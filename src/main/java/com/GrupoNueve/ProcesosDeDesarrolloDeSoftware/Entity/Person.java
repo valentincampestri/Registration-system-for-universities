@@ -5,7 +5,7 @@ import lombok.experimental.FieldDefaults;
 
 @AllArgsConstructor
 @Data
-@FieldDefaults(level = AccessLevel.PRIVATE)
+@FieldDefaults(level = AccessLevel.PROTECTED)
 public abstract class Person {
     String name;
     String lastName;

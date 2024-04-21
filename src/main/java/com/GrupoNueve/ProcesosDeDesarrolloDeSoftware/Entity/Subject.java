@@ -12,5 +12,4 @@ public class Subject {
     String subjectID;
     String name;
     String workload;
-
 }
