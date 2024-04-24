@@ -4,10 +4,8 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 @AllArgsConstructor
-@NoArgsConstructor
 @Data
-@FieldDefaults(level = AccessLevel.PRIVATE)
-@Builder
+@FieldDefaults(level = AccessLevel.PROTECTED)
 public abstract class Person {
     String name;
     String lastName;

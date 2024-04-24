@@ -1,4 +1,5 @@
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity;
 
-public interface IReportPDF {
+public interface IReport {
+    public void generateReport();
 }

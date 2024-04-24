@@ -1,4 +1,8 @@
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.Implementation;
 
-public class SubjectRepository {
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.ISubjectRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class SubjectRepository implements ISubjectRepository {
 }

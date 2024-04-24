@@ -1,4 +1,8 @@
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Service.Implementation;
 
-public class InscriptionService {
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Service.IInscriptionService;
+import org.springframework.stereotype.Service;
+
+@Service
+public class InscriptionService implements IInscriptionService {
 }

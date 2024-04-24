@@ -1,4 +1,8 @@
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.Implementation;
 
-public class InscriptionRepository {
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.IInscriptionRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class InscriptionRepository implements IInscriptionRepository {
 }
