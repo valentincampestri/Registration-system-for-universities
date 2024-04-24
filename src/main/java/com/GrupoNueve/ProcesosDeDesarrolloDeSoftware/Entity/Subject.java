@@ -11,5 +11,5 @@ import lombok.experimental.FieldDefaults;
 public class Subject {
     String subjectID;
     String name;
-    String workload;
+    Integer workload;
 }

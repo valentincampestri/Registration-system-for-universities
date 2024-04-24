@@ -9,6 +9,6 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Builder
 public class Classroom {
-    int maxCapacity;
-    String classroomId;
+    Integer maxCapacity;
+    Integer classroomId;
 }

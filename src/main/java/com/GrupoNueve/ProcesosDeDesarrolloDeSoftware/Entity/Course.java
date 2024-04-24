@@ -14,7 +14,7 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Builder
 public class Course {
-    String courseID;
+    Integer courseID;
     LocalTime startTime;
     LocalTime endTime;
     String modality;
@@ -23,4 +23,5 @@ public class Course {
     Classroom classroom;
     Term term;
     List<DayOfWeek> daysList;
+    String schedule;
 }
