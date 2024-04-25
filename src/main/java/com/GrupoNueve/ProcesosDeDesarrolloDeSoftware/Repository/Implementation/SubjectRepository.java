@@ -1,15 +1,46 @@
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.Implementation;
 
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Course;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Subject;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.ISubjectRepository;
 import org.jgrapht.Graph;
 import org.jgrapht.graph.DefaultEdge;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 @Repository
 public class SubjectRepository implements ISubjectRepository {
+
+    private List<Subject> subjectsList = new ArrayList<>();
+
     @Override
-    public Graph<Subject, DefaultEdge> getAllSubjects() {
-        return null;
+    public void addSubject(Subject subject) {
+        subjectsList.add(subject);
+    }
+
+    @Override
+    public void deleteSubject(Integer subjectId) {
+        subjectsList.removeIf(subject -> subject.getSubjectID().equals(subjectId));
+    }
+
+    @Override
+    public void updateSubject(Subject subject) {
+        subjectsList.remove(subject);
+        subjectsList.add(subject);
+    }
+
+    @Override
+    public Optional<Subject> getSubjectById(Integer subjectId) {
+        return subjectsList.stream()
+                .filter(subject -> subject.getSubjectID().equals(subjectId))
+                .findFirst();
+    }
+
+    @Override
+    public List<Subject> getAllSubject() {
+        return subjectsList;
     }
 }

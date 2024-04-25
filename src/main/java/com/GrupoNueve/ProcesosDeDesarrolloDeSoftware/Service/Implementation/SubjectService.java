@@ -16,30 +16,4 @@ import java.util.List;
 
 @Service
 public class SubjectService implements ISubjectService {
-Graph<Subject, DefaultEdge> subjectGraph;
-
-    public SubjectService() {
-        subjectGraph = new DefaultDirectedGraph<>(DefaultEdge.class);
-    }
-
-    public void addSubject(Subject subject) {
-        subjectGraph.addVertex(subject);
-    }
-
-    public void addPrerequisite(Subject subject, Subject prerequisite) {
-        subjectGraph.addEdge(subject, prerequisite);
-    }
-
-    public List<Subject> getPrerequisites(Subject subject) {
-        return Graphs.successorListOf(subjectGraph, subject);
-    }
-
-    @Override
-    public void addPrerequisites(String subjectId, String prerequisite) {
-    }
-
-    @Override
-    public List<SubjectDto> getPrerequisites(String subjectId) {
-        return null;
-    }
 }
