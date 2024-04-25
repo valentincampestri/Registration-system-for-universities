@@ -13,9 +13,4 @@ public class InscriptionService implements IInscriptionService {
     public List<InscriptionDto> getInscriptionsByStudent(String studentId) {
         return null;
     }
-
-    @Override
-    public void addInscription(String studentId, Course course) {
-
-    }
 }
