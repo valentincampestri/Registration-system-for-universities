@@ -7,6 +7,11 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Builder
 public class MercadoPago implements IPaymentMethod {
+    String cvu;
+    String alias;
+    String cuil;
+
+
     // TODO: Implement methods
     @Override
     public boolean pay(Double amount) {

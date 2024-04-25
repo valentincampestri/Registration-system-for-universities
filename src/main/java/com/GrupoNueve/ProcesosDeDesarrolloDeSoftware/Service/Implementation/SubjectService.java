@@ -1,4 +1,5 @@
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Service.Implementation;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.SubjectDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Subject;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Service.ISubjectService;
 import org.jgrapht.Graph;
@@ -15,7 +16,7 @@ import java.util.List;
 
 @Service
 public class SubjectService implements ISubjectService {
-/*    Graph<Subject, DefaultEdge> subjectGraph;
+Graph<Subject, DefaultEdge> subjectGraph;
 
     public SubjectService() {
         subjectGraph = new DefaultDirectedGraph<>(DefaultEdge.class);
@@ -31,5 +32,14 @@ public class SubjectService implements ISubjectService {
 
     public List<Subject> getPrerequisites(Subject subject) {
         return Graphs.successorListOf(subjectGraph, subject);
-    }*/
+    }
+
+    @Override
+    public void addPrerequisites(String subjectId, String prerequisite) {
+    }
+
+    @Override
+    public List<SubjectDto> getPrerequisites(String subjectId) {
+        return null;
+    }
 }
