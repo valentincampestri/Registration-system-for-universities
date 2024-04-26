@@ -5,6 +5,8 @@ import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.MessageResponse;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.ReportDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.ScheduleDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.*;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.BadRequestException;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.InvalidArgsException;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.NotFoundException;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.ICourseRepository;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Service.ICourseService;
@@ -52,7 +54,7 @@ public class CourseService implements ICourseService {
         Course course = Mapper.convertCourseDtoToCourse(courseDto);
         Optional<Course> existentCourse = courseRepository.getCourseById(course.getCourseID());
         if (existentCourse.isPresent()) {
-            throw new NotFoundException("Course already exists.");
+            throw new BadRequestException("Course already exists.");
         } else {
             courseRepository.addCourse(course);
         }
@@ -63,7 +65,7 @@ public class CourseService implements ICourseService {
     public List<CourseDto> getAllCourses() {
         List<Course> courseList = courseRepository.getAllCourses();
         if (courseList.isEmpty()) {
-            throw new NotFoundException("No courses found.");
+            throw new NotFoundException("There are no courses.");
         }
         List<CourseDto> response = courseList.stream()
                 .map(course -> new CourseDto(
