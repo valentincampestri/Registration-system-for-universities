@@ -3,6 +3,7 @@ package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 
 @AllArgsConstructor
@@ -11,6 +12,6 @@ import java.time.LocalTime;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Builder
 public class Term {
-    LocalTime start;
-    LocalTime end;
+    LocalDate start;
+    LocalDate end;
 }

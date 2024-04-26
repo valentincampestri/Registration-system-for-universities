@@ -14,5 +14,5 @@ public class Subject {
     Integer subjectID;
     String name;
     Integer workload;
-    List<Subject> prerequisites;
+    List<Integer> prerequisites;
 }
