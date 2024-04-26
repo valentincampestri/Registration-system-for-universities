@@ -1,6 +1,7 @@
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Service.Implementation;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.SubjectDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Subject;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.ISubjectRepository;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Service.ISubjectService;
 import org.jgrapht.Graph;
 import org.jgrapht.Graphs;
@@ -16,4 +17,9 @@ import java.util.List;
 
 @Service
 public class SubjectService implements ISubjectService {
+    ISubjectRepository subjectRepository;
+
+    public SubjectService(ISubjectRepository subjectRepository) {
+        this.subjectRepository = subjectRepository;
+    }
 }

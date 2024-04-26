@@ -16,9 +16,4 @@ public class InscriptionController {
     public InscriptionController(IInscriptionService inscriptionService) {
         this.inscriptionService = inscriptionService;
     }
-
-    @GetMapping ("/getInscriptionsByStudent")
-    public ResponseEntity<?> getInscriptionsByStudent(@PathVariable String studentId){
-        return new ResponseEntity<>(inscriptionService.getInscriptionsByStudent(studentId), HttpStatus.OK);
-    }
 }
