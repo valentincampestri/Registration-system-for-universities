@@ -11,10 +11,10 @@ import java.util.List;
 public class MockBuilder {
     public static CourseDto mockCourseDto() {
         return new CourseDto(
-                0,
+                "0",
                 LocalTime.parse("09:00"),
                 LocalTime.parse("10:00"),
-                "string",
+                "virtual",
                 new Professor(
                         "string",
                         "string",
@@ -24,14 +24,14 @@ public class MockBuilder {
                         "string"
                 ),
                 new Subject(
-                        0,
+                        "1",
                         "string",
                         0,
-                        List.of(0)
+                        List.of("10")
                 ),
                 new Classroom(
                         50,
-                        701
+                        "701"
                 ),
                 new Term(
                         LocalDate.parse("2024-04-26"),
@@ -44,10 +44,10 @@ public class MockBuilder {
 
     public static Course mockCourse() {
         return new Course(
-                0,
+                "0",
                 LocalTime.parse("09:00"),
                 LocalTime.parse("10:00"),
-                "string",
+                "virtual",
                 new Professor(
                         "string",
                         "string",
@@ -57,14 +57,14 @@ public class MockBuilder {
                         "string"
                 ),
                 new Subject(
-                        0,
+                        "1",
                         "string",
                         0,
-                        List.of(0)
+                        List.of("10")
                 ),
                 new Classroom(
                         50,
-                        701
+                        "701"
                 ),
                 new Term(
                         LocalDate.parse("2024-04-26"),

@@ -7,8 +7,8 @@ import java.util.Optional;
 
 public interface ICourseRepository {
     void addCourse(Course course);
-    void deleteCourse(Integer courseId);
+    void deleteCourse(String courseId);
     void updateCourse(Course course);
-    Optional<Course> getCourseById(Integer courseId);
+    Optional<Course> getCourseById(String courseId);
     List<Course> getAllCourses();
 }

@@ -14,7 +14,7 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Builder
 public class Course {
-    Integer courseID;
+    String courseID;
     LocalTime startTime;
     LocalTime endTime;
     String modality;

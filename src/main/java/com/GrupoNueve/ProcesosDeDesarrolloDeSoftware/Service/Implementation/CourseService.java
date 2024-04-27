@@ -1,12 +1,10 @@
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Service.Implementation;
 
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.CourseDto;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.MessageResponse;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.ReportDto;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.MessageResponseDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.ScheduleDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.*;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.BadRequestException;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.InvalidArgsException;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.NotFoundException;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.ICourseRepository;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Service.ICourseService;
@@ -45,12 +43,12 @@ public class CourseService implements ICourseService {
     }
 
     @Override
-    public ReportDto getTermReportByProfessor(String professorId) {
-        return null;
+    public void getTermReportByProfessor(String professorId) {
+        return;
     }
 
     @Override
-    public MessageResponse createCourse(CourseDto courseDto) {
+    public MessageResponseDto createCourse(CourseDto courseDto) {
         Course course = Mapper.convertCourseDtoToCourse(courseDto);
         Optional<Course> existentCourse = courseRepository.getCourseById(course.getCourseID());
         if (existentCourse.isPresent()) {
@@ -58,7 +56,7 @@ public class CourseService implements ICourseService {
         } else {
             courseRepository.addCourse(course);
         }
-        return new MessageResponse("Course created successfully.");
+        return new MessageResponseDto("Course created successfully.");
     }
 
     @Override

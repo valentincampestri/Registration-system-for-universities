@@ -18,7 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CourseDto {
-    private Integer courseID;
+    private String courseID;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
     @Schema(type = "string", format = "HH:mm", example = "09:00")
     private LocalTime startTime;

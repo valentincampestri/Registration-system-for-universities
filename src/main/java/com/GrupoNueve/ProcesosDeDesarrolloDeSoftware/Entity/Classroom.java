@@ -10,5 +10,5 @@ import lombok.experimental.FieldDefaults;
 @Builder
 public class Classroom {
     Integer maxCapacity;
-    Integer classroomId;
+    String classroomId;
 }

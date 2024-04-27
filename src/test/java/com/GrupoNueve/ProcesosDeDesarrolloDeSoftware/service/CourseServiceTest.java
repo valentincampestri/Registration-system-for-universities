@@ -2,7 +2,7 @@ package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.service;
 
 
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.CourseDto;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.MessageResponse;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.MessageResponseDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.*;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.BadRequestException;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.NotFoundException;
@@ -10,8 +10,6 @@ import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.Implementation.C
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Service.Implementation.CourseService;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.utills.Mapper;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.utils.MockBuilder;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import io.swagger.v3.oas.annotations.media.Schema;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,9 +19,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -59,7 +54,7 @@ public class CourseServiceTest {
         Course course = Mapper.convertCourseDtoToCourse(courseDto);
         when(courseRepository.getCourseById(course.getCourseID())).thenReturn(Optional.empty());
         // Act
-        MessageResponse result = courseService.createCourse(courseDto);
+        MessageResponseDto result = courseService.createCourse(courseDto);
         // Assert
         Assertions.assertEquals("Course created successfully.", result.getMessage());
     }

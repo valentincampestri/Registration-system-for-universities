@@ -8,8 +8,8 @@ import java.util.Optional;
 
 public interface IInscriptionRepository {
     void addInscription(Inscription inscription);
-    void deleteInscription(Integer inscriptionId);
+    void deleteInscription(String inscriptionId);
     void updateInscription(Inscription inscription);
-    Optional<Inscription> getInscriptionById(Integer inscriptionId);
+    Optional<Inscription> getInscriptionById(String inscriptionId);
     List<Inscription> getAllInscriptions();
 }

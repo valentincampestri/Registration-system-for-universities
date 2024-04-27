@@ -19,7 +19,7 @@ public class InscriptionRepository implements IInscriptionRepository {
     }
 
     @Override
-    public void deleteInscription(Integer inscriptionId) {
+    public void deleteInscription(String inscriptionId) {
         inscriptionsList.removeIf(inscription -> inscription.getId().equals(inscriptionId));
     }
 
@@ -30,7 +30,7 @@ public class InscriptionRepository implements IInscriptionRepository {
     }
 
     @Override
-    public Optional<Inscription> getInscriptionById(Integer inscriptionId) {
+    public Optional<Inscription> getInscriptionById(String inscriptionId) {
         return inscriptionsList.stream()
                 .filter(inscription -> inscription.getId().equals(inscriptionId))
                 .findFirst();

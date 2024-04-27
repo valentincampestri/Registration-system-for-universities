@@ -11,7 +11,7 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Builder
 public class Fee {
-    Integer feeNumber;
+    String feeId;
     List<Course> courses;
     Student student;
 
