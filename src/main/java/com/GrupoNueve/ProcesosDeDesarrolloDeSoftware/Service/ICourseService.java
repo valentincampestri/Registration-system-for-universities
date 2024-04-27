@@ -1,6 +1,6 @@
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Service;
 
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.MessageResponseDto;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.MessageResponseDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.CourseRequestDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.CourseResponseDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.ScheduleDto;

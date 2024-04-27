@@ -1,6 +1,6 @@
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception;
 
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.ExceptionDto;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.ExceptionDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

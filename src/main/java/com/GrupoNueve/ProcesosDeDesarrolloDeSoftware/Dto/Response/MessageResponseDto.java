@@ -1,4 +1,4 @@
-package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto;
+package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
