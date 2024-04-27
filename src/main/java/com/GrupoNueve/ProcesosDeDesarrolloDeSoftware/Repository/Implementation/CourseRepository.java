@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Repository
 public class CourseRepository implements ICourseRepository {
@@ -34,6 +35,12 @@ public class CourseRepository implements ICourseRepository {
         return coursesList.stream()
                 .filter(course -> course.getCourseCode().equals(courseId))
                 .findFirst();
+    }
+    @Override
+    public List<Course> getCoursesByProfessor(String professorId) {
+        return coursesList.stream()
+                .filter(course -> course.getProfessor().getPersonCode().equals(professorId))
+                .collect(Collectors.toList());
     }
 
     @Override
