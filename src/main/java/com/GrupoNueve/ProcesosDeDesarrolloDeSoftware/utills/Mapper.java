@@ -2,6 +2,7 @@ package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.utills;
 
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.CourseRequestDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.CourseResponseDto;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.SubjectDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Course;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Professor;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Subject;
@@ -54,6 +55,24 @@ public class Mapper {
                 courseRequestDto.getDaysList(),
                 courseRequestDto.getSchedule(),
                 courseRequestDto.getPrice()
+        );
+    }
+
+    public static SubjectDto convertSubjectToSubjectDto(Subject subject) {
+        return new SubjectDto(
+                subject.getSubjectID(),
+                subject.getName(),
+                subject.getWorkload(),
+                subject.getPrerequisites()
+        );
+    }
+
+    public static Subject convertSubjectDtoToSubject(SubjectDto subjectDto) {
+        return new Subject(
+                subjectDto.getSubjectID(),
+                subjectDto.getName(),
+                subjectDto.getWorkload(),
+                subjectDto.getPrerequisites()
         );
     }
 }

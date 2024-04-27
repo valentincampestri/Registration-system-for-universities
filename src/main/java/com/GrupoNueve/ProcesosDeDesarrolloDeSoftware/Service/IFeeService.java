@@ -1,4 +1,4 @@
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Service;
 
-public interface IPaymentService {
+public interface IFeeService {
 }

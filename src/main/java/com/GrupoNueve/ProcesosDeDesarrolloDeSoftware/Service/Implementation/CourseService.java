@@ -58,11 +58,11 @@ public class CourseService implements ICourseService {
     @Override
     public MessageResponseDto createCourse(CourseRequestDto courseRequestDto, String professorId, String subjectId) {
         Optional<Professor> existentProfessor = professorRepository.getProfessorById(professorId);
-        if (!existentProfessor.isPresent()) {
+        if (existentProfessor.isEmpty()) {
             throw new NotFoundException("Professor does not exist.");
         }
         Optional<Subject> existentSubject = subjectRepository.getSubjectById(subjectId);
-        if (!existentSubject.isPresent()) {
+        if (existentSubject.isEmpty()) {
             throw new NotFoundException("Subject does not exist.");
         }
         Course course = Mapper.convertCourseRequestDtoToCourse(courseRequestDto, existentProfessor.get(), existentSubject.get());

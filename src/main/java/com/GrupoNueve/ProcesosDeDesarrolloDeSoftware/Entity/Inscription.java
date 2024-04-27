@@ -14,9 +14,4 @@ public class Inscription {
     String id;
     Student student;
     Course course;
-
-    // TODO: Implement this method
-    public boolean payFee(Fee fee) {
-        return true;
-    }
 }

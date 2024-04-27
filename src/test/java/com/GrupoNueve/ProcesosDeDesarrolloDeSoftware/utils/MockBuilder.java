@@ -2,6 +2,7 @@ package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.utils;
 
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.CourseRequestDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.CourseResponseDto;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.SubjectDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.*;
 
 import java.time.DayOfWeek;
@@ -112,6 +113,42 @@ public class MockBuilder {
     public static Subject mockSubject() {
         return new Subject(
                 "1",
+                "string",
+                10,
+                List.of("1","2")
+        );
+    }
+
+    public static Subject mockSubject2() {
+        return new Subject(
+                "2",
+                "string",
+                11,
+                List.of("11")
+        );
+    }
+
+    public static SubjectDto mockSubjectDto() {
+        return new SubjectDto(
+                "1",
+                "string",
+                10,
+                List.of("1","2")
+        );
+    }
+
+    public static SubjectDto mockSubjectDto2() {
+        return new SubjectDto(
+                "2",
+                "string",
+                11,
+                List.of("3","2")
+        );
+    }
+
+    public static SubjectDto mockSubjectInvalidWorkloadDto() {
+        return new SubjectDto(
+                "2",
                 "string",
                 0,
                 List.of("10")

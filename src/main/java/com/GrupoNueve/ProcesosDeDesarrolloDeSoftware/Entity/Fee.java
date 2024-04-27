@@ -14,4 +14,5 @@ public class Fee {
     String feeId;
     List<Course> courses;
     Student student;
+    Boolean isPaid;
 }
