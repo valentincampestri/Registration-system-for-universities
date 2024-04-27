@@ -7,8 +7,12 @@ import java.util.Optional;
 
 public interface IPaymentRepository {
     void addPayment(Payment payment);
+
     void deletePayment(String paymentId);
+
     void updatePayment(Payment payment);
+
     Optional<Payment> getPaymentById(String paymentId);
+
     List<Payment> getAllPayments();
 }

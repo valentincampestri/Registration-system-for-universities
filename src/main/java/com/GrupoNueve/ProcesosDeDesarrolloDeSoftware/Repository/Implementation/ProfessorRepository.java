@@ -1,6 +1,5 @@
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.Implementation;
 
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Payment;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Professor;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.IProfessorRepository;
 import org.springframework.stereotype.Repository;

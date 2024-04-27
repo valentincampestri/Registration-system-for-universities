@@ -2,7 +2,9 @@ package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.utills;
 
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.CourseRequestDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.CourseResponseDto;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.*;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Course;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Professor;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Subject;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
@@ -37,7 +39,7 @@ public class Mapper {
         );
     }
 
-    public static Course convertCourseRequestDtoToCourse(CourseRequestDto courseRequestDto, Professor professor, Subject subject){
+    public static Course convertCourseRequestDtoToCourse(CourseRequestDto courseRequestDto, Professor professor, Subject subject) {
         return new Course(
                 courseRequestDto.getCourseID(),
                 courseRequestDto.getStartTime(),

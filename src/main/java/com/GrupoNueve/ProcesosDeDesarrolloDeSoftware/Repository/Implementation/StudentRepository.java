@@ -1,7 +1,6 @@
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.Implementation;
 
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Student;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Subject;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.IStudentRepository;
 import org.springframework.stereotype.Repository;
 

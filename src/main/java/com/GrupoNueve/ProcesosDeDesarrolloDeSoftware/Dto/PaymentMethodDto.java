@@ -1,4 +1,5 @@
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto;
 
-public class InscriptionDto {
+// REVISAR
+public class PaymentMethodDto {
 }

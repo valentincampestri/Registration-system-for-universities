@@ -6,7 +6,7 @@ import lombok.experimental.FieldDefaults;
 import java.util.List;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Professor extends Person{
+public class Professor extends Person {
     List<Subject> subjects;
 
     public Professor(String name, String lastName, String personID, String email, String phone, String address) {

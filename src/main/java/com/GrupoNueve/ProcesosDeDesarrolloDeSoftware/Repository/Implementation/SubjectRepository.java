@@ -1,10 +1,7 @@
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.Implementation;
 
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Course;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Subject;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.ISubjectRepository;
-import org.jgrapht.Graph;
-import org.jgrapht.graph.DefaultEdge;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
