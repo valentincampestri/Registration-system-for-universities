@@ -1,19 +1,20 @@
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Service;
 
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.CourseDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.MessageResponseDto;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.CourseRequestDto;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.CourseResponseDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.ScheduleDto;
 
 import java.util.List;
 
 public interface ICourseService {
     void generateReport();
-    List<CourseDto> getCoursesBySubject(Integer subjectId);
+    List<CourseResponseDto> getCoursesBySubject(Integer subjectId);
     ScheduleDto getScheduleByCourse(Integer courseId);
-    List<CourseDto> getCoursesByProfessor();
+    List<CourseResponseDto> getCoursesByProfessor();
     void getTermReportByProfessor(String professorId);
 
-    List<CourseDto> getAllCourses();
+    List<CourseResponseDto> getAllCourses();
 
-    MessageResponseDto createCourse(CourseDto courseDto);
+    MessageResponseDto createCourse(CourseRequestDto courseRequestDto, String personId, String subjectId);
 }

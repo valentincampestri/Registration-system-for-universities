@@ -1,6 +1,6 @@
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Controller;
 
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.CourseDto;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.CourseRequestDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Service.ICourseService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,8 +19,8 @@ public class CourseController {
         return ResponseEntity.ok(courseService.getAllCourses());
     }
 
-    @PostMapping("/create")
-    public ResponseEntity<?> createCourse(@RequestBody CourseDto courseDto) {
-        return ResponseEntity.ok(courseService.createCourse(courseDto));
+    @PostMapping("/create/{personId}/{subjectId}")
+    public ResponseEntity<?> createCourse(@RequestBody CourseRequestDto courseRequestDto, @PathVariable String personId, @PathVariable String subjectId) {
+        return ResponseEntity.ok(courseService.createCourse(courseRequestDto, personId, subjectId));
     }
 }

@@ -1,12 +1,15 @@
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Service.Implementation;
 
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.CourseDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.MessageResponseDto;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.CourseRequestDto;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.CourseResponseDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.ScheduleDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.*;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.BadRequestException;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.NotFoundException;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.ICourseRepository;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.IProfessorRepository;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.ISubjectRepository;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Service.ICourseService;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.utills.Mapper;
 import org.springframework.stereotype.Service;
@@ -17,18 +20,21 @@ import java.util.Optional;
 @Service
 public class CourseService implements ICourseService {
     ICourseRepository courseRepository;
+    IProfessorRepository professorRepository;
+    ISubjectRepository subjectRepository;
 
-    public CourseService(ICourseRepository courseRepository) {
+    public CourseService(ICourseRepository courseRepository, IProfessorRepository professorRepository, ISubjectRepository subjectRepository) {
         this.courseRepository = courseRepository;
+        this.professorRepository = professorRepository;
+        this.subjectRepository = subjectRepository;
     }
 
     @Override
     public void generateReport() {
-
     }
 
     @Override
-    public List<CourseDto> getCoursesBySubject(Integer subjectId) {
+    public List<CourseResponseDto> getCoursesBySubject(Integer subjectId) {
         return null;
     }
 
@@ -38,7 +44,7 @@ public class CourseService implements ICourseService {
     }
 
     @Override
-    public List<CourseDto> getCoursesByProfessor() {
+    public List<CourseResponseDto> getCoursesByProfessor() {
         return null;
     }
 
@@ -48,8 +54,16 @@ public class CourseService implements ICourseService {
     }
 
     @Override
-    public MessageResponseDto createCourse(CourseDto courseDto) {
-        Course course = Mapper.convertCourseDtoToCourse(courseDto);
+    public MessageResponseDto createCourse(CourseRequestDto courseRequestDto, String professorId, String subjectId) {
+        Optional<Professor> existentProfessor = professorRepository.getProfessorById(professorId);
+        if (!existentProfessor.isPresent()) {
+            throw new NotFoundException("Professor does not exist.");
+        }
+        Optional<Subject> existentSubject = subjectRepository.getSubjectById(subjectId);
+        if (!existentSubject.isPresent()) {
+            throw new NotFoundException("Subject does not exist.");
+        }
+        Course course = Mapper.convertCourseRequestDtoToCourse(courseRequestDto, existentProfessor.get(), existentSubject.get());
         Optional<Course> existentCourse = courseRepository.getCourseById(course.getCourseID());
         if (existentCourse.isPresent()) {
             throw new BadRequestException("Course already exists.");
@@ -60,25 +74,12 @@ public class CourseService implements ICourseService {
     }
 
     @Override
-    public List<CourseDto> getAllCourses() {
+    public List<CourseResponseDto> getAllCourses() {
         List<Course> courseList = courseRepository.getAllCourses();
         if (courseList.isEmpty()) {
             throw new NotFoundException("There are no courses.");
         }
-        List<CourseDto> response = courseList.stream()
-                .map(course -> new CourseDto(
-                        course.getCourseID(),
-                        course.getStartTime(),
-                        course.getEndTime(),
-                        course.getModality(),
-                        course.getProfessor(),
-                        course.getSubject(),
-                        course.getClassroom(),
-                        course.getTerm(),
-                        course.getDaysList(),
-                        course.getSchedule()
-                ))
-                .toList();
+        List<CourseResponseDto> response = courseList.stream().map(Mapper::convertCourseToCourseResponseDto).toList();
         return response;
     }
 }
