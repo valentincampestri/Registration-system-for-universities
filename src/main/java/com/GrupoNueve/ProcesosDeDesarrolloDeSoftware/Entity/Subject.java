@@ -11,8 +11,8 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Builder
 public class Subject {
-    String subjectID;
+    String subjectCode;
     String name;
     Integer workload;
-    List<String> prerequisites;
+    List<String> prerequisitesCodeList;
 }

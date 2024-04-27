@@ -3828,7 +3828,7 @@
 											"top": 1019,
 											"width": 165.1279296875,
 											"height": 13,
-											"text": "-prerequisites: List<Integer>",
+											"text": "-prerequisitesId: List<Integer>",
 											"horizontalAlignment": 0
 										}
 									],
@@ -21343,7 +21343,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGPDXP1n/0KURY="
 									},
-									"name": "prerequisites",
+									"name": "prerequisitesId",
 									"visibility": "private",
 									"type": "List<Integer>"
 								}

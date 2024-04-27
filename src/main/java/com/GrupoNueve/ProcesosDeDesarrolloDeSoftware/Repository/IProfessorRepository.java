@@ -12,7 +12,7 @@ public interface IProfessorRepository {
 
     void updateProfessor(Professor professor);
 
-    Optional<Professor> getProfessorById(String professorId);
+    Optional<Professor> getProfessorByCode(String professorId);
 
     List<Professor> getAllProfessors();
 }

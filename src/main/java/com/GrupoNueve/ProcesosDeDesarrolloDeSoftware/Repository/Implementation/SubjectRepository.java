@@ -20,7 +20,7 @@ public class SubjectRepository implements ISubjectRepository {
 
     @Override
     public void deleteSubject(String subjectId) {
-        subjectsList.removeIf(subject -> subject.getSubjectID().equals(subjectId));
+        subjectsList.removeIf(subject -> subject.getSubjectCode().equals(subjectId));
     }
 
     @Override
@@ -30,9 +30,9 @@ public class SubjectRepository implements ISubjectRepository {
     }
 
     @Override
-    public Optional<Subject> getSubjectById(String subjectId) {
+    public Optional<Subject> getSubjectByCode(String subjectId) {
         return subjectsList.stream()
-                .filter(subject -> subject.getSubjectID().equals(subjectId))
+                .filter(subject -> subject.getSubjectCode().equals(subjectId))
                 .findFirst();
     }
 

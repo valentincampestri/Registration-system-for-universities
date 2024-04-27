@@ -20,7 +20,7 @@ public class StudentRepository implements IStudentRepository {
 
     @Override
     public void deleteStudent(String studentId) {
-        studentsList.removeIf(student -> student.getPersonID().equals(studentId));
+        studentsList.removeIf(student -> student.getPersonCode().equals(studentId));
     }
 
     @Override
@@ -30,9 +30,9 @@ public class StudentRepository implements IStudentRepository {
     }
 
     @Override
-    public Optional<Student> getStudentById(String studentId) {
+    public Optional<Student> getStudentByCode(String studentId) {
         return studentsList.stream()
-                .filter(student -> student.getPersonID().equals(studentId))
+                .filter(student -> student.getPersonCode().equals(studentId))
                 .findFirst();
     }
 

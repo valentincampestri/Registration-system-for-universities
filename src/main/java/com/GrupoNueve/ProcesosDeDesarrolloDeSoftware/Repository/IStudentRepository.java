@@ -12,7 +12,7 @@ public interface IStudentRepository {
 
     void updateStudent(Student student);
 
-    Optional<Student> getStudentById(String studentId);
+    Optional<Student> getStudentByCode(String studentId);
 
     List<Student> getAllStudents();
 }

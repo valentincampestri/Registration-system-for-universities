@@ -11,7 +11,7 @@ import lombok.experimental.FieldDefaults;
 public abstract class Person {
     String name;
     String lastName;
-    String personID;
+    String personCode;
     String email;
     String phone;
     String address;

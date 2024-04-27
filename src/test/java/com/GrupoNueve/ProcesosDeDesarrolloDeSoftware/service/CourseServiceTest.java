@@ -47,7 +47,7 @@ public class CourseServiceTest {
         CourseRequestDto courseRequestDto = MockBuilder.mockCourseRequestDto();
         String professorId = "1";
         String subjectId = "1";
-        when(professorRepository.getProfessorById(professorId)).thenReturn(Optional.empty());
+        when(professorRepository.getProfessorByCode(professorId)).thenReturn(Optional.empty());
         // Act & Assert
         NotFoundException exception = assertThrows(NotFoundException.class, () -> courseService.createCourse(courseRequestDto, professorId, subjectId));
         Assertions.assertEquals("Professor does not exist.", exception.getMessage());
@@ -60,8 +60,8 @@ public class CourseServiceTest {
         CourseRequestDto courseRequestDto = MockBuilder.mockCourseRequestDto();
         String professorId = "1";
         String subjectId = "1";
-        when(professorRepository.getProfessorById(professorId)).thenReturn(Optional.of(MockBuilder.mockProfessor()));
-        when(subjectRepository.getSubjectById(subjectId)).thenReturn(Optional.empty());
+        when(professorRepository.getProfessorByCode(professorId)).thenReturn(Optional.of(MockBuilder.mockProfessor()));
+        when(subjectRepository.getSubjectByCode(subjectId)).thenReturn(Optional.empty());
         // Act & Assert
         NotFoundException exception = assertThrows(NotFoundException.class, () -> courseService.createCourse(courseRequestDto, professorId, subjectId));
         Assertions.assertEquals("Subject does not exist.", exception.getMessage());
@@ -74,10 +74,10 @@ public class CourseServiceTest {
         CourseRequestDto courseRequestDto = MockBuilder.mockCourseRequestDto();
         String professorId = "1";
         String subjectId = "1";
-        when(professorRepository.getProfessorById(professorId)).thenReturn(Optional.of(MockBuilder.mockProfessor()));
-        when(subjectRepository.getSubjectById(subjectId)).thenReturn(Optional.of(MockBuilder.mockSubject()));
+        when(professorRepository.getProfessorByCode(professorId)).thenReturn(Optional.of(MockBuilder.mockProfessor()));
+        when(subjectRepository.getSubjectByCode(subjectId)).thenReturn(Optional.of(MockBuilder.mockSubject()));
         Course course = Mapper.convertCourseRequestDtoToCourse(courseRequestDto, MockBuilder.mockProfessor(), MockBuilder.mockSubject());
-        when(courseRepository.getCourseById(course.getCourseID())).thenReturn(Optional.of(course));
+        when(courseRepository.getCourseByCode(course.getCourseCode())).thenReturn(Optional.of(course));
         // Act & Assert
         BadRequestException exception = assertThrows(BadRequestException.class, () -> courseService.createCourse(courseRequestDto,"1","1"));
         Assertions.assertEquals("Course already exists.", exception.getMessage());
@@ -90,10 +90,10 @@ public class CourseServiceTest {
         CourseRequestDto courseRequestDto = MockBuilder.mockCourseRequestDto();
         String professorId = "1";
         String subjectId = "1";
-        when(professorRepository.getProfessorById(professorId)).thenReturn(Optional.of(MockBuilder.mockProfessor()));
-        when(subjectRepository.getSubjectById(subjectId)).thenReturn(Optional.of(MockBuilder.mockSubject()));
+        when(professorRepository.getProfessorByCode(professorId)).thenReturn(Optional.of(MockBuilder.mockProfessor()));
+        when(subjectRepository.getSubjectByCode(subjectId)).thenReturn(Optional.of(MockBuilder.mockSubject()));
         Course course = Mapper.convertCourseRequestDtoToCourse(courseRequestDto, MockBuilder.mockProfessor(), MockBuilder.mockSubject());
-        when(courseRepository.getCourseById(course.getCourseID())).thenReturn(Optional.empty());
+        when(courseRepository.getCourseByCode(course.getCourseCode())).thenReturn(Optional.empty());
         // Act
         MessageResponseDto result = courseService.createCourse(courseRequestDto,"1","1");
         // Assert

@@ -1,0 +1,30 @@
+[
+  {
+    "subjectID": "1",
+    "name": "Física",
+    "workload": 40,
+    "prerequisitesId": []
+  },
+  {
+    "subjectID": "2",
+    "name": "Arquitectura de computadores",
+    "workload": 40,
+    "prerequisitesId": []
+  },
+  {
+    "subjectID": "3",
+    "name": "Sistemas Operativos",
+    "workload": 40,
+    "prerequisitesId": [
+      "2"
+      ]
+  },
+  {
+    "subjectID": "4",
+    "name": "Termodinámica",
+    "workload": 40,
+    "prerequisitesId": [
+      "1","3"
+    ]
+  }
+]

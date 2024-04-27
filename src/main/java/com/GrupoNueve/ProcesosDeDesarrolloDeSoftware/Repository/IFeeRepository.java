@@ -12,7 +12,7 @@ public interface IFeeRepository {
 
     void updateFee(Fee payment);
 
-    Optional<Fee> getFeeById(String paymentId);
+    Optional<Fee> getFeeByCode(String paymentId);
 
     List<Fee> getAllFees();
 }

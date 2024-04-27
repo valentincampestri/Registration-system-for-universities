@@ -1,9 +1,7 @@
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Service.Implementation;
 
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.CourseResponseDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.MessageResponseDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.SubjectDto;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Professor;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Subject;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.BadRequestException;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.InvalidArgsException;
@@ -41,20 +39,19 @@ public class SubjectService implements ISubjectService {
     @Override
     public MessageResponseDto createSubject(SubjectDto subjectDto) {
         Subject subject = Mapper.convertSubjectDtoToSubject(subjectDto);
-        Optional<Subject> existentSubject = subjectRepository.getSubjectById(subjectDto.getSubjectID());
+        Optional<Subject> existentSubject = subjectRepository.getSubjectByCode(subjectDto.getSubjectID());
         if (existentSubject.isPresent()) {
             throw new BadRequestException("Subject already exists.");
         }
         if (subject.getWorkload()<=0){
             throw new InvalidArgsException("Workload must be greater than 0.");
         }
-        //para los prerequisitos hacer una lista, mappear esa lsita, y que verifique en repository  no existe
-        for (String prerequisite : subject.getPrerequisites()) {
-            Optional<Subject> existentPrerequisite = subjectRepository.getSubjectById(prerequisite);
+        for (String prerequisite : subject.getPrerequisitesCodeList()) {
+            Optional<Subject> existentPrerequisite = subjectRepository.getSubjectByCode(prerequisite);
             if (existentPrerequisite.isEmpty()) {
-                throw new NotFoundException("One or more Prerequisites don´t exist.");
+                throw new NotFoundException("One or more prerequisitesId don´t exist.");
             }
-            if (prerequisite.equals(subject.getSubjectID())) {
+            if (prerequisite.equals(subject.getSubjectCode())) {
                 throw new InvalidArgsException("A subject cannot be a prerequisite of itself.");
             }
         }

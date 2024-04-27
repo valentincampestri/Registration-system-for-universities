@@ -11,7 +11,7 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Builder
 public class Inscription {
-    String id;
+    String inscriptionCode;
     Student student;
     Course course;
 }

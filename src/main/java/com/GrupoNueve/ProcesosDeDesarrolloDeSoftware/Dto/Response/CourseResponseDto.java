@@ -21,7 +21,7 @@ import java.util.List;
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CourseResponseDto {
-    String courseID;
+    String courseCode;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
     @Schema(type = "string", format = "HH:mm", example = "09:00")
     LocalTime startTime;

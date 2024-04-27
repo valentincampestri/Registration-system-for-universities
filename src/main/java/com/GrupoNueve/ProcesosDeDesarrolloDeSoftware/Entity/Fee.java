@@ -11,7 +11,7 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Builder
 public class Fee {
-    String feeId;
+    String feeCode;
     List<Course> courses;
     Student student;
     Boolean isPaid;

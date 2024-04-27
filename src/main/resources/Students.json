@@ -1,0 +1,37 @@
+[
+  {
+    "name": "Juan",
+    "lastName": "Perez",
+    "personID": "123",
+    "email": "juan@hotmail.com",
+    "phone": "123456789",
+    "address": "Calle 123",
+    "career": {
+      "careerID": "1",
+      "name": "Ingeniería en Sistemas",
+      "maxWorkload": "250"
+    },
+    "approvedSubjects": [
+      "1",
+      "2"
+    ]
+  },
+  {
+    "name": "Kimba",
+    "lastName": "Messi",
+    "personID": "1234",
+    "email": "kimba@hotmail.com",
+    "phone": "123456",
+    "address": "Calle 1234",
+    "career": {
+      "careerID": "2",
+      "name": "Licenciatura en Sistemas",
+      "maxWorkload": "220"
+    },
+    "approvedSubjects": [
+      "2",
+      "3"
+    ]
+  }
+
+]

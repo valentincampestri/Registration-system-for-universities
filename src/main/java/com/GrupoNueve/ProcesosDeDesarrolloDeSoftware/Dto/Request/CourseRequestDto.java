@@ -20,7 +20,7 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 
 public class CourseRequestDto {
-    String courseID;
+    String courseCode;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
     @Schema(type = "string", format = "HH:mm", example = "09:00")
     LocalTime startTime;

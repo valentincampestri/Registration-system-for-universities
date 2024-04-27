@@ -12,7 +12,7 @@ public interface IInscriptionRepository {
 
     void updateInscription(Inscription inscription);
 
-    Optional<Inscription> getInscriptionById(String inscriptionId);
+    Optional<Inscription> getInscriptionByCode(String inscriptionId);
 
     List<Inscription> getAllInscriptions();
 }

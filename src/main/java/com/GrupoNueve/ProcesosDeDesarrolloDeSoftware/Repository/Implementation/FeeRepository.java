@@ -30,9 +30,9 @@ public class FeeRepository implements IFeeRepository {
     }
 
     @Override
-    public Optional<Fee> getFeeById(String feeId) {
+    public Optional<Fee> getFeeByCode(String feeId) {
         return feesList.stream()
-                .filter(fee -> fee.getFeeId().equals(feeId))
+                .filter(fee -> fee.getFeeCode().equals(feeId))
                 .findFirst();
     }
 

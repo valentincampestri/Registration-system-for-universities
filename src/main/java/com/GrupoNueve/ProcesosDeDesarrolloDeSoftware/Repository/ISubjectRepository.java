@@ -12,7 +12,7 @@ public interface ISubjectRepository {
 
     void updateSubject(Subject subject);
 
-    Optional<Subject> getSubjectById(String subjectId);
+    Optional<Subject> getSubjectByCode(String subjectId);
 
     List<Subject> getAllSubject();
 }

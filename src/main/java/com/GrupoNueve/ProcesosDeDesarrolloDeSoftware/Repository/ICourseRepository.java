@@ -12,7 +12,7 @@ public interface ICourseRepository {
 
     void updateCourse(Course course);
 
-    Optional<Course> getCourseById(String courseId);
+    Optional<Course> getCourseByCode(String courseId);
 
     List<Course> getAllCourses();
 }

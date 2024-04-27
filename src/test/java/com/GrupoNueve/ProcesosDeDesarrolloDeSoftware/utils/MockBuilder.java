@@ -43,7 +43,8 @@ public class MockBuilder {
                         "string",
                         "string",
                         "string",
-                        "string"
+                        "string",
+                        List.of("1","2")
                 ),
                 new Subject(
                         "1",
@@ -77,7 +78,8 @@ public class MockBuilder {
                         "string",
                         "string",
                         "string",
-                        "string"
+                        "string",
+                        List.of("1","2")
                 ),
                 new Subject(
                         "1",
@@ -106,22 +108,14 @@ public class MockBuilder {
                 "string",
                 "string",
                 "string",
-                "string"
+                "string",
+                List.of("1","2")
         );
     }
 
     public static Subject mockSubject() {
         return new Subject(
-                "1",
-                "string",
-                10,
-                List.of("1","2")
-        );
-    }
-
-    public static Subject mockSubject2() {
-        return new Subject(
-                "2",
+                "14",
                 "string",
                 11,
                 List.of("11")
@@ -130,25 +124,34 @@ public class MockBuilder {
 
     public static SubjectDto mockSubjectDto() {
         return new SubjectDto(
-                "1",
+                "14",
                 "string",
-                10,
-                List.of("1","2")
+                11,
+                List.of("11")
         );
     }
 
-    public static SubjectDto mockSubjectDto2() {
-        return new SubjectDto(
-                "2",
+    public static Subject mockSubjectPrerequisiteItself() {
+        return new Subject(
+                "13",
                 "string",
-                11,
-                List.of("3","2")
+                10,
+                List.of("1","13")
+        );
+    }
+
+    public static SubjectDto mockSubjectPrerequisiteItselfDto() {
+        return new SubjectDto(
+                "13",
+                "string",
+                10,
+                List.of("1","13")
         );
     }
 
     public static SubjectDto mockSubjectInvalidWorkloadDto() {
         return new SubjectDto(
-                "2",
+                "15",
                 "string",
                 0,
                 List.of("10")

@@ -16,5 +16,5 @@ public class SubjectDto {
     String subjectID;
     String name;
     Integer workload;
-    List<String> prerequisites;
+    List<String> prerequisitesCodeList;
 }

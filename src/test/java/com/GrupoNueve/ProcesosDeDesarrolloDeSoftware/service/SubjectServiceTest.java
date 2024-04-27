@@ -1,10 +1,7 @@
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.service;
 
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.CourseRequestDto;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.CourseResponseDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.MessageResponseDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.SubjectDto;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Course;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Subject;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.BadRequestException;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.InvalidArgsException;
@@ -20,14 +17,18 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
+@DirtiesContext
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
 public class SubjectServiceTest {
@@ -41,7 +42,7 @@ public class SubjectServiceTest {
     public void createSubjectTestFailSubject() {
         // Arrange
         SubjectDto subjectDto = MockBuilder.mockSubjectDto();
-        when(subjectRepository.getSubjectById(subjectDto.getSubjectID())).thenReturn(Optional.of(MockBuilder.mockSubject()));
+        when(subjectRepository.getSubjectByCode(subjectDto.getSubjectID())).thenReturn(Optional.of(MockBuilder.mockSubject()));
         // Act & Assert
         BadRequestException exception = assertThrows(BadRequestException.class, () -> subjectService.createSubject(subjectDto));
         Assertions.assertEquals("Subject already exists.", exception.getMessage());
@@ -52,54 +53,45 @@ public class SubjectServiceTest {
     public void createSubjectTestFailWorkload() {
         // Arrange
         SubjectDto subjectDto = MockBuilder.mockSubjectInvalidWorkloadDto();
-        when(subjectRepository.getSubjectById(subjectDto.getSubjectID())).thenReturn(Optional.empty());
+        when(subjectRepository.getSubjectByCode(subjectDto.getSubjectID())).thenReturn(Optional.empty());
         // Act & Assert
         InvalidArgsException exception = assertThrows(InvalidArgsException.class, () -> subjectService.createSubject(subjectDto));
         Assertions.assertEquals("Workload must be greater than 0.", exception.getMessage());
     }
 
-    /*@Test
-    @DisplayName("createSubject - One or more Prerequisites don´t exist")
-    public void createSubjectTestFailPrerequisitesDontExist() {
+    @Test
+    @DisplayName("createSubject - One or more prerequisitesId don´t exist")
+    public void createSubjectTestFailprerequisitesIdDontExist() {
         // Arrange
         SubjectDto subjectDto = MockBuilder.mockSubjectDto();
-        when(subjectRepository.getSubjectById(subjectDto.getSubjectID())).thenReturn(Optional.empty());
-        for (String prerequisite : subjectDto.getPrerequisites()) {
-            when(subjectRepository.getSubjectById(prerequisite)).thenReturn(Optional.empty());
-        }
+        when(subjectRepository.getSubjectByCode(anyString())).thenReturn(Optional.empty());
         // Act & Assert
         NotFoundException exception = assertThrows(NotFoundException.class, () -> subjectService.createSubject(subjectDto));
-        Assertions.assertEquals("One or more Prerequisites don´t exist.", exception.getMessage());
-    }*/
+        Assertions.assertEquals("One or more prerequisitesId don´t exist.", exception.getMessage());
+    }
 
-    /*@Test
+    @Test
     @DisplayName("createSubject - A subject cannot be a prerequisite of itself.")
-    public void createSubjectTestFailPrerequisitesItself() {
+    public void createSubjectTestFailprerequisitesIdItself() {
         // Arrange
-        SubjectDto subjectDto = MockBuilder.mockSubjectDto();
-        when(subjectRepository.getSubjectById(subjectDto.getSubjectID())).thenReturn(Optional.empty());
-        for (String prerequisite : subjectDto.getPrerequisites()) {
-            when(subjectRepository.getSubjectById(prerequisite)).thenReturn(Optional.of(MockBuilder.mockSubject2()));
-        }
+        SubjectDto subjectDto = MockBuilder.mockSubjectPrerequisiteItselfDto();
+        when(subjectRepository.getSubjectByCode(anyString())).thenReturn(Optional.empty()).thenReturn(Optional.of(MockBuilder.mockSubjectPrerequisiteItself()));
         // Act & Assert
         InvalidArgsException exception = assertThrows(InvalidArgsException.class, () -> subjectService.createSubject(subjectDto));
         Assertions.assertEquals("A subject cannot be a prerequisite of itself.", exception.getMessage());
-    }*/
+    }
 
-/*    @Test
+    @Test
     @DisplayName("createSubject - Ok")
     public void createSubjectTestOk() {
         // Arrange
         SubjectDto subjectDto = MockBuilder.mockSubjectDto();
-        when(subjectRepository.getSubjectById(subjectDto.getSubjectID())).thenReturn(Optional.empty());
-        for (String prerequisite : subjectDto.getPrerequisites()) {
-            when(subjectRepository.getSubjectById(prerequisite)).thenReturn(Optional.of(MockBuilder.mockSubject2()));
-        }
+        when(subjectRepository.getSubjectByCode(anyString())).thenReturn(Optional.empty()).thenReturn(Optional.of(MockBuilder.mockSubject()));
         // Act
         MessageResponseDto result = subjectService.createSubject(subjectDto);
         // Assert
-        Assertions.assertEquals("Course created successfully.", result.getMessage());
-    }*/
+        Assertions.assertEquals("Subject created successfully.", result.getMessage());
+    }
 
     @Test
     @DisplayName("getAllSubjects - There are no subjects")

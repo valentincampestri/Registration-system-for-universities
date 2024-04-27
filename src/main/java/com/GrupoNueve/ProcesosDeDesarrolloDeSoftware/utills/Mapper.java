@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 public class Mapper {
     public static CourseResponseDto convertCourseToCourseResponseDto(Course course) {
         return new CourseResponseDto(
-                course.getCourseID(),
+                course.getCourseCode(),
                 course.getStartTime(),
                 course.getEndTime(),
                 course.getModality(),
@@ -28,7 +28,7 @@ public class Mapper {
 
     public static Course convertCourseResponseDtoToCourse(CourseResponseDto courseResponseDto) {
         return new Course(
-                courseResponseDto.getCourseID(),
+                courseResponseDto.getCourseCode(),
                 courseResponseDto.getStartTime(),
                 courseResponseDto.getEndTime(),
                 courseResponseDto.getModality(),
@@ -44,7 +44,7 @@ public class Mapper {
 
     public static Course convertCourseRequestDtoToCourse(CourseRequestDto courseRequestDto, Professor professor, Subject subject) {
         return new Course(
-                courseRequestDto.getCourseID(),
+                courseRequestDto.getCourseCode(),
                 courseRequestDto.getStartTime(),
                 courseRequestDto.getEndTime(),
                 courseRequestDto.getModality(),
@@ -60,10 +60,10 @@ public class Mapper {
 
     public static SubjectDto convertSubjectToSubjectDto(Subject subject) {
         return new SubjectDto(
-                subject.getSubjectID(),
+                subject.getSubjectCode(),
                 subject.getName(),
                 subject.getWorkload(),
-                subject.getPrerequisites()
+                subject.getPrerequisitesCodeList()
         );
     }
 
@@ -72,7 +72,7 @@ public class Mapper {
                 subjectDto.getSubjectID(),
                 subjectDto.getName(),
                 subjectDto.getWorkload(),
-                subjectDto.getPrerequisites()
+                subjectDto.getPrerequisitesCodeList()
         );
     }
 }
