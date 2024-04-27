@@ -14,8 +14,4 @@ public class Fee {
     String feeId;
     List<Course> courses;
     Student student;
-
-    public void addCourse(Course course) {
-        courses.add(course);
-    }
 }

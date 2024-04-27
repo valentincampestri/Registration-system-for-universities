@@ -20,7 +20,8 @@ public class Mapper {
                 course.getClassroom(),
                 course.getTerm(),
                 course.getDaysList(),
-                course.getSchedule()
+                course.getSchedule(),
+                course.getPrice()
         );
     }
 
@@ -35,7 +36,8 @@ public class Mapper {
                 courseResponseDto.getClassroom(),
                 courseResponseDto.getTerm(),
                 courseResponseDto.getDaysList(),
-                courseResponseDto.getSchedule()
+                courseResponseDto.getSchedule(),
+                courseResponseDto.getPrice()
         );
     }
 
@@ -50,7 +52,8 @@ public class Mapper {
                 courseRequestDto.getClassroom(),
                 courseRequestDto.getTerm(),
                 courseRequestDto.getDaysList(),
-                courseRequestDto.getSchedule()
+                courseRequestDto.getSchedule(),
+                courseRequestDto.getPrice()
         );
     }
 }

@@ -32,4 +32,5 @@ public class CourseRequestDto {
     Term term;
     List<DayOfWeek> daysList;
     String schedule;
+    Double price;
 }

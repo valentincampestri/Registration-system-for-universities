@@ -23,4 +23,5 @@ public class Course {
     Term term;
     List<DayOfWeek> daysList;
     String schedule;
+    Double price;
 }

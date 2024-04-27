@@ -19,9 +19,4 @@ public class MercadoPago implements IPaymentMethod {
     public boolean pay(Double amount) {
         return false;
     }
-
-    @Override
-    public boolean verifyPayment() {
-        return false;
-    }
 }

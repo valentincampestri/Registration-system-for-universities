@@ -25,7 +25,8 @@ public class MockBuilder {
                         LocalDate.parse("2024-07-26")
                 ),
                 List.of(DayOfWeek.MONDAY),
-                "Schedule"
+                "Schedule",
+                1000D
         );
     }
 
@@ -58,7 +59,8 @@ public class MockBuilder {
                         LocalDate.parse("2024-07-26")
                 ),
                 List.of(DayOfWeek.MONDAY),
-                "Schedule"
+                "Schedule",
+                1000D
         );
     }
 
@@ -91,7 +93,8 @@ public class MockBuilder {
                         LocalDate.parse("2024-07-26")
                 ),
                 List.of(DayOfWeek.MONDAY),
-                "Schedule"
+                "Schedule",
+                1000D
         );
     }
 
