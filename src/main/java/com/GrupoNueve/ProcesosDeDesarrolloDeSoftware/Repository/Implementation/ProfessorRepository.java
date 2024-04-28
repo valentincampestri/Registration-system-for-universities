@@ -22,9 +22,9 @@ import java.util.Optional;
 public class ProfessorRepository implements IProfessorRepository {
     private List<Professor> professorsList = new ArrayList<>();
 
-    /*public ProfessorRepository() throws IOException {
+    public ProfessorRepository() throws IOException {
         loadProfessors();
-    }*/
+    }
 
     @Override
     public void addProfessor(Professor professor) {
@@ -54,7 +54,7 @@ public class ProfessorRepository implements IProfessorRepository {
         return professorsList;
     }
 
-    /*private void loadProfessors() throws IOException {
+    private void loadProfessors() throws IOException {
         File file;
         ObjectMapper objectMapper = new ObjectMapper();
         List<Professor> mappedProfessors;
@@ -72,5 +72,5 @@ public class ProfessorRepository implements IProfessorRepository {
             System.out.println(e.getMessage());
             System.out.println(LocalDate.now());
         }
-    }*/
+    }
 }

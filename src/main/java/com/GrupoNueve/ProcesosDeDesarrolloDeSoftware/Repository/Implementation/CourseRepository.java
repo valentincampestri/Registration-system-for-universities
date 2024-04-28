@@ -22,9 +22,9 @@ public class CourseRepository implements ICourseRepository {
 
     private List<Course> coursesList = new ArrayList<>();
 
-    /*public CourseRepository() throws IOException {
+    public CourseRepository() throws IOException {
         loadCourses();
-    }*/
+    }
 
     @Override
     public void addCourse(Course course) {
@@ -54,7 +54,7 @@ public class CourseRepository implements ICourseRepository {
         return coursesList;
     }
 
-    /*private void loadCourses() throws IOException {
+    private void loadCourses() throws IOException {
         File file;
         ObjectMapper objectMapper = new ObjectMapper();
         List<Course> mappedCourses;
@@ -72,5 +72,5 @@ public class CourseRepository implements ICourseRepository {
             System.out.println(e.getMessage());
             System.out.println(LocalDate.now());
         }
-    }*/
+    }
 }

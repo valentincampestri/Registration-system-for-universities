@@ -21,9 +21,9 @@ import java.util.Optional;
 @Repository
 public class SubjectRepository implements ISubjectRepository {
 
-    /*public SubjectRepository() throws IOException {
+    public SubjectRepository() throws IOException {
         loadSubjects();
-    }*/
+    }
 
     private List<Subject> subjectsList = new ArrayList<>();
 
@@ -55,7 +55,7 @@ public class SubjectRepository implements ISubjectRepository {
         return subjectsList;
     }
 
-    /*private void loadSubjects() throws IOException {
+    private void loadSubjects() throws IOException {
         File file;
         ObjectMapper objectMapper = new ObjectMapper();
         List<Subject> mappedSubjects;
@@ -73,5 +73,5 @@ public class SubjectRepository implements ISubjectRepository {
             System.out.println(e.getMessage());
             System.out.println(LocalDate.now());
         }
-    }*/
+    }
 }

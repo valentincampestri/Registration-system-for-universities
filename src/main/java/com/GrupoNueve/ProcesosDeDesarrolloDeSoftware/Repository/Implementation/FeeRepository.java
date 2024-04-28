@@ -20,9 +20,9 @@ import java.util.Optional;
 @Repository
 public class FeeRepository implements IFeeRepository {
 
-   /* public FeeRepository() throws IOException {
+    public FeeRepository() throws IOException {
         loadFees();
-    }*/
+    }
 
     private List<Fee> feesList = new ArrayList<>();
 
@@ -54,7 +54,7 @@ public class FeeRepository implements IFeeRepository {
         return feesList;
     }
 
-    /*private void loadFees() throws IOException {
+    private void loadFees() throws IOException {
         File file;
         ObjectMapper objectMapper = new ObjectMapper();
         List<Fee> mappedFees;
@@ -72,5 +72,5 @@ public class FeeRepository implements IFeeRepository {
             System.out.println(e.getMessage());
             System.out.println(LocalDate.now());
         }
-    }*/
+    }
 }

@@ -23,9 +23,9 @@ public class InscriptionRepository implements IInscriptionRepository {
 
     private List<Inscription> inscriptionsList = new ArrayList<>();
 
-    /*public InscriptionRepository() throws IOException {
+    public InscriptionRepository() throws IOException {
         loadInscriptions();
-    }*/
+    }
 
     @Override
     public void addInscription(Inscription inscription) {
@@ -55,7 +55,7 @@ public class InscriptionRepository implements IInscriptionRepository {
         return inscriptionsList;
     }
 
-    /*private void loadInscriptions() throws IOException {
+    private void loadInscriptions() throws IOException {
         File file;
         ObjectMapper objectMapper = new ObjectMapper();
         List<Inscription> mappedInscriptions;
@@ -73,5 +73,5 @@ public class InscriptionRepository implements IInscriptionRepository {
             System.out.println(e.getMessage());
             System.out.println(LocalDate.now());
         }
-    }*/
+    }
 }

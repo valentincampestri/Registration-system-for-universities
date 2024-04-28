@@ -23,9 +23,9 @@ public class StudentRepository implements IStudentRepository {
 
     private List<Student> studentsList = new ArrayList<>();
 
-    /*public StudentRepository() throws IOException {
+    public StudentRepository() throws IOException {
         loadStudents();
-    }*/
+    }
 
     @Override
     public void addStudent(Student student) {
@@ -55,7 +55,7 @@ public class StudentRepository implements IStudentRepository {
         return studentsList;
     }
 
-   /* private void loadStudents() throws IOException {
+    private void loadStudents() throws IOException {
         File file;
         ObjectMapper objectMapper = new ObjectMapper();
         List<Student> mappedStudents;
@@ -73,5 +73,5 @@ public class StudentRepository implements IStudentRepository {
             System.out.println(e.getMessage());
             System.out.println(LocalDate.now());
         }
-    }*/
+    }
 }
