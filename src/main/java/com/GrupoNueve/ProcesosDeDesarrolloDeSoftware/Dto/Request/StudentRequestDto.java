@@ -1,7 +1,6 @@
-package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto;
+package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request;
 
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Career;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Subject;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class StudentDto {
+public class StudentRequestDto {
     String name;
     String lastName;
     String personID;
@@ -21,5 +20,5 @@ public class StudentDto {
     String phone;
     String address;
     Career career;
-    List<Subject> approvedSubjects;
+    List<String> approvedSubjectCodeList;
 }

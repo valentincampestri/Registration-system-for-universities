@@ -1,7 +1,6 @@
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.Implementation;
 
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Inscription;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Inscription;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.IInscriptionRepository;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;

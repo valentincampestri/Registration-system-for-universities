@@ -12,4 +12,6 @@ public class ProfessorController {
     public ProfessorController(IProfessorService professorService) {
         this.professorService = professorService;
     }
+
+
 }

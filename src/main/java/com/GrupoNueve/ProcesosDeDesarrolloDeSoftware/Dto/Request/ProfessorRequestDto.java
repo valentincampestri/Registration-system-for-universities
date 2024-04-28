@@ -1,6 +1,5 @@
-package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto;
+package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request;
 
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Subject;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,13 +11,12 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class ProfessorDto {
+public class ProfessorRequestDto {
     String name;
     String lastName;
     String personID;
     String email;
     String phone;
     String address;
-    List<Subject> subjects;
-
+    List<String> SubjectsCodeList;
 }
