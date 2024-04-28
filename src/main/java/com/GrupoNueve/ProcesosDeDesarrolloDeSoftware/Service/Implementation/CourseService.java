@@ -92,19 +92,19 @@ public class CourseService implements ICourseService {
 
 
         if (courses.isEmpty()) {
-            return new MessageResponseDto("No hay cursos asignados para el docente con ID: " + professorCode);
+            return new MessageResponseDto("There are no courses assigned for the teacher with ID: " + professorCode);
         }
 
 
         StringBuilder reportContent = new StringBuilder();
-        reportContent.append("Informe de cursos asignados para el docente con ID: ").append(professorCode).append("\n\n");
+        reportContent.append("Report of assigned courses for the teacher with ID:").append(professorCode).append("\n\n");
         for (Course course : courses) {
-            reportContent.append("Nombre del curso: ").append(course.getSubject().getName()).append("\n");
-            reportContent.append("Horario: ").append(course.getStartTime()).append(" - ").append(course.getEndTime()).append("\n");
-            reportContent.append("Aula asignada: ").append(course.getClassroom().getClassroomCode()).append("\n\n");
+            reportContent.append("Course name: ").append(course.getSubject().getName()).append("\n");
+            reportContent.append("Timetable: ").append(course.getStartTime()).append(" - ").append(course.getEndTime()).append("\n");
+            reportContent.append("Assigned classroom: ").append(course.getClassroom().getClassroomCode()).append("\n\n");
         }
 
-        return new MessageResponseDto("Generando reporte en PDF para el docente con ID: " + professorCode + "...");
+        return new MessageResponseDto("Generating PDF report for the teacher with ID: " + professorCode + "...");
 
     }
 
