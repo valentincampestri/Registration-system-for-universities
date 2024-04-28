@@ -3,6 +3,7 @@ package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Service.Implementation;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.FeeResponseDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.MessageResponseDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.*;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.BadRequestException;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.IFeeRepository;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Service.IFeeService;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.utils.Mapper;
@@ -38,24 +39,32 @@ public class FeeService implements IFeeService {
 
     @Override
     public MessageResponseDto pay(String studentCode, String paymentMethod) {
-        /*List<Fee> feeList = feeRepository.getFeeByStudentCode(studentCode);
+        List<Fee> feeList = feeRepository.getFeeByStudentCode(studentCode);
         for (Fee fee : feeList) {
             if (!fee.getIsPaid()) {
                 String normalizedPaymentMethod = paymentMethod.toLowerCase();
-                IPaymentMethod paymentMethod1 = switch (normalizedPaymentMethod) {
+                IPaymentMethod selectedPaymentMethod;
+                switch (normalizedPaymentMethod) {
                     case "mercadopago":
-                        new MercadoPago();
+                        selectedPaymentMethod = new MercadoPago();
+                        break;
+                    case "paypal":
+                        selectedPaymentMethod = new PayPal();
+                        break;
+                    case "credit_card":
+                        selectedPaymentMethod = new CreditCard();
                         break;
                     default:
                         throw new IllegalArgumentException("Invalid payment method: " + paymentMethod);
-                };
-
-                fee.setIsPaid(true);
-                feeRepository.updateFee(fee);
-                return new MessageResponseDto("The fee has been paid successfully.");
+                }
+                if (selectedPaymentMethod.pay(fee.getPrice())){
+                    fee.setIsPaid(true);
+                    feeRepository.updateFee(fee);
+                    return new MessageResponseDto("The fee has been paid successfully.");
+                }
             }
-        }*/
-        return new MessageResponseDto("The student has no unpaid fees.");
+        }
+        throw new BadRequestException("The student does not have any pending fees.");
     }
 
     @Override
