@@ -21,5 +21,20 @@
         ]
       }
     ]
+  },
+  {
+    "name": "Lionel",
+    "lastName": "Messi",
+    "personCode": "ST002",
+    "email": "messi@example.com",
+    "phone": "0800111222",
+    "address": "8373 Main St",
+    "career": {
+      "careerCode": "C001",
+      "name": "Computer Science",
+      "maxWorkload": 240
+    },
+    "approvedSubjectList": [
+    ]
   }
 ]

@@ -10,7 +10,7 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 
 public class Fee {
-    static String currentCode="0";
+    static String currentCode="1";
     String feeCode;
     List<Inscription> inscriptions;
     Double price;

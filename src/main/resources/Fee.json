@@ -1,7 +1,9 @@
 [
   {
+    "feeCode": "0",
     "inscriptions": [
       {
+        "inscriptionCode": "0",
         "student": {
           "name": "Alice",
           "lastName": "Smith",
