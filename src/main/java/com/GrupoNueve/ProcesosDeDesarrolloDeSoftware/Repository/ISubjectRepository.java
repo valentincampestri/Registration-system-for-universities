@@ -8,11 +8,11 @@ import java.util.Optional;
 public interface ISubjectRepository {
     void addSubject(Subject subject);
 
-    void deleteSubject(String subjectId);
+    void deleteSubject(String subjectCode);
 
     void updateSubject(Subject subject);
 
-    Optional<Subject> getSubjectByCode(String subjectId);
+    Optional<Subject> getSubjectByCode(String subjectCode);
 
     List<Subject> getAllSubject();
 }

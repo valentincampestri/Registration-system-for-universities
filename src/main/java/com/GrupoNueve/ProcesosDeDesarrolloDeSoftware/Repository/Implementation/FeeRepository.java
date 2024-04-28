@@ -43,10 +43,11 @@ public class FeeRepository implements IFeeRepository {
     }
 
     @Override
-    public Optional<Fee> getFeeByCode(String feeId) {
+    public List<Fee> getFeeByStudentCode(String StudentCode) {
         return feesList.stream()
-                .filter(fee -> fee.getFeeCode().equals(feeId))
-                .findFirst();
+                .filter(fee -> fee.getInscriptions().stream()
+                        .anyMatch(inscription -> inscription.getStudent().getPersonCode().equals(StudentCode)))
+                .toList();
     }
 
     @Override

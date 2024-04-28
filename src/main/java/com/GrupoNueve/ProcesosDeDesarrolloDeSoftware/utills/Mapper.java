@@ -2,8 +2,10 @@ package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.utills;
 
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.CourseRequestDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.CourseResponseDto;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.FeeResponseDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.SubjectDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Course;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Fee;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Professor;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Subject;
 import org.springframework.context.annotation.Configuration;
@@ -73,6 +75,15 @@ public class Mapper {
                 subjectDto.getName(),
                 subjectDto.getWorkload(),
                 subjectDto.getPrerequisitesCodeList()
+        );
+    }
+
+    public static FeeResponseDto convertFeeToFeeResponseDto(Fee fee) {
+        return new FeeResponseDto(
+                fee.getFeeCode(),
+                fee.getInscriptions(),
+                fee.getPrice(),
+                fee.getIsPaid()
         );
     }
 }

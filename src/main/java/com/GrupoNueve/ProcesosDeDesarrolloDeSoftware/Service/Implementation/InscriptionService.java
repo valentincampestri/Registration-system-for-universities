@@ -19,6 +19,8 @@ public class InscriptionService implements IInscriptionService {
 
     @Override
     public MessageResponseDto createInscription(InscriptionRequestDto inscriptionRequestDto, String studentCode) {
+
+
         return new MessageResponseDto("You have successfully enrolled in the selected courses. Now you can pay according to your student code.");
     }
 }

@@ -15,5 +15,4 @@ import java.util.List;
 public class Student extends Person {
     Career career;
     List<Subject> approvedSubjectList;
-    List<Fee> feeList;
 }

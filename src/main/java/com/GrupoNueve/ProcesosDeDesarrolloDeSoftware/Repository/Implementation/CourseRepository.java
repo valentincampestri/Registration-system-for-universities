@@ -32,8 +32,8 @@ public class CourseRepository implements ICourseRepository {
     }
 
     @Override
-    public void deleteCourse(String courseId) {
-        coursesList.removeIf(course -> course.getCourseCode().equals(courseId));
+    public void deleteCourse(String courseCode) {
+        coursesList.removeIf(course -> course.getCourseCode().equals(courseCode));
     }
 
     @Override
@@ -43,9 +43,9 @@ public class CourseRepository implements ICourseRepository {
     }
 
     @Override
-    public Optional<Course> getCourseByCode(String courseId) {
+    public Optional<Course> getCourseByCode(String courseCode) {
         return coursesList.stream()
-                .filter(course -> course.getCourseCode().equals(courseId))
+                .filter(course -> course.getCourseCode().equals(courseCode))
                 .findFirst();
     }
 

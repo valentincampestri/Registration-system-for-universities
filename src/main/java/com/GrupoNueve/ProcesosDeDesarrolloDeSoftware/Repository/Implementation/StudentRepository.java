@@ -33,8 +33,8 @@ public class StudentRepository implements IStudentRepository {
     }
 
     @Override
-    public void deleteStudent(String studentId) {
-        studentsList.removeIf(student -> student.getPersonCode().equals(studentId));
+    public void deleteStudent(String studentCode) {
+        studentsList.removeIf(student -> student.getPersonCode().equals(studentCode));
     }
 
     @Override
@@ -44,9 +44,9 @@ public class StudentRepository implements IStudentRepository {
     }
 
     @Override
-    public Optional<Student> getStudentByCode(String studentId) {
+    public Optional<Student> getStudentByCode(String studentCode) {
         return studentsList.stream()
-                .filter(student -> student.getPersonCode().equals(studentId))
+                .filter(student -> student.getPersonCode().equals(studentCode))
                 .findFirst();
     }
 

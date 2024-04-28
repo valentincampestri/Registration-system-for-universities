@@ -32,8 +32,8 @@ public class ProfessorRepository implements IProfessorRepository {
     }
 
     @Override
-    public void deleteProfessor(String professorId) {
-        professorsList.removeIf(professor -> professor.getPersonCode().equals(professorId));
+    public void deleteProfessor(String professorCode) {
+        professorsList.removeIf(professor -> professor.getPersonCode().equals(professorCode));
     }
 
     @Override
@@ -43,9 +43,9 @@ public class ProfessorRepository implements IProfessorRepository {
     }
 
     @Override
-    public Optional<Professor> getProfessorByCode(String professorId) {
+    public Optional<Professor> getProfessorByCode(String professorCode) {
         return professorsList.stream()
-                .filter(professor -> professor.getPersonCode().equals(professorId))
+                .filter(professor -> professor.getPersonCode().equals(professorCode))
                 .findFirst();
     }
 

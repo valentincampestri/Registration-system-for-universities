@@ -8,11 +8,11 @@ import java.util.Optional;
 public interface IStudentRepository {
     void addStudent(Student student);
 
-    void deleteStudent(String studentId);
+    void deleteStudent(String studentCode);
 
     void updateStudent(Student student);
 
-    Optional<Student> getStudentByCode(String studentId);
+    Optional<Student> getStudentByCode(String studentCode);
 
     List<Student> getAllStudents();
 }

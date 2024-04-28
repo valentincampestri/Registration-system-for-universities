@@ -1,6 +1,7 @@
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response;
 
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Course;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Inscription;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Student;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -15,8 +16,7 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class FeeResponseDto {
     String feeCode;
-    List<Course> courses;
-    Student student;
+    List<Inscription> inscriptions;
     Double price;
     Boolean isPaid;
 }

@@ -8,11 +8,11 @@ import java.util.Optional;
 public interface IProfessorRepository {
     void addProfessor(Professor professor);
 
-    void deleteProfessor(String professorId);
+    void deleteProfessor(String professorCode);
 
     void updateProfessor(Professor professor);
 
-    Optional<Professor> getProfessorByCode(String professorId);
+    Optional<Professor> getProfessorByCode(String professorCode);
 
     List<Professor> getAllProfessors();
 }
