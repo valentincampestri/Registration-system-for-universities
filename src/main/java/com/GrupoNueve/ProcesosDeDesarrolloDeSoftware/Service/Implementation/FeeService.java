@@ -37,7 +37,7 @@ public class FeeService implements IFeeService {
     }
 
     @Override
-    public MessageResponseDto payFee(String studentCode, String paymentMethod) {
+    public MessageResponseDto pay(String studentCode, String paymentMethod) {
         /*List<Fee> feeList = feeRepository.getFeeByStudentCode(studentCode);
         for (Fee fee : feeList) {
             if (!fee.getIsPaid()) {
