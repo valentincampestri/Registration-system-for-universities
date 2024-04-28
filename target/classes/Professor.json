@@ -1,43 +1,20 @@
 [
   {
-    "name": "Ana",
-    "lastName": "Martínez",
-    "personCode": "1212",
-    "email": "anamartinez@uade.edu.ar",
-    "phone": "11111111",
-    "address": "lacasadeana 1212",
+    "name": "John",
+    "lastName": "Doe",
+    "personCode": "P001",
+    "email": "john.doe@example.com",
+    "phone": "123-456-7890",
+    "address": "123 Main St",
     "subjects": [
       {
-        "subjectID": "5",
-        "name": "Software Development Processes",
-        "workload": 40,
-        "prerequisitesId": [
+        "subjectCode": "S001",
+        "name": "Computer Science",
+        "workload": 60,
+        "prerequisitesCodeList": [
+          "S002"
         ]
       }
-    ]
-  },
-  {
-    "name": "Miguel",
-    "lastName": "Pérez",
-    "personCode": "092",
-    "email": "mperez@uade.edu.ar",
-    "phone": "11111111",
-    "address": "lacasademigue 092",
-    "subjects": [
-      "Physics",
-      "Computer Architecture"
-    ]
-  },
-  {
-    "name": "Juan",
-    "lastName": "Gonzalez",
-    "personID": "1223",
-    "email": "jgonzales@uade.edu.ar",
-    "phone": "1114323",
-    "address": "lacasadejuan 1223",
-    "subjects": [
-      "Operating systems",
-      "Thermodynamics"
     ]
   }
 ]

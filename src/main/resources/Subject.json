@@ -1,0 +1,10 @@
+[
+  {
+    "subjectCode": "S001",
+    "name": "Computer Science",
+    "workload": 60,
+    "prerequisitesCodeList": [
+      "S002"
+    ]
+  }
+]

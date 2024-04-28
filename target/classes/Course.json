@@ -1,40 +1,49 @@
-/*
-String courseCode;
-LocalTime startTime;
-LocalTime endTime;
-String modality;
-Professor professor;
-Subject subject;
-Classroom classroom;
-Term term;
-List<DayOfWeek> daysList;
-String schedule;
-Double price;*/
 [
   {
-    "courseCode": "CSE110",
-    "startTime": "08:00",
-    "endTime": "10:00",
-    "modality": "On site",
+    "courseCode": "CS101",
+    "startTime": "09:00",
+    "endTime": "11:00",
+    "modality": "Presencial",
     "professor": {
-      "name": "Ana",
-      "lastName": "Martínez",
-      "personID": "1212",
-      "email": "anamartinez@uade.edu.ar",
-      "phone": "11111111",
-      "address": "lacasadeana 1212",
+      "name": "John",
+      "lastName": "Doe",
+      "personCode": "P001",
+      "email": "john.doe@example.com",
+      "phone": "123-456-7890",
+      "address": "123 Main St",
       "subjects": [
-        "Software Development Processes"
-      ],
-        "classrooms": [
-            "Classroom 1"
-        ],
-        "term": [
-          "start": "2024-04-27",
-          "end": "2024-04-27"
-        ],
-        "daysList": [
-            "Monday"
-        ]
+        {
+          "subjectCode": "S001",
+          "name": "Computer Science",
+          "workload": 60,
+          "prerequisitesCodeList": [
+            "S002"
+          ]
+        }
+      ]
+    },
+    "subject": {
+      "subjectCode": "S001",
+      "name": "Computer Science",
+      "workload": 60,
+      "prerequisitesCodeList": [
+        "S002"
+      ]
+    },
+    "classroom": {
+      "maxCapacity": 30,
+      "classroomCode": "C101"
+    },
+    "term": {
+      "start": "2024-09-01",
+      "end": "2024-12-20"
+    },
+    "daysList": [
+      "MONDAY",
+      "WEDNESDAY",
+      "FRIDAY"
+    ],
+    "schedule": "M",
+    "price": 1000
   }
 ]

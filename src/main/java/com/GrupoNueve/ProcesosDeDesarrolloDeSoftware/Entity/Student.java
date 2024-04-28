@@ -1,10 +1,14 @@
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity;
 
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 import java.util.List;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Student extends Person {
     Career career;

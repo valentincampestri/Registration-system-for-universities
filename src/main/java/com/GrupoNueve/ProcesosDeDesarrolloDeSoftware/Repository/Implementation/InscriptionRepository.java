@@ -1,9 +1,19 @@
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.Implementation;
 
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Inscription;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Inscription;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.IInscriptionRepository;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.ResourceUtils;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -12,6 +22,10 @@ import java.util.Optional;
 public class InscriptionRepository implements IInscriptionRepository {
 
     private List<Inscription> inscriptionsList = new ArrayList<>();
+
+    /*public InscriptionRepository() throws IOException {
+        loadInscriptions();
+    }*/
 
     @Override
     public void addInscription(Inscription inscription) {
@@ -40,4 +54,24 @@ public class InscriptionRepository implements IInscriptionRepository {
     public List<Inscription> getAllInscriptions() {
         return inscriptionsList;
     }
+
+    /*private void loadInscriptions() throws IOException {
+        File file;
+        ObjectMapper objectMapper = new ObjectMapper();
+        List<Inscription> mappedInscriptions;
+
+        try {
+            file = ResourceUtils.getFile("classpath:Inscription.json");
+
+            objectMapper.registerModule(new JavaTimeModule());
+            objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+            objectMapper.setDateFormat(new SimpleDateFormat("dd-MM-yyyy"));
+            mappedInscriptions = objectMapper.readValue(file, new TypeReference<List<Inscription>>() {
+            });
+            inscriptionsList = mappedInscriptions;
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+            System.out.println(LocalDate.now());
+        }
+    }*/
 }
