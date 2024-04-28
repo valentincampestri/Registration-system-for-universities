@@ -2,6 +2,7 @@ package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.utils;
 
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.InscriptionDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.CourseRequestDto;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.StudentRequestDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.CourseResponseDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.InscriptionResponseDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.SubjectDto;
@@ -135,7 +136,27 @@ public class MockBuilder {
                 "string",
                 "string",
                 mockCareer(),
-                new ArrayList<>()
+                List.of(
+                        new Subject(
+                                "1",
+                                "Physics",
+                                40,
+                                List.of("0")
+                        )
+                )
+        );
+    }
+
+    public static StudentRequestDto mockStudentRequestDto() {
+        return new StudentRequestDto(
+                "string",
+                "string",
+                "string",
+                "string",
+                "string",
+                "string",
+                mockCareer(),
+                List.of("11")
         );
     }
 

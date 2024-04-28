@@ -93,6 +93,11 @@ public class CourseService implements ICourseService {
     }
 
     @Override
+    public MessageResponseDto getTermReportByProfessor(String professorId) {
+        return null;
+    }
+
+    /*@Override
     public MessageResponseDto getTermReportByProfessor(String professorCode) {
         List<Course> courses = courseRepository.getCoursesByProfessor(professorCode);
 
@@ -111,8 +116,7 @@ public class CourseService implements ICourseService {
         }
 
         return new MessageResponseDto("Generando reporte en PDF para el docente con ID: " + professorCode + "...");
-
-    }
+    }*/
 
     @Override
     public MessageResponseDto createCourse(CourseRequestDto courseRequestDto, String professorCode, String subjectCode) {

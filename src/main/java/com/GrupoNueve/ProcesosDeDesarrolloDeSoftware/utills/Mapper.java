@@ -1,14 +1,15 @@
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.utills;
 
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.CourseRequestDto;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.ProfessorRequestDto;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.StudentRequestDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.CourseResponseDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.InscriptionResponseDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.SubjectDto;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Course;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Inscription;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Professor;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Subject;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.*;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.List;
 
 @Configuration
 public class Mapper {
@@ -83,6 +84,33 @@ public class Mapper {
                 inscription.getInscriptionCode(),
                 inscription.getStudent(),
                 inscription.getCourse()
+        );
+    }
+
+    public static Professor convertProfessorRequestDtoToProfessor(ProfessorRequestDto professorRequestDto,
+                                                                  List<Subject> subjects){
+        return new Professor(
+                professorRequestDto.getName(),
+                professorRequestDto.getLastName(),
+                professorRequestDto.getPersonID(),
+                professorRequestDto.getEmail(),
+                professorRequestDto.getPhone(),
+                professorRequestDto.getAddress(),
+                subjects
+        );
+    }
+
+    public static Student convertStudentRequestDtoToStudent(StudentRequestDto studentRequestDto,
+                                                              List<Subject> subjects){
+        return new Student(
+                studentRequestDto.getName(),
+                studentRequestDto.getLastName(),
+                studentRequestDto.getPersonID(),
+                studentRequestDto.getEmail(),
+                studentRequestDto.getPhone(),
+                studentRequestDto.getAddress(),
+                studentRequestDto.getCareer(),
+                subjects
         );
     }
 }

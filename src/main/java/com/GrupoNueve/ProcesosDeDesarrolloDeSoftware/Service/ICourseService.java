@@ -10,13 +10,13 @@ import java.util.List;
 public interface ICourseService {
     void generateReport();
 
-    List<CourseResponseDto> getCoursesBySubject(Integer subjectId);
+    List<CourseResponseDto> getCoursesBySubject(String subjectId);
 
-    ScheduleDto getScheduleByCourse(Integer courseId);
+    ScheduleDto getScheduleByCourse(String courseId);
 
-    List<CourseResponseDto> getCoursesByProfessor();
+    List<CourseResponseDto> getCoursesByProfessor(String professorCode);
 
-    void getTermReportByProfessor(String professorId);
+    MessageResponseDto getTermReportByProfessor(String professorId);
 
     List<CourseResponseDto> getAllCourses();
 
