@@ -26,12 +26,12 @@ public class InscriptionService implements IInscriptionService {
     IStudentRepository studentRepository;
     ICourseRepository courseRepository;
 
-    public InscriptionService(IInscriptionRepository inscriptionRepository, Utils utils, IStudentRepository studentRepository) {
+    public InscriptionService(IInscriptionRepository inscriptionRepository, Utils utils, IStudentRepository studentRepository, ICourseRepository courseRepository) {
         this.inscriptionRepository = inscriptionRepository;
         this.utils = utils;
         this.studentRepository = studentRepository;
+        this.courseRepository = courseRepository;
     }
-
 
     @Override
     public MessageResponseDto createInscription(InscriptionRequestDto inscriptionRequestDto, String studentCode) {
