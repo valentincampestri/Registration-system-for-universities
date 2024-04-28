@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface IInscriptionService {
     List<InscriptionResponseDto> getInscriptionsByStudent(String studentId);
+    List<InscriptionResponseDto> getAllInscriptions();
 }

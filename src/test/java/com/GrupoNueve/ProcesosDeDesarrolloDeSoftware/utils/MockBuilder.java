@@ -1,13 +1,16 @@
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.utils;
 
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.InscriptionDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.CourseRequestDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.CourseResponseDto;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.InscriptionResponseDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.SubjectDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.*;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MockBuilder {
@@ -112,6 +115,43 @@ public class MockBuilder {
                 List.of(DayOfWeek.MONDAY),
                 "Schedule",
                 1000D
+        );
+    }
+
+    public static Career mockCareer() {
+        return new Career(
+                "string",
+                "string",
+                68
+        );
+    }
+
+    public static Student mockStudent() {
+        return new Student(
+                "string",
+                "string",
+                "string",
+                "string",
+                "string",
+                "string",
+                mockCareer(),
+                new ArrayList<>()
+        );
+    }
+
+    public static Inscription mockInscription() {
+        return new Inscription(
+                "4124",
+                mockStudent(),
+                mockCourse()
+        );
+    }
+
+    public static InscriptionResponseDto mockInscriptoinDto() {
+        return new InscriptionResponseDto(
+                "4124",
+                mockStudent(),
+                mockCourse()
         );
     }
 

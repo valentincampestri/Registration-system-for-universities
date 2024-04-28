@@ -1,4 +1,4 @@
-package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response;
+package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto;
 
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Course;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Student;
@@ -12,8 +12,7 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-
-public class InscriptionResponseDto {
+public class InscriptionDto {
     String inscriptionCode;
     Student student;
     Course course;
