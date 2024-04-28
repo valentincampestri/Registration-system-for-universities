@@ -62,7 +62,7 @@
       "subjects": [
         {
           "subjectCode": "S001",
-          "name": "Chimestry",
+          "name": "Chemistry",
           "workload": 50,
           "prerequisitesCodeList": [
           ]
@@ -79,7 +79,7 @@
     },
     "subject": {
       "subjectCode": "S001",
-      "name": "Chimestry",
+      "name": "Chemistry",
       "workload": 50,
       "prerequisitesCodeList": [
       ]
@@ -100,5 +100,60 @@
     ],
     "schedule": "Exam 1: Class 4, Exam 2: Class 9, Make-up/Early final: Class 11, Regular final: Class 12",
     "price": 800
+  },
+  {
+    "courseCode": "CS103",
+    "startTime": "09:00",
+    "endTime": "11:00",
+    "modality": "Presencial",
+    "professor": {
+      "name": "Luka",
+      "lastName": "Modric",
+      "personCode": "P003",
+      "email": "lukamodric@example.com",
+      "phone": "12038923",
+      "address": "0927 Wow St",
+      "subjects": [
+        {
+          "subjectCode": "S001",
+          "name": "Chemistry",
+          "workload": 50,
+          "prerequisitesCodeList": [
+          ]
+        },
+        {
+          "subjectCode": "S002",
+          "name": "Computer Science",
+          "workload": 60,
+          "prerequisitesCodeList": [
+            "S002"
+          ]
+        }
+      ]
+    },
+    "subject": {
+      "subjectCode": "S002",
+      "name": "Computer Science",
+      "workload": 60,
+      "prerequisitesCodeList": [
+        "S002"
+      ]
+    },
+    "classroom": {
+      "maxCapacity": 30,
+      "classroomCode": "C103"
+    },
+    "term": {
+      "start": "2024-09-01",
+      "end": "2024-12-20"
+    },
+    "lastInscriptionDate": "2024-10-01",
+    "daysList": [
+      "MONDAY",
+      "THURSDAY",
+      "FRIDAY"
+    ],
+    "schedule": "Exam 1: Class 5, Exam 2: Class 10, Make-up/Early final: Class 11, Regular final: Class 13",
+    "price": 1000
   }
 ]

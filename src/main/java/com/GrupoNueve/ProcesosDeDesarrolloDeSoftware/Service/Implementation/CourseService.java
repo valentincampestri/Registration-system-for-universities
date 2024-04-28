@@ -97,10 +97,7 @@ public class CourseService implements ICourseService {
         }
 
         ReportPDF report = new ReportPDF();
-        for (Course course : courses) {
-            report.generateReport(course);
-        }
-
+        report.generateReport(courses);
         return new MessageResponseDto("PDF generated");
     }
 
