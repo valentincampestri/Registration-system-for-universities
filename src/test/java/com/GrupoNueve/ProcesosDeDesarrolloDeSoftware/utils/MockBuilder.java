@@ -44,13 +44,20 @@ public class MockBuilder {
                         "string",
                         "string",
                         "string",
-                        List.of("1","2")
+                        List.of(
+                                new Subject(
+                                        "1",
+                                        "Physics",
+                                        40,
+                                        List.of("0")
+                                )
+                        )
                 ),
                 new Subject(
                         "1",
-                        "string",
-                        0,
-                        List.of("10")
+                        "Physics",
+                        40,
+                        List.of("0")
                 ),
                 new Classroom(
                         50,
@@ -79,13 +86,20 @@ public class MockBuilder {
                         "string",
                         "string",
                         "string",
-                        List.of("1","2")
+                        List.of(
+                                new Subject(
+                                        "1",
+                                        "Physics",
+                                        40,
+                                        List.of("0")
+                                )
+                        )
                 ),
                 new Subject(
                         "1",
-                        "string",
-                        0,
-                        List.of("10")
+                        "Physics",
+                        40,
+                        List.of("0")
                 ),
                 new Classroom(
                         50,
@@ -109,7 +123,14 @@ public class MockBuilder {
                 "string",
                 "string",
                 "string",
-                List.of("1","2")
+                List.of(
+                        new Subject(
+                                "1",
+                                "Physics",
+                                40,
+                                List.of("0")
+                        )
+                )
         );
     }
 

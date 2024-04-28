@@ -1,8 +1,43 @@
-/*public abstract class Person {
-  String name;
-  String lastName;
-  String personID;
-  String email;
-  String phone;
-  String address;
-}*/
+[
+  {
+    "name": "Ana",
+    "lastName": "Martínez",
+    "personCode": "1212",
+    "email": "anamartinez@uade.edu.ar",
+    "phone": "11111111",
+    "address": "lacasadeana 1212",
+    "subjects": [
+      {
+        "subjectID": "5",
+        "name": "Software Development Processes",
+        "workload": 40,
+        "prerequisitesId": [
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Miguel",
+    "lastName": "Pérez",
+    "personCode": "092",
+    "email": "mperez@uade.edu.ar",
+    "phone": "11111111",
+    "address": "lacasademigue 092",
+    "subjects": [
+      "Physics",
+      "Computer Architecture"
+    ]
+  },
+  {
+    "name": "Juan",
+    "lastName": "Gonzalez",
+    "personID": "1223",
+    "email": "jgonzales@uade.edu.ar",
+    "phone": "1114323",
+    "address": "lacasadejuan 1223",
+    "subjects": [
+      "Operating systems",
+      "Thermodynamics"
+    ]
+  }
+]

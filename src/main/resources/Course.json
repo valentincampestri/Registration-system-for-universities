@@ -1,0 +1,40 @@
+/*
+String courseCode;
+LocalTime startTime;
+LocalTime endTime;
+String modality;
+Professor professor;
+Subject subject;
+Classroom classroom;
+Term term;
+List<DayOfWeek> daysList;
+String schedule;
+Double price;*/
+[
+  {
+    "courseCode": "CSE110",
+    "startTime": "08:00",
+    "endTime": "10:00",
+    "modality": "On site",
+    "professor": {
+      "name": "Ana",
+      "lastName": "Martínez",
+      "personID": "1212",
+      "email": "anamartinez@uade.edu.ar",
+      "phone": "11111111",
+      "address": "lacasadeana 1212",
+      "subjects": [
+        "Software Development Processes"
+      ],
+        "classrooms": [
+            "Classroom 1"
+        ],
+        "term": [
+          "start": "2024-04-27",
+          "end": "2024-04-27"
+        ],
+        "daysList": [
+            "Monday"
+        ]
+  }
+]

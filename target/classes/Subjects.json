@@ -1,19 +1,19 @@
 [
   {
     "subjectID": "1",
-    "name": "Física",
+    "name": "Physics",
     "workload": 40,
     "prerequisitesId": []
   },
   {
     "subjectID": "2",
-    "name": "Arquitectura de computadores",
+    "name": "Computer Architecture",
     "workload": 40,
     "prerequisitesId": []
   },
   {
     "subjectID": "3",
-    "name": "Sistemas Operativos",
+    "name": "Operating systems",
     "workload": 40,
     "prerequisitesId": [
       "2"
@@ -21,10 +21,17 @@
   },
   {
     "subjectID": "4",
-    "name": "Termodinámica",
+    "name": "Thermodynamics",
     "workload": 40,
     "prerequisitesId": [
       "1","3"
+    ]
+  },
+  {
+    "subjectID": "5",
+    "name": "Software Development Processes",
+    "workload": 40,
+    "prerequisitesId": [
     ]
   }
 ]

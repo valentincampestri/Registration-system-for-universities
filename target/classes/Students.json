@@ -11,10 +11,12 @@
       "name": "Ingeniería en Sistemas",
       "maxWorkload": "250"
     },
-    "approvedSubjects": [
-      "1",
-      "2"
-    ]
+    "approvedSubjectList": {
+      "subjectID": "1",
+      "name": "Physics",
+      "workload": 40,
+      "prerequisitesId": []
+    }
   },
   {
     "name": "Kimba",
@@ -28,10 +30,21 @@
       "name": "Licenciatura en Sistemas",
       "maxWorkload": "220"
     },
-    "approvedSubjects": [
-      "2",
-      "3"
+    "approvedSubjectList": [
+      {
+        "subjectID": "2",
+        "name": "Computer Architecture",
+        "workload": 40,
+        "prerequisitesId": []
+      },
+      {
+        "subjectID": "3",
+        "name": "Operating systems",
+        "workload": 40,
+        "prerequisitesId": [
+          "2"
+        ]
+      }
     ]
   }
-
 ]
