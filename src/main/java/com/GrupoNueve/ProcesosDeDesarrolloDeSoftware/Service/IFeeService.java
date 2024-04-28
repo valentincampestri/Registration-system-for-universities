@@ -10,8 +10,7 @@ import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Student;
 import java.util.List;
 
 public interface IFeeService {
-
     void addFee(Inscription inscription);
-    MessageResponseDto payFee(String feeCode, String paymentMethod);
-    List<FeeResponseDto> getFeesByStudent(String studentId);
+    MessageResponseDto payFee(String studentCode, String paymentMethod);
+    List<FeeResponseDto> getFeesByStudent(String studentCode);
 }

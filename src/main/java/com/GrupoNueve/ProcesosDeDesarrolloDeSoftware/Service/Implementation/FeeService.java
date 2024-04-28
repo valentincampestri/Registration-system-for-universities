@@ -2,10 +2,7 @@ package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Service.Implementation;
 
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.FeeResponseDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.MessageResponseDto;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Course;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Fee;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Inscription;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Student;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.*;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.ICourseRepository;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.IFeeRepository;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.IStudentRepository;
@@ -43,8 +40,25 @@ public class FeeService implements IFeeService {
     }
 
     @Override
-    public MessageResponseDto payFee(String feeCode, String paymentMethod) {
-        return null;
+    public MessageResponseDto payFee(String studentCode, String paymentMethod) {
+        /*List<Fee> feeList = feeRepository.getFeeByStudentCode(studentCode);
+        for (Fee fee : feeList) {
+            if (!fee.getIsPaid()) {
+                String normalizedPaymentMethod = paymentMethod.toLowerCase();
+                IPaymentMethod paymentMethod1 = switch (normalizedPaymentMethod) {
+                    case "mercadopago":
+                        new MercadoPago();
+                        break;
+                    default:
+                        throw new IllegalArgumentException("Invalid payment method: " + paymentMethod);
+                };
+
+                fee.setIsPaid(true);
+                feeRepository.updateFee(fee);
+                return new MessageResponseDto("The fee has been paid successfully.");
+            }
+        }*/
+        return new MessageResponseDto("The student has no unpaid fees.");
     }
 
     @Override
