@@ -3,13 +3,21 @@ package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.List;
+
 @NoArgsConstructor
-@AllArgsConstructor
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Builder
 public class Inscription {
+    static String currentCode="0";
     String inscriptionCode;
     Student student;
-    Course course;
+    List<Course> courses;
+
+    public Inscription(Student student, List<Course> courses) {
+        this.inscriptionCode = currentCode;
+        this.student = student;
+        this.courses = courses;
+        currentCode = String.valueOf(Integer.parseInt(currentCode) + 1);
+    }
 }

@@ -1,6 +1,5 @@
 [
   {
-    "feeCode": "F001",
     "courses": [
       {
         "courseCode": "CS101",
@@ -46,7 +45,8 @@
           "WEDNESDAY",
           "FRIDAY"
         ],
-        "schedule": "M"
+        "schedule": "M",
+        "price": 1000
       }
     ],
     "student": {
@@ -57,6 +57,7 @@
       "phone": "987-654-3210",
       "address": "456 Oak St"
     },
+    "price": 1000,
     "isPaid": false
   }
 ]
