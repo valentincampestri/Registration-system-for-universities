@@ -8,7 +8,42 @@
     "address": "123 Main St",
     "subjects": [
       {
+        "subjectCode": "S002",
+        "name": "Computer Science",
+        "workload": 60,
+        "prerequisitesCodeList": [
+          "S002"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Cristiano",
+    "lastName": "Ronaldo",
+    "personCode": "P002",
+    "email": "cr7@example.com",
+    "phone": "77777777",
+    "address": "877 Sape St",
+    "subjects": [
+    ]
+  },
+  {
+    "name": "Luka",
+    "lastName": "Modric",
+    "personCode": "P003",
+    "email": "lukamodric@example.com",
+    "phone": "12038923",
+    "address": "0927 Wow St",
+    "subjects": [
+      {
         "subjectCode": "S001",
+        "name": "Chimestry",
+        "workload": 50,
+        "prerequisitesCodeList": [
+        ]
+      },
+      {
+        "subjectCode": "S002",
         "name": "Computer Science",
         "workload": 60,
         "prerequisitesCodeList": [

@@ -1,10 +1,25 @@
 [
   {
     "subjectCode": "S001",
+    "name": "Chimestry",
+    "workload": 50,
+    "prerequisitesCodeList": [
+    ]
+  },
+  {
+    "subjectCode": "S002",
     "name": "Computer Science",
     "workload": 60,
     "prerequisitesCodeList": [
       "S002"
+    ]
+  },
+  {
+    "subjectCode": "S003",
+    "name": "Final thesis",
+    "workload": 70,
+    "prerequisitesCodeList": [
+      "S001","S002"
     ]
   }
 ]

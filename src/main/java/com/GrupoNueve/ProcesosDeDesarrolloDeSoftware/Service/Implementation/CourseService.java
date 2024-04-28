@@ -6,6 +6,7 @@ import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.MessageRespons
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.ScheduleDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Course;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Professor;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.ReportPDF;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Subject;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.BadRequestException;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.NotFoundException;
@@ -92,20 +93,15 @@ public class CourseService implements ICourseService {
 
 
         if (courses.isEmpty()) {
-            return new MessageResponseDto("There are no courses assigned for the teacher with ID: " + professorCode);
+            throw new BadRequestException("There are no courses assigned for the professor with ID: " + professorCode);
         }
 
-
-        StringBuilder reportContent = new StringBuilder();
-        reportContent.append("Report of assigned courses for the teacher with ID:").append(professorCode).append("\n\n");
+        ReportPDF report = new ReportPDF();
         for (Course course : courses) {
-            reportContent.append("Course name: ").append(course.getSubject().getName()).append("\n");
-            reportContent.append("Timetable: ").append(course.getStartTime()).append(" - ").append(course.getEndTime()).append("\n");
-            reportContent.append("Assigned classroom: ").append(course.getClassroom().getClassroomCode()).append("\n\n");
+            report.generateReport(course);
         }
 
-        return new MessageResponseDto("Generating PDF report for the teacher with ID: " + professorCode + "...");
-
+        return new MessageResponseDto("PDF generated");
     }
 
     @Override

@@ -27,7 +27,7 @@
               "address": "123 Main St",
               "subjects": [
                 {
-                  "subjectCode": "S001",
+                  "subjectCode": "S002",
                   "name": "Computer Science",
                   "workload": 60,
                   "prerequisitesCodeList": [
@@ -37,7 +37,7 @@
               ]
             },
             "subject": {
-              "subjectCode": "S001",
+              "subjectCode": "S002",
               "name": "Computer Science",
               "workload": 60,
               "prerequisitesCodeList": [
