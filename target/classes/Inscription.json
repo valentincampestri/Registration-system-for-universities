@@ -53,7 +53,8 @@
           "WEDNESDAY",
           "FRIDAY"
         ],
-        "schedule": "M"
+        "schedule": "M",
+        "price": 1000
       }
     ]
   }
