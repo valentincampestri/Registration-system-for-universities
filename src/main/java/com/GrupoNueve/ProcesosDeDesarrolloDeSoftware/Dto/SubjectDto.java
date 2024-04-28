@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class SubjectDto {
-    String subjectID;
+    String subjectCode;
     String name;
     Integer workload;
     List<String> prerequisitesCodeList;

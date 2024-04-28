@@ -186,7 +186,7 @@
 											"top": 1268,
 											"width": 640.86279296875,
 											"height": 13,
-											"text": "+createCourse(courseRequestDto: CourseRequestDto, personId: String, subjectId: String): ResponseEntity<?>",
+											"text": "+createCourse(courseRequestDto: CourseRequestDto, personId: String, subjectCode: String): ResponseEntity<?>",
 											"horizontalAlignment": 0
 										}
 									],
@@ -6229,7 +6229,7 @@
 											"top": 2949,
 											"width": 377.84130859375,
 											"height": 13,
-											"text": "+getInscriptionsByStudent(studentId: String): List<InscriptionDto>",
+											"text": "+getInscriptionsByStudent(studentCode: String): List<InscriptionDto>",
 											"horizontalAlignment": 0
 										}
 									],
@@ -14999,7 +14999,7 @@
 											"top": 1598,
 											"width": 207.66064453125,
 											"height": 13,
-											"text": "-subjectID: String",
+											"text": "-subjectCode: String",
 											"horizontalAlignment": 0
 										},
 										{
@@ -27909,7 +27909,7 @@
 											"_parent": {
 												"$ref": "AAAAAAGPImKgithr9MA="
 											},
-											"name": "subjectId",
+											"name": "subjectCode",
 											"type": "String"
 										},
 										{
@@ -32610,7 +32610,7 @@
 											"_parent": {
 												"$ref": "AAAAAAGPDbdi8wVCkJ0="
 											},
-											"name": "studentId",
+											"name": "studentCode",
 											"type": "String"
 										},
 										{
@@ -32978,7 +32978,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGPF1AUTc3alZ8="
 									},
-									"name": "subjectID",
+									"name": "subjectCode",
 									"visibility": "private",
 									"type": "String"
 								},

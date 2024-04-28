@@ -49,11 +49,11 @@ public class CourseServiceTest {
     public void createCourseTestFailProfessor() {
         // Arrange
         CourseRequestDto courseRequestDto = MockBuilder.mockCourseRequestDto();
-        String professorId = "1";
-        String subjectId = "1";
-        when(professorRepository.getProfessorByCode(professorId)).thenReturn(Optional.empty());
+        String professorCode = "1";
+        String subjectCode = "1";
+        when(professorRepository.getProfessorByCode(professorCode)).thenReturn(Optional.empty());
         // Act & Assert
-        NotFoundException exception = assertThrows(NotFoundException.class, () -> courseService.createCourse(courseRequestDto, professorId, subjectId));
+        NotFoundException exception = assertThrows(NotFoundException.class, () -> courseService.createCourse(courseRequestDto, professorCode, subjectCode));
         Assertions.assertEquals("Professor does not exist.", exception.getMessage());
     }
 
@@ -62,12 +62,12 @@ public class CourseServiceTest {
     public void createCourseTestFailSubject() {
         // Arrange
         CourseRequestDto courseRequestDto = MockBuilder.mockCourseRequestDto();
-        String professorId = "1";
-        String subjectId = "1";
-        when(professorRepository.getProfessorByCode(professorId)).thenReturn(Optional.of(MockBuilder.mockProfessor()));
-        when(subjectRepository.getSubjectByCode(subjectId)).thenReturn(Optional.empty());
+        String professorCode = "1";
+        String subjectCode = "1";
+        when(professorRepository.getProfessorByCode(professorCode)).thenReturn(Optional.of(MockBuilder.mockProfessor()));
+        when(subjectRepository.getSubjectByCode(subjectCode)).thenReturn(Optional.empty());
         // Act & Assert
-        NotFoundException exception = assertThrows(NotFoundException.class, () -> courseService.createCourse(courseRequestDto, professorId, subjectId));
+        NotFoundException exception = assertThrows(NotFoundException.class, () -> courseService.createCourse(courseRequestDto, professorCode, subjectCode));
         Assertions.assertEquals("Subject does not exist.", exception.getMessage());
     }
 
@@ -76,10 +76,10 @@ public class CourseServiceTest {
     public void createCourseTestFailCourse() {
         // Arrange
         CourseRequestDto courseRequestDto = MockBuilder.mockCourseRequestDto();
-        String professorId = "1";
-        String subjectId = "1";
-        when(professorRepository.getProfessorByCode(professorId)).thenReturn(Optional.of(MockBuilder.mockProfessor()));
-        when(subjectRepository.getSubjectByCode(subjectId)).thenReturn(Optional.of(MockBuilder.mockSubject()));
+        String professorCode = "1";
+        String subjectCode = "1";
+        when(professorRepository.getProfessorByCode(professorCode)).thenReturn(Optional.of(MockBuilder.mockProfessor()));
+        when(subjectRepository.getSubjectByCode(subjectCode)).thenReturn(Optional.of(MockBuilder.mockSubject()));
         Course course = Mapper.convertCourseRequestDtoToCourse(courseRequestDto, MockBuilder.mockProfessor(), MockBuilder.mockSubject());
         when(courseRepository.getCourseByCode(course.getCourseCode())).thenReturn(Optional.of(course));
         // Act & Assert
@@ -92,10 +92,10 @@ public class CourseServiceTest {
     public void createCourseTestOk() {
         // Arrange
         CourseRequestDto courseRequestDto = MockBuilder.mockCourseRequestDto();
-        String professorId = "1";
-        String subjectId = "1";
-        when(professorRepository.getProfessorByCode(professorId)).thenReturn(Optional.of(MockBuilder.mockProfessor()));
-        when(subjectRepository.getSubjectByCode(subjectId)).thenReturn(Optional.of(MockBuilder.mockSubject()));
+        String professorCode = "1";
+        String subjectCode = "1";
+        when(professorRepository.getProfessorByCode(professorCode)).thenReturn(Optional.of(MockBuilder.mockProfessor()));
+        when(subjectRepository.getSubjectByCode(subjectCode)).thenReturn(Optional.of(MockBuilder.mockSubject()));
         Course course = Mapper.convertCourseRequestDtoToCourse(courseRequestDto, MockBuilder.mockProfessor(), MockBuilder.mockSubject());
         when(courseRepository.getCourseByCode(course.getCourseCode())).thenReturn(Optional.empty());
         // Act
@@ -131,24 +131,24 @@ public class CourseServiceTest {
     @DisplayName("getCoursesBySubject - No courses found for subject")
     public void getCoursesBySubjectNoCoursesTest() {
         // Arrange
-        String subjectId = "123";
+        String subjectCode = "123";
         when(courseRepository.getAllCourses()).thenReturn(new ArrayList<>());
 
         // Act & Assert
-        Assertions.assertThrows(NotFoundException.class, () -> courseService.getCoursesBySubject(subjectId));
+        Assertions.assertThrows(NotFoundException.class, () -> courseService.getCoursesBySubject(subjectCode));
     }
 
     @Test
     @DisplayName("getCoursesBySubject - Courses found for subject")
     public void getCoursesBySubjectCoursesFoundTest() {
         // Arrange
-        String subjectId = "123";
+        String subjectCode = "123";
         List<Course> courses = new ArrayList<>();
         courses.add(MockBuilder.mockCourse());
         when(courseRepository.getAllCourses()).thenReturn(courses);
 
         // Act
-        List<CourseResponseDto> response = courseService.getCoursesBySubject(subjectId);
+        List<CourseResponseDto> response = courseService.getCoursesBySubject(subjectCode);
 
         // Assert
         Assertions.assertNotNull(response);
@@ -158,24 +158,24 @@ public class CourseServiceTest {
     @DisplayName("getCoursesByProfessor - No courses found for professor")
     public void getCoursesByProfessorNoCoursesTest() {
         // Arrange
-        String professorId = "123";
+        String professorCode = "123";
         when(courseRepository.getAllCourses()).thenReturn(new ArrayList<>());
 
         // Act & Assert
-        Assertions.assertThrows(NotFoundException.class, () -> courseService.getCoursesByProfessor(professorId));
+        Assertions.assertThrows(NotFoundException.class, () -> courseService.getCoursesByProfessor(professorCode));
     }
 
     @Test
     @DisplayName("getCoursesByProfessor - Courses found for professor")
     public void getCoursesByProfessorCoursesFoundTest() {
         // Arrange
-        String professorId = "123";
+        String professorCode = "123";
         List<Course> courses = new ArrayList<>();
         courses.add(MockBuilder.mockCourse());
         when(courseRepository.getAllCourses()).thenReturn(courses);
 
         // Act
-        List<CourseResponseDto> response = courseService.getCoursesByProfessor(professorId);
+        List<CourseResponseDto> response = courseService.getCoursesByProfessor(professorCode);
 
         // Assert
         Assertions.assertNotNull(response);
@@ -185,15 +185,15 @@ public class CourseServiceTest {
     @DisplayName("getScheduleByCourse - Course found")
     public void getScheduleByCourseTestCourseFound() {
         // Arrange
-        String courseId = "1";
+        String courseCode = "1";
         Course course = MockBuilder.mockCourse();
-        course.setCourseCode(courseId);
+        course.setCourseCode(courseCode);
         ScheduleDto expectedScheduleDto = new ScheduleDto("Schedule");
 
-        when(courseRepository.getCourseByCode(courseId)).thenReturn(Optional.of(course));
+        when(courseRepository.getCourseByCode(courseCode)).thenReturn(Optional.of(course));
 
         // Act
-        ScheduleDto result = courseService.getScheduleByCourse(courseId);
+        ScheduleDto result = courseService.getScheduleByCourse(courseCode);
 
         // Assert
         Assertions.assertEquals(expectedScheduleDto, result);
@@ -203,39 +203,39 @@ public class CourseServiceTest {
     @DisplayName("getScheduleByCourse - Course not found")
     public void getScheduleByCourseTestCourseNotFound() {
         // Arrange
-        String courseId = "1";
-        when(courseRepository.getCourseByCode(courseId)).thenReturn(Optional.empty());
+        String courseCode = "1";
+        when(courseRepository.getCourseByCode(courseCode)).thenReturn(Optional.empty());
 
         // Act & Assert
-        Assertions.assertThrows(NotFoundException.class, () -> courseService.getScheduleByCourse(courseId));
+        Assertions.assertThrows(NotFoundException.class, () -> courseService.getScheduleByCourse(courseCode));
     }
     @Test
     @DisplayName("getTermReportByProfessor - No courses found for professor")
     public void getTermReportByProfessorNoCoursesTest() {
         // Arrange
-        String professorId = "123";
-        when(courseRepository.getCoursesByProfessor(professorId)).thenReturn(Collections.emptyList());
+        String professorCode = "123";
+        when(courseRepository.getCoursesByProfessor(professorCode)).thenReturn(Collections.emptyList());
 
         // Act
-        MessageResponseDto response = courseService.getTermReportByProfessor(professorId);
+        MessageResponseDto response = courseService.getTermReportByProfessor(professorCode);
 
         // Assert
-        Assertions.assertEquals("No hay cursos asignados para el docente con ID: " + professorId, response.getMessage());
+        Assertions.assertEquals("No hay cursos asignados para el docente con ID: " + professorCode, response.getMessage());
     }
 
     @Test
     @DisplayName("getTermReportByProfessor - Courses found for professor")
     public void getTermReportByProfessorCoursesFoundTest() {
         // Arrange
-        String professorId = "123";
+        String professorCode = "123";
         List<Course> courses = List.of(MockBuilder.mockCourse());
-        when(courseRepository.getCoursesByProfessor(professorId)).thenReturn(courses);
+        when(courseRepository.getCoursesByProfessor(professorCode)).thenReturn(courses);
 
         // Act
-        MessageResponseDto response = courseService.getTermReportByProfessor(professorId);
+        MessageResponseDto response = courseService.getTermReportByProfessor(professorCode);
 
         // Assert
-        Assertions.assertTrue(response.getMessage().startsWith("Generando reporte en PDF para el docente con ID: " + professorId));
+        Assertions.assertTrue(response.getMessage().startsWith("Generando reporte en PDF para el docente con ID: " + professorCode));
     }
 
 }

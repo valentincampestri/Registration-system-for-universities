@@ -39,7 +39,7 @@ public class SubjectService implements ISubjectService {
     @Override
     public MessageResponseDto createSubject(SubjectDto subjectDto) {
         Subject subject = Mapper.convertSubjectDtoToSubject(subjectDto);
-        Optional<Subject> existentSubject = subjectRepository.getSubjectByCode(subjectDto.getSubjectID());
+        Optional<Subject> existentSubject = subjectRepository.getSubjectByCode(subjectDto.getSubjectCode());
         if (existentSubject.isPresent()) {
             throw new BadRequestException("Subject already exists.");
         }

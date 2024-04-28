@@ -109,12 +109,12 @@ public class CourseService implements ICourseService {
     }
 
     @Override
-    public MessageResponseDto createCourse(CourseRequestDto courseRequestDto, String professorId, String subjectId) {
-        Optional<Professor> existentProfessor = professorRepository.getProfessorByCode(professorId);
+    public MessageResponseDto createCourse(CourseRequestDto courseRequestDto, String professorCode, String subjectCode) {
+        Optional<Professor> existentProfessor = professorRepository.getProfessorByCode(professorCode);
         if (existentProfessor.isEmpty()) {
             throw new NotFoundException("Professor does not exist.");
         }
-        Optional<Subject> existentSubject = subjectRepository.getSubjectByCode(subjectId);
+        Optional<Subject> existentSubject = subjectRepository.getSubjectByCode(subjectCode);
         if (existentSubject.isEmpty()) {
             throw new NotFoundException("Subject does not exist.");
         }

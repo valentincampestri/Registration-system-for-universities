@@ -28,21 +28,21 @@ public class CourseController {
     public ResponseEntity<?> createCourse(@RequestBody CourseRequestDto courseRequestDto, @PathVariable String professorCode, @PathVariable String subjectCode) {
         return ResponseEntity.ok(courseService.createCourse(courseRequestDto, professorCode, subjectCode));
     }
-    @GetMapping("/subject/{subjectId}")
-    public ResponseEntity<List<CourseResponseDto>> getCoursesBySubject(@PathVariable String subjectId) {
-        return ResponseEntity.ok(courseService.getCoursesBySubject(subjectId));
+    @GetMapping("/subject/{subjectCode}")
+    public ResponseEntity<List<CourseResponseDto>> getCoursesBySubject(@PathVariable String subjectCode) {
+        return ResponseEntity.ok(courseService.getCoursesBySubject(subjectCode));
     }
 
-    @GetMapping("/professor/{professorId}")
-    public ResponseEntity<List<CourseResponseDto>> getCoursesByProfessor(@PathVariable String professorId) {
-        return ResponseEntity.ok(courseService.getCoursesByProfessor(professorId));
+    @GetMapping("/professor/{professorCode}")
+    public ResponseEntity<List<CourseResponseDto>> getCoursesByProfessor(@PathVariable String professorCode) {
+        return ResponseEntity.ok(courseService.getCoursesByProfessor(professorCode));
     }
-    @GetMapping("/{courseId}/schedule")
-    public ScheduleDto getScheduleByCourse(@PathVariable String courseId) {
-        return courseService.getScheduleByCourse(courseId);
+    @GetMapping("/{courseCode}/schedule")
+    public ScheduleDto getScheduleByCourse(@PathVariable String courseCode) {
+        return courseService.getScheduleByCourse(courseCode);
     }
     @PostMapping("/generate-report")
-    public MessageResponseDto getTermReportByProfessor(@RequestParam("professorId") String professorId) {
-        return courseService.getTermReportByProfessor(professorId);
+    public MessageResponseDto getTermReportByProfessor(@RequestParam("professorCode") String professorCode) {
+        return courseService.getTermReportByProfessor(professorCode);
     }
 }

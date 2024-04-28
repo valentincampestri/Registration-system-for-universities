@@ -72,7 +72,7 @@ public class Mapper {
 
     public static Subject convertSubjectDtoToSubject(SubjectDto subjectDto) {
         return new Subject(
-                subjectDto.getSubjectID(),
+                subjectDto.getSubjectCode(),
                 subjectDto.getName(),
                 subjectDto.getWorkload(),
                 subjectDto.getPrerequisitesCodeList()

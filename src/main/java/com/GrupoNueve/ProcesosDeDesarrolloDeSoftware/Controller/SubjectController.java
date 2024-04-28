@@ -26,7 +26,7 @@ public class SubjectController {
         return ResponseEntity.ok(subjectService.getAllSubjects());
     }
 
-    @PostMapping("/create/{personId}/{subjectId}")
+    @PostMapping("/create/{personId}/{subjectCode}")
     public ResponseEntity<MessageResponseDto> createSubject(@RequestBody SubjectDto subjectDto) {
         return ResponseEntity.ok(subjectService.createSubject(subjectDto));
     }

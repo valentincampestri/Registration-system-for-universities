@@ -32,8 +32,8 @@ public class FeeRepository implements IFeeRepository {
     }
 
     @Override
-    public void deleteFee(String feeId) {
-        feesList.removeIf(fee -> feeId.equals(feeId));
+    public void deleteFee(String feeCode) {
+        feesList.removeIf(fee -> feeCode.equals(feeCode));
     }
 
     @Override
