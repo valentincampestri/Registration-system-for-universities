@@ -13,7 +13,7 @@ import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.ICourseRepositor
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.IProfessorRepository;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.ISubjectRepository;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Service.ICourseService;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.utills.Mapper;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.utils.Mapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

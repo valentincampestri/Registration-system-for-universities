@@ -7,6 +7,7 @@ import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Service.Implementation.Cour
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Service.Implementation.FeeService;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Service.Implementation.InscriptionService;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.utils.MockBuilder;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.utils.Utils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -28,6 +29,8 @@ import static org.mockito.Mockito.when;
 public class InscriptionServiceTest {
     @Mock
     InscriptionRepository inscriptionRepository;
+    @Mock
+    Utils utils;
     @InjectMocks
     InscriptionService inscriptionService;
 

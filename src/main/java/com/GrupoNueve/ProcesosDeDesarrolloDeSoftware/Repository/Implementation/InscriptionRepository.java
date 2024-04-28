@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static java.util.stream.Collectors.toList;
+
 @Repository
 public class InscriptionRepository implements IInscriptionRepository {
 
@@ -43,10 +45,10 @@ public class InscriptionRepository implements IInscriptionRepository {
     }
 
     @Override
-    public Optional<Inscription> getInscriptionByCode(String inscriptionCode) {
+    public List<Inscription> getInscriptionByStudentCode(String studentCode) {
         return inscriptionsList.stream()
-                .filter(inscription -> inscription.getInscriptionCode().equals(inscriptionCode))
-                .findFirst();
+                .filter(inscription -> inscription.getStudent().getPersonCode().equals(studentCode))
+                .toList();
     }
 
     @Override

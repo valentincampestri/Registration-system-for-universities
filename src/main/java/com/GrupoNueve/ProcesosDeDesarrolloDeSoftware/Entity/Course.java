@@ -4,6 +4,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -21,6 +22,7 @@ public class Course {
     Subject subject;
     Classroom classroom;
     Term term;
+    LocalDate lastInscriptionDate;
     List<DayOfWeek> daysList;
     String schedule;
     Double price;

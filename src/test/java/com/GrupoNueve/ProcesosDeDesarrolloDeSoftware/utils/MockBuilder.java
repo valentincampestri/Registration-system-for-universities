@@ -22,9 +22,10 @@ public class MockBuilder {
                         "701"
                 ),
                 new Term(
-                        LocalDate.parse("2024-04-26"),
-                        LocalDate.parse("2024-07-26")
+                        LocalDate.parse("2025-04-26"),
+                        LocalDate.parse("2025-07-26")
                 ),
+                LocalDate.parse("2025-05-26"),
                 List.of(DayOfWeek.MONDAY),
                 "Schedule",
                 1000D
@@ -64,9 +65,10 @@ public class MockBuilder {
                         "701"
                 ),
                 new Term(
-                        LocalDate.parse("2024-04-26"),
-                        LocalDate.parse("2024-07-26")
+                        LocalDate.parse("2025-04-26"),
+                        LocalDate.parse("2025-07-26")
                 ),
+                LocalDate.parse("2025-05-26"),
                 List.of(DayOfWeek.MONDAY),
                 "Schedule",
                 1000D
@@ -106,9 +108,10 @@ public class MockBuilder {
                         "701"
                 ),
                 new Term(
-                        LocalDate.parse("2024-04-26"),
-                        LocalDate.parse("2024-07-26")
+                        LocalDate.parse("2025-04-26"),
+                        LocalDate.parse("2025-07-26")
                 ),
+                LocalDate.parse("2025-05-26"),
                 List.of(DayOfWeek.MONDAY),
                 "Schedule",
                 1000D

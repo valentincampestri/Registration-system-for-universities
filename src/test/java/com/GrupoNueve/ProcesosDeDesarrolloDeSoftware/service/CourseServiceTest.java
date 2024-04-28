@@ -10,7 +10,7 @@ import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.Implementation.C
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.Implementation.ProfessorRepository;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.Implementation.SubjectRepository;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Service.Implementation.CourseService;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.utills.Mapper;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.utils.Mapper;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.utils.MockBuilder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

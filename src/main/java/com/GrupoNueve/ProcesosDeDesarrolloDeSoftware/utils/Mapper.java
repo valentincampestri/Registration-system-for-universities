@@ -1,13 +1,11 @@
-package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.utills;
+package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.utils;
 
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.CourseRequestDto;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.InscriptionRequestDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.CourseResponseDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.FeeResponseDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.SubjectDto;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Course;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Fee;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Professor;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Subject;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.*;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
@@ -22,6 +20,7 @@ public class Mapper {
                 course.getSubject(),
                 course.getClassroom(),
                 course.getTerm(),
+                course.getLastInscriptionDate(),
                 course.getDaysList(),
                 course.getSchedule(),
                 course.getPrice()
@@ -38,6 +37,7 @@ public class Mapper {
                 courseResponseDto.getSubject(),
                 courseResponseDto.getClassroom(),
                 courseResponseDto.getTerm(),
+                courseResponseDto.getLastInscriptionDate(),
                 courseResponseDto.getDaysList(),
                 courseResponseDto.getSchedule(),
                 courseResponseDto.getPrice()
@@ -54,6 +54,7 @@ public class Mapper {
                 subject,
                 courseRequestDto.getClassroom(),
                 courseRequestDto.getTerm(),
+                courseRequestDto.getLastInscriptionDate(),
                 courseRequestDto.getDaysList(),
                 courseRequestDto.getSchedule(),
                 courseRequestDto.getPrice()

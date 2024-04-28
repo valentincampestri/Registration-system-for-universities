@@ -8,7 +8,7 @@ import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.InvalidArgsExcept
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.NotFoundException;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.ISubjectRepository;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Service.ISubjectService;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.utills.Mapper;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.utils.Mapper;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;

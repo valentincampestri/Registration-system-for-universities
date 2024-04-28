@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -30,6 +31,7 @@ public class CourseRequestDto {
     String modality;
     Classroom classroom;
     Term term;
+    LocalDate lastInscriptionDate;
     List<DayOfWeek> daysList;
     String schedule;
     Double price;

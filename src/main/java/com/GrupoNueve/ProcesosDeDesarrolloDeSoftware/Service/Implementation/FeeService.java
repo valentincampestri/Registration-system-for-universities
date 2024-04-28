@@ -3,15 +3,12 @@ package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Service.Implementation;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.FeeResponseDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.MessageResponseDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.*;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.ICourseRepository;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.IFeeRepository;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.IStudentRepository;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Service.IFeeService;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.utills.Mapper;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.utils.Mapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class FeeService implements IFeeService {
@@ -64,6 +61,6 @@ public class FeeService implements IFeeService {
     @Override
     public List<FeeResponseDto> getFeesByStudent(String studentCode) {
         List<Fee> feeList = feeRepository.getFeeByStudentCode(studentCode);
-        return  feeList.stream().map(Mapper::convertFeeToFeeResponseDto).toList();
+        return feeList.stream().map(Mapper::convertFeeToFeeResponseDto).toList();
     }
 }
