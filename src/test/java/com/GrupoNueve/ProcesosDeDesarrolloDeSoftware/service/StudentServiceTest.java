@@ -20,6 +20,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.rmi.MarshalledObject;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -44,8 +45,21 @@ public class StudentServiceTest {
     StudentService studentService;
 
     @Test
+    @DisplayName("createStudent - List of approved subjects is null.")
+    public void createStudentTestFailSubject(){
+        // Arrange
+        StudentRequestDto studentRequestDto = MockBuilder.mockStudentRequestDto();
+        studentRequestDto.setApprovedSubjectsCodeList(null);
+
+        // Act & Assert
+        BadRequestException exception = assertThrows(BadRequestException.class, () ->
+                studentService.createStudent(studentRequestDto));
+        Assertions.assertEquals("List of approved subjects is null.", exception.getMessage());
+    }
+
+    @Test
     @DisplayName("createStudent - Student already exists.")
-    public void createStudentTestOk() {
+    public void createStudentTestStudentAlreadyExists() {
         // Arrange
         StudentRequestDto studentRequestDto = MockBuilder.mockStudentRequestDto();
         List<Subject> subjects = new ArrayList<>();
