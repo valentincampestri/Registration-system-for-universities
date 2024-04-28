@@ -33,26 +33,9 @@ public class CourseService implements ICourseService {
     }
 
     @Override
-    public MessageResponseDto generateReport(String professorId) {
+    public void generateReport() {
 
-        List<Course> courses = courseRepository.getCoursesByProfessor(professorId);
-
-
-        if (courses.isEmpty()) {
-            return new MessageResponseDto("No hay cursos asignados para el docente con ID: " + professorId);
         }
-
-
-        StringBuilder reportContent = new StringBuilder();
-        reportContent.append("Informe de cursos asignados para el docente con ID: ").append(professorId).append("\n\n");
-        for (Course course : courses) {
-            reportContent.append("Nombre del curso: ").append(course.getSubject().getName()).append("\n");
-            reportContent.append("Horario: ").append(course.getStartTime()).append(" - ").append(course.getEndTime()).append("\n");
-            reportContent.append("Aula asignada: ").append(course.getClassroom().getClassroomCode()).append("\n\n");
-        }
-
-        return new MessageResponseDto("Generando reporte en PDF para el docente con ID: " + professorId + "...");
-    }
 
 
 
@@ -113,8 +96,25 @@ public class CourseService implements ICourseService {
     }
 
     @Override
-    public void getTermReportByProfessor(String professorId) {
-        return;
+    public MessageResponseDto getTermReportByProfessor(String professorId) {
+        List<Course> courses = courseRepository.getCoursesByProfessor(professorId);
+
+
+        if (courses.isEmpty()) {
+            return new MessageResponseDto("No hay cursos asignados para el docente con ID: " + professorId);
+        }
+
+
+        StringBuilder reportContent = new StringBuilder();
+        reportContent.append("Informe de cursos asignados para el docente con ID: ").append(professorId).append("\n\n");
+        for (Course course : courses) {
+            reportContent.append("Nombre del curso: ").append(course.getSubject().getName()).append("\n");
+            reportContent.append("Horario: ").append(course.getStartTime()).append(" - ").append(course.getEndTime()).append("\n");
+            reportContent.append("Aula asignada: ").append(course.getClassroom().getClassroomCode()).append("\n\n");
+        }
+
+        return new MessageResponseDto("Generando reporte en PDF para el docente con ID: " + professorId + "...");
+
     }
 
     @Override

@@ -44,7 +44,7 @@ public class CourseController {
         return courseService.getScheduleByCourse(courseId);
     }
     @PostMapping("/generate-report")
-    public MessageResponseDto generateReport(@RequestParam("professorId") String professorId) {
-        return courseService.generateReport(professorId);
+    public MessageResponseDto getTermReportByProfessor(@RequestParam("professorId") String professorId) {
+        return courseService.getTermReportByProfessor(professorId);
     }
 }

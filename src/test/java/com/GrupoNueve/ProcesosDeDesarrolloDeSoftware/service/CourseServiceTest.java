@@ -208,29 +208,29 @@ public class CourseServiceTest {
         Assertions.assertThrows(NotFoundException.class, () -> courseService.getScheduleByCourse(courseId));
     }
     @Test
-    @DisplayName("generateReport - No courses found for professor")
-    public void generateReportNoCoursesTest() {
+    @DisplayName("getTermReportByProfessor - No courses found for professor")
+    public void getTermReportByProfessorNoCoursesTest() {
         // Arrange
         String professorId = "123";
         when(courseRepository.getCoursesByProfessor(professorId)).thenReturn(Collections.emptyList());
 
         // Act
-        MessageResponseDto response = courseService.generateReport(professorId);
+        MessageResponseDto response = courseService.getTermReportByProfessor(professorId);
 
         // Assert
         Assertions.assertEquals("No hay cursos asignados para el docente con ID: " + professorId, response.getMessage());
     }
 
     @Test
-    @DisplayName("generateReport - Courses found for professor")
-    public void generateReportCoursesFoundTest() {
+    @DisplayName("getTermReportByProfessor - Courses found for professor")
+    public void getTermReportByProfessorCoursesFoundTest() {
         // Arrange
         String professorId = "123";
         List<Course> courses = List.of(MockBuilder.mockCourse());
         when(courseRepository.getCoursesByProfessor(professorId)).thenReturn(courses);
 
         // Act
-        MessageResponseDto response = courseService.generateReport(professorId);
+        MessageResponseDto response = courseService.getTermReportByProfessor(professorId);
 
         // Assert
         Assertions.assertTrue(response.getMessage().startsWith("Generando reporte en PDF para el docente con ID: " + professorId));
