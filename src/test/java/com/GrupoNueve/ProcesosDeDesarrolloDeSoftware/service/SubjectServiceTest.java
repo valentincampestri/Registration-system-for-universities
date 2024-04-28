@@ -42,7 +42,7 @@ public class SubjectServiceTest {
     public void createSubjectTestFailSubject() {
         // Arrange
         SubjectDto subjectDto = MockBuilder.mockSubjectDto();
-        when(subjectRepository.getSubjectByCode(subjectDto.getsubjectCode())).thenReturn(Optional.of(MockBuilder.mockSubject()));
+        when(subjectRepository.getSubjectByCode(subjectDto.getSubjectCode())).thenReturn(Optional.of(MockBuilder.mockSubject()));
         // Act & Assert
         BadRequestException exception = assertThrows(BadRequestException.class, () -> subjectService.createSubject(subjectDto));
         Assertions.assertEquals("Subject already exists.", exception.getMessage());
@@ -53,7 +53,7 @@ public class SubjectServiceTest {
     public void createSubjectTestFailWorkload() {
         // Arrange
         SubjectDto subjectDto = MockBuilder.mockSubjectInvalidWorkloadDto();
-        when(subjectRepository.getSubjectByCode(subjectDto.getsubjectCode())).thenReturn(Optional.empty());
+        when(subjectRepository.getSubjectByCode(subjectDto.getSubjectCode())).thenReturn(Optional.empty());
         // Act & Assert
         InvalidArgsException exception = assertThrows(InvalidArgsException.class, () -> subjectService.createSubject(subjectDto));
         Assertions.assertEquals("Workload must be greater than 0.", exception.getMessage());
