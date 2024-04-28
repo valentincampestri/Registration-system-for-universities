@@ -16,6 +16,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Repository
 public class CourseRepository implements ICourseRepository {
@@ -47,6 +48,12 @@ public class CourseRepository implements ICourseRepository {
         return coursesList.stream()
                 .filter(course -> course.getCourseCode().equals(courseCode))
                 .findFirst();
+    }
+    @Override
+    public List<Course> getCoursesByProfessor(String professorCode) {
+        return coursesList.stream()
+                .filter(course -> course.getProfessor().getPersonCode().equals(professorCode))
+                .collect(Collectors.toList());
     }
 
     @Override

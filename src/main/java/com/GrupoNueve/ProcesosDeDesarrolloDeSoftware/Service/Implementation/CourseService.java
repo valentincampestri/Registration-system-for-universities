@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CourseService implements ICourseService {
@@ -31,28 +32,80 @@ public class CourseService implements ICourseService {
         this.subjectRepository = subjectRepository;
     }
 
+
     @Override
-    public void generateReport() {
+    public List<CourseResponseDto> getCoursesBySubject(String subjectCode) {
+
+        List<Course> allCourses = courseRepository.getAllCourses();
+        if (allCourses.isEmpty()) {
+            throw new NotFoundException("There are no courses.");
+        }
+
+        List<Course> coursesFilteredBySubject = allCourses.stream()
+                .filter(course -> course.getSubject().getSubjectCode().equals(subjectCode))
+                .toList();
+
+
+        return coursesFilteredBySubject.stream()
+                .map(Mapper::convertCourseToCourseResponseDto)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public List<CourseResponseDto> getCoursesBySubject(Integer subjectId) {
-        return null;
+    public ScheduleDto getScheduleByCourse(String courseCode) {
+
+        Course course = courseRepository.getCourseByCode(courseCode)
+                .orElseThrow(() -> new NotFoundException("Course not found with ID: " + courseCode));
+
+
+        String schedule = course.getSchedule();
+
+
+        ScheduleDto scheduleDto = new ScheduleDto();
+        scheduleDto.setSchedule(schedule);
+
+        return scheduleDto;
     }
 
     @Override
-    public ScheduleDto getScheduleByCourse(Integer courseId) {
-        return null;
+    public List<CourseResponseDto> getCoursesByProfessor(String professorCode) {
+
+        List<Course> allCourses = courseRepository.getAllCourses();
+
+        if (allCourses.isEmpty()) {
+            throw new NotFoundException("There are no courses.");
+        }
+        List<Course> coursesFilteredByProfessor = allCourses.stream()
+                .filter(course -> course.getProfessor().getPersonCode().equals(professorCode))
+                .toList();
+
+        // Mapear los cursos filtrados al DTO de respuesta
+
+        return coursesFilteredByProfessor.stream()
+                .map(Mapper::convertCourseToCourseResponseDto)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public List<CourseResponseDto> getCoursesByProfessor() {
-        return null;
-    }
+    public MessageResponseDto getTermReportByProfessor(String professorCode) {
+        List<Course> courses = courseRepository.getCoursesByProfessor(professorCode);
 
-    @Override
-    public void getTermReportByProfessor(String professorId) {
-        return;
+
+        if (courses.isEmpty()) {
+            return new MessageResponseDto("No hay cursos asignados para el docente con ID: " + professorCode);
+        }
+
+
+        StringBuilder reportContent = new StringBuilder();
+        reportContent.append("Informe de cursos asignados para el docente con ID: ").append(professorCode).append("\n\n");
+        for (Course course : courses) {
+            reportContent.append("Nombre del curso: ").append(course.getSubject().getName()).append("\n");
+            reportContent.append("Horario: ").append(course.getStartTime()).append(" - ").append(course.getEndTime()).append("\n");
+            reportContent.append("Aula asignada: ").append(course.getClassroom().getClassroomCode()).append("\n\n");
+        }
+
+        return new MessageResponseDto("Generando reporte en PDF para el docente con ID: " + professorCode + "...");
+
     }
 
     @Override
@@ -81,7 +134,6 @@ public class CourseService implements ICourseService {
         if (courseList.isEmpty()) {
             throw new NotFoundException("There are no courses.");
         }
-        List<CourseResponseDto> response = courseList.stream().map(Mapper::convertCourseToCourseResponseDto).toList();
-        return response;
+        return courseList.stream().map(Mapper::convertCourseToCourseResponseDto).toList();
     }
 }

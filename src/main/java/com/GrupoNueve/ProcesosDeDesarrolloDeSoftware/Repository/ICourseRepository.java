@@ -15,4 +15,6 @@ public interface ICourseRepository {
     Optional<Course> getCourseByCode(String courseCode);
 
     List<Course> getAllCourses();
+
+    List<Course> getCoursesByProfessor(String professorCode);
 }

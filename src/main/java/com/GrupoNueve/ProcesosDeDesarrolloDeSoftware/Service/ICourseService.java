@@ -8,15 +8,14 @@ import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.ScheduleDto;
 import java.util.List;
 
 public interface ICourseService {
-    void generateReport();
 
-    List<CourseResponseDto> getCoursesBySubject(Integer subjectId);
+    List<CourseResponseDto> getCoursesBySubject(String subjectCode);
 
-    ScheduleDto getScheduleByCourse(Integer courseId);
+    ScheduleDto getScheduleByCourse(String courseCode);
 
-    List<CourseResponseDto> getCoursesByProfessor();
+    List<CourseResponseDto> getCoursesByProfessor(String professorCode);
 
-    void getTermReportByProfessor(String professorId);
+    MessageResponseDto getTermReportByProfessor(String professorCode);
 
     List<CourseResponseDto> getAllCourses();
 
