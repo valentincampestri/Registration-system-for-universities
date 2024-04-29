@@ -1,6 +1,7 @@
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.utils;
 
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.CourseRequestDto;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.InscriptionRequestDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.CourseResponseDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.FeeResponseDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.SubjectDto;
@@ -231,6 +232,12 @@ public class MockBuilder {
                         )
                 )
         );
+    }
+
+    public static InscriptionRequestDto mockInscriptionRequestDto() {
+        Inscription inscription = mockInscription();
+        return new InscriptionRequestDto(
+                inscription.getCourses().stream().map(Course::getCourseCode).toList());
     }
 
     public static Fee mockFee() {
