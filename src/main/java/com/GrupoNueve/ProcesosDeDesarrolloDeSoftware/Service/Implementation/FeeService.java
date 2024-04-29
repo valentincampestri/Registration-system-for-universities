@@ -70,6 +70,9 @@ public class FeeService implements IFeeService {
     @Override
     public List<FeeResponseDto> getFeesByStudent(String studentCode) {
         List<Fee> feeList = feeRepository.getFeeByStudentCode(studentCode);
+        if (feeList.isEmpty()) {
+            throw new BadRequestException("The student does not have fees.");
+        }
         return feeList.stream().map(Mapper::convertFeeToFeeResponseDto).toList();
     }
 }
