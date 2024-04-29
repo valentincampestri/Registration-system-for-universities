@@ -207,7 +207,9 @@ public class CourseServiceTest {
         when(courseRepository.getCourseByCode(courseCode)).thenReturn(Optional.empty());
 
         // Act & Assert
-        Assertions.assertThrows(NotFoundException.class, () -> courseService.getScheduleByCourse(courseCode));
+        NotFoundException exception = assertThrows(NotFoundException.class, () -> courseService.getScheduleByCourse(courseCode));
+        Assertions.assertEquals("Course not found with ID: " + courseCode, exception.getMessage());
+
     }
     @Test
     @DisplayName("getTermReportByProfessor - No courses found for professor")
@@ -216,16 +218,14 @@ public class CourseServiceTest {
         String professorCode = "123";
         when(courseRepository.getCoursesByProfessor(professorCode)).thenReturn(Collections.emptyList());
 
-        // Act
-        MessageResponseDto response = courseService.getTermReportByProfessor(professorCode);
-
-        // Assert
-        Assertions.assertEquals("No hay cursos asignados para el docente con ID: " + professorCode, response.getMessage());
+        // Act && Assert
+        BadRequestException exception = assertThrows(BadRequestException.class, () -> courseService.getTermReportByProfessor(professorCode));
+        Assertions.assertEquals("There are no courses assigned for the professor with ID: "+professorCode, exception.getMessage());
     }
 
     @Test
-    @DisplayName("getTermReportByProfessor - Courses found for professor")
-    public void getTermReportByProfessorCoursesFoundTest() {
+    @DisplayName("getTermReportByProfessor - OK")
+    public void getTermReportByProfessorCoursesOkTest() {
         // Arrange
         String professorCode = "123";
         List<Course> courses = List.of(MockBuilder.mockCourse());
@@ -235,7 +235,7 @@ public class CourseServiceTest {
         MessageResponseDto response = courseService.getTermReportByProfessor(professorCode);
 
         // Assert
-        Assertions.assertTrue(response.getMessage().startsWith("Generando reporte en PDF para el docente con ID: " + professorCode));
+        Assertions.assertEquals("PDF generated.", response.getMessage());
     }
 
 }

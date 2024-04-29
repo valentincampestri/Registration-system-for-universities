@@ -80,8 +80,6 @@ public class CourseService implements ICourseService {
                 .filter(course -> course.getProfessor().getPersonCode().equals(professorCode))
                 .toList();
 
-        // Mapear los cursos filtrados al DTO de respuesta
-
         return coursesFilteredByProfessor.stream()
                 .map(Mapper::convertCourseToCourseResponseDto)
                 .collect(Collectors.toList());
@@ -98,7 +96,7 @@ public class CourseService implements ICourseService {
 
         ReportPDF report = new ReportPDF();
         report.generateReport(courses);
-        return new MessageResponseDto("PDF generated");
+        return new MessageResponseDto("PDF generated.");
     }
 
     @Override
