@@ -1,4 +1,3 @@
-/*
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.service;
 
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.StudentRequestDto;
@@ -40,7 +39,8 @@ public class StudentServiceTest {
 
     @InjectMocks
     StudentService studentService;
-
+    
+/*
     @Test
     @DisplayName("createStudent - List of approved subjects is null.")
     public void createStudentTestFailSubject(){
