@@ -4,19 +4,25 @@ import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.FeeResponseDto
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.MessageResponseDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.*;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.BadRequestException;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.InvalidArgsException;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.NotFoundException;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.IFeeRepository;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.IStudentRepository;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Service.IFeeService;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.utils.Mapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FeeService implements IFeeService {
     IFeeRepository feeRepository;
+    IStudentRepository studentRepository;
 
-    public FeeService(IFeeRepository feeRepository) {
+    public FeeService(IFeeRepository feeRepository, IStudentRepository studentRepository) {
         this.feeRepository = feeRepository;
+        this.studentRepository = studentRepository;
     }
 
     @Override
@@ -55,7 +61,7 @@ public class FeeService implements IFeeService {
                         selectedPaymentMethod = new CreditCard();
                         break;
                     default:
-                        throw new IllegalArgumentException("Invalid payment method: " + paymentMethod);
+                        throw new InvalidArgsException("Invalid payment method: " + paymentMethod);
                 }
                 if (selectedPaymentMethod.pay(fee.getPrice())){
                     fee.setIsPaid(true);
@@ -69,6 +75,10 @@ public class FeeService implements IFeeService {
 
     @Override
     public List<FeeResponseDto> getFeesByStudent(String studentCode) {
+        Optional<Student> existentStudent = studentRepository.getStudentByCode(studentCode);
+        if (existentStudent.isEmpty()) {
+            throw new NotFoundException("The student does not exist.");
+        }
         List<Fee> feeList = feeRepository.getFeeByStudentCode(studentCode);
         if (feeList.isEmpty()) {
             throw new BadRequestException("The student does not have fees.");

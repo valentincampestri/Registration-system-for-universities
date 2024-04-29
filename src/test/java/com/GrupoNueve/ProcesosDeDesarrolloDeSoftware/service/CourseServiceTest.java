@@ -129,7 +129,7 @@ public class CourseServiceTest {
 
     @Test
     @DisplayName("getCoursesBySubject - No courses found for subject")
-    public void getCoursesBySubjectNoCoursesTest() {
+    public void getCoursesBySubjectTestNoCourses() {
         // Arrange
         String subjectCode = "123";
         when(courseRepository.getAllCourses()).thenReturn(new ArrayList<>());
@@ -140,7 +140,7 @@ public class CourseServiceTest {
 
     @Test
     @DisplayName("getCoursesBySubject - Courses found for subject")
-    public void getCoursesBySubjectCoursesFoundTest() {
+    public void getCoursesBySubjectTestCoursesFound() {
         // Arrange
         String subjectCode = "123";
         List<Course> courses = new ArrayList<>();
@@ -156,7 +156,7 @@ public class CourseServiceTest {
 
     @Test
     @DisplayName("getCoursesByProfessor - No courses found for professor")
-    public void getCoursesByProfessorNoCoursesTest() {
+    public void getCoursesByProfessorTestNoCourses() {
         // Arrange
         String professorCode = "123";
         when(courseRepository.getAllCourses()).thenReturn(new ArrayList<>());
@@ -167,7 +167,7 @@ public class CourseServiceTest {
 
     @Test
     @DisplayName("getCoursesByProfessor - Courses found for professor")
-    public void getCoursesByProfessorCoursesFoundTest() {
+    public void getCoursesByProfessorTestCoursesFound() {
         // Arrange
         String professorCode = "123";
         List<Course> courses = new ArrayList<>();
@@ -213,7 +213,7 @@ public class CourseServiceTest {
     }
     @Test
     @DisplayName("getTermReportByProfessor - No courses found for professor")
-    public void getTermReportByProfessorNoCoursesTest() {
+    public void getTermReportByProfessorTestNoCourses() {
         // Arrange
         String professorCode = "123";
         when(courseRepository.getCoursesByProfessor(professorCode)).thenReturn(Collections.emptyList());
@@ -225,7 +225,7 @@ public class CourseServiceTest {
 
     @Test
     @DisplayName("getTermReportByProfessor - OK")
-    public void getTermReportByProfessorCoursesOkTest() {
+    public void getTermReportByProfessorTestOk() {
         // Arrange
         String professorCode = "123";
         List<Course> courses = List.of(MockBuilder.mockCourse());

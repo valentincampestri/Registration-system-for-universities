@@ -10,7 +10,22 @@
           "personCode": "ST001",
           "email": "alice.smith@example.com",
           "phone": "987-654-3210",
-          "address": "456 Oak St"
+          "address": "456 Oak St",
+          "career": {
+            "careerCode": "C001",
+            "name": "Computer Science",
+            "maxWorkload": 240
+          },
+          "approvedSubjectList": [
+            {
+              "subjectCode": "S002",
+              "name": "Computer Science",
+              "workload": 60,
+              "prerequisitesCodeList": [
+                "S002"
+              ]
+            }
+          ]
         },
         "courses": [
           {
