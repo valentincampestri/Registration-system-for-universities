@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface ICourseService {
 
+
     List<CourseResponseDto> getCoursesBySubject(String subjectCode);
 
     ScheduleDto getScheduleByCourse(String courseCode);

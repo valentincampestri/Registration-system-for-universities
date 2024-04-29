@@ -18,5 +18,5 @@ public class ProfessorRequestDto {
     String email;
     String phone;
     String address;
-    List<String> SubjectsCodeList;
+    List<String> subjectsCodeList;
 }

@@ -4,13 +4,14 @@ import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.CourseRequestDt
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.InscriptionRequestDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.CourseResponseDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.FeeResponseDto;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.StudentRequestDto;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.InscriptionResponseDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.SubjectDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.*;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 
 public class MockBuilder {
@@ -118,6 +119,63 @@ public class MockBuilder {
                 List.of(DayOfWeek.MONDAY),
                 "Schedule",
                 1000D
+        );
+    }
+
+    public static Career mockCareer() {
+        return new Career(
+                "string",
+                "string",
+                68
+        );
+    }
+
+/*    public static Student mockStudent() {
+        return new Student(
+                "string",
+                "string",
+                "string",
+                "string",
+                "string",
+                "string",
+                mockCareer(),
+                List.of(
+                        new Subject(
+                                "1",
+                                "Physics",
+                                40,
+                                List.of("0")
+                        )
+                )
+        );
+    }*/
+
+    public static StudentRequestDto mockStudentRequestDto() {
+        return new StudentRequestDto(
+                "string",
+                "string",
+                "string",
+                "string",
+                "string",
+                "string",
+                mockCareer(),
+                List.of("11")
+        );
+    }
+
+   /* public static Inscription mockInscription() {
+        return new Inscription(
+                "4124",
+                mockStudent(),
+                mockCourse()
+        );
+    }*/
+
+    public static InscriptionResponseDto mockInscriptoinDto() {
+        return new InscriptionResponseDto(
+                "4124",
+                mockStudent(),
+                mockCourse()
         );
     }
 

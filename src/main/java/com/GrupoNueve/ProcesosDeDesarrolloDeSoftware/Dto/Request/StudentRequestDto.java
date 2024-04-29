@@ -20,5 +20,5 @@ public class StudentRequestDto {
     String phone;
     String address;
     Career career;
-    List<String> approvedSubjectCodeList;
+    List<String> approvedSubjectsCodeList;
 }

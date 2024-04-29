@@ -14,7 +14,7 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 
 public class InscriptionResponseDto {
-    String id;
+    String inscriptionCode;
     Student student;
     Course course;
 }
