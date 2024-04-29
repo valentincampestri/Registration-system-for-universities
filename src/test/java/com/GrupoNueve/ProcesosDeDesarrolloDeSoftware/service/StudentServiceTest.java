@@ -1,6 +1,7 @@
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.service;
 
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.StudentRequestDto;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.MessageResponseDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Student;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Subject;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.BadRequestException;
@@ -24,6 +25,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @DirtiesContext
@@ -40,7 +42,6 @@ public class StudentServiceTest {
     @InjectMocks
     StudentService studentService;
 
-
     @Test
     @DisplayName("createStudent - Student already exists.")
     public void createStudentTestFailStudentAlreadyExists() {
@@ -53,17 +54,32 @@ public class StudentServiceTest {
         Assertions.assertEquals("Student already exists.", exception.getMessage());
     }
 
- /*   @Test
+    @Test
     @DisplayName("createStudent - One or more subjects don't exists.")
     public void createStudentTestFailSubjectsDontExists() {
         // Arrange
         StudentRequestDto studentRequestDto = MockBuilder.mockStudentRequestDto();
-        when(studentRepository.getStudentByCode(studentRequestDto.getPersonCode())).thenReturn(Optional.of(MockBuilder.mockStudent()));
+        when(studentRepository.getStudentByCode(any())).thenReturn(Optional.empty());
+        when(subjectRepository.getSubjectByCode(any())).thenReturn(Optional.empty());
 
         // Act & Assert
         BadRequestException exception = assertThrows(BadRequestException.class, () -> studentService.createStudent(studentRequestDto));
-        Assertions.assertEquals("Student already exists.", exception.getMessage());
-    }*/
+        Assertions.assertEquals("One or more subjects don't exists.", exception.getMessage());
+    }
+
+    @Test
+    @DisplayName("createStudent - Ok.")
+    public void createStudentTestOk() {
+        // Arrange
+        StudentRequestDto studentRequestDto = MockBuilder.mockStudentRequestDto();
+        when(studentRepository.getStudentByCode(any())).thenReturn(Optional.empty());
+        when(subjectRepository.getSubjectByCode(any())).thenReturn(Optional.of(MockBuilder.mockSubject()));
+
+        // Act
+        MessageResponseDto result = studentService.createStudent(studentRequestDto);
+        // Assert
+        Assertions.assertEquals("Student created successfully.", result.getMessage());
+    }
 
 }
 

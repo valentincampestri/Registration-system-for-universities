@@ -21,8 +21,9 @@ public class StudentService implements IStudentService {
 
     ISubjectRepository subjectRepository;
 
-    public StudentService(IStudentRepository studentRepository) {
+    public StudentService(IStudentRepository studentRepository, ISubjectRepository subjectRepository) {
         this.studentRepository = studentRepository;
+        this.subjectRepository = subjectRepository;
     }
 
     @Override
