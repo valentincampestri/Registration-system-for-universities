@@ -1,4 +1,3 @@
-/*
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.service;
 
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.StudentRequestDto;
@@ -54,6 +53,17 @@ public class StudentServiceTest {
         Assertions.assertEquals("Student already exists.", exception.getMessage());
     }
 
+ /*   @Test
+    @DisplayName("createStudent - One or more subjects don't exists.")
+    public void createStudentTestFailSubjectsDontExists() {
+        // Arrange
+        StudentRequestDto studentRequestDto = MockBuilder.mockStudentRequestDto();
+        when(studentRepository.getStudentByCode(studentRequestDto.getPersonCode())).thenReturn(Optional.of(MockBuilder.mockStudent()));
+
+        // Act & Assert
+        BadRequestException exception = assertThrows(BadRequestException.class, () -> studentService.createStudent(studentRequestDto));
+        Assertions.assertEquals("Student already exists.", exception.getMessage());
+    }*/
+
 }
 
-*/
