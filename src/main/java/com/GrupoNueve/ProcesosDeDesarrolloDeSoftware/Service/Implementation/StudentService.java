@@ -1,9 +1,7 @@
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Service.Implementation;
 
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.ProfessorRequestDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.StudentRequestDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.MessageResponseDto;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Professor;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Student;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Subject;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.BadRequestException;
@@ -29,12 +27,7 @@ public class StudentService implements IStudentService {
 
     @Override
     public MessageResponseDto createStudent(StudentRequestDto studentRequestDto) {
-        if (studentRequestDto.getApprovedSubjectsCodeList() == null) {
-            throw new BadRequestException("List of approved subjects is null.");
-        }
-
-        Optional<Student> existentStudent = studentRepository.
-                getStudentByCode(studentRequestDto.getPersonID());
+        Optional<Student> existentStudent = studentRepository.getStudentByCode(studentRequestDto.getPersonCode());
 
         if (existentStudent.isPresent()){
             throw new BadRequestException("Student already exists.");
@@ -44,7 +37,7 @@ public class StudentService implements IStudentService {
         for (String subjectCode : studentRequestDto.getApprovedSubjectsCodeList()){
             Optional<Subject> subjectCandidate = subjectRepository.getSubjectByCode(subjectCode);
             if (subjectCandidate.isEmpty()) {
-                throw new BadRequestException("One or more subject don't exists.");
+                throw new BadRequestException("One or more subjects don't exists.");
             }
             subjects.add(subjectCandidate.get());
         }

@@ -15,7 +15,7 @@ import java.util.List;
 public class StudentRequestDto {
     String name;
     String lastName;
-    String personID;
+    String personCode;
     String email;
     String phone;
     String address;

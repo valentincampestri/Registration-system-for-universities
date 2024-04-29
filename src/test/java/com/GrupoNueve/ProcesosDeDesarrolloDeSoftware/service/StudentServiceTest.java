@@ -1,3 +1,4 @@
+/*
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.service;
 
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.StudentRequestDto;
@@ -40,29 +41,13 @@ public class StudentServiceTest {
     @InjectMocks
     StudentService studentService;
 
-/*
-    @Test
-    @DisplayName("createStudent - List of approved subjects is null.")
-    public void createStudentTestFailSubject(){
-        // Arrange
-        StudentRequestDto studentRequestDto = MockBuilder.mockStudentRequestDto();
-        studentRequestDto.setApprovedSubjectsCodeList(null);
-
-        // Act & Assert
-        BadRequestException exception = assertThrows(BadRequestException.class, () -> studentService.createStudent(studentRequestDto));
-        Assertions.assertEquals("List of approved subjects is null.", exception.getMessage());
-    }
 
     @Test
     @DisplayName("createStudent - Student already exists.")
-    public void createStudentTestStudentAlreadyExists() {
+    public void createStudentTestFailStudentAlreadyExists() {
         // Arrange
         StudentRequestDto studentRequestDto = MockBuilder.mockStudentRequestDto();
-        List<Subject> subjects = new ArrayList<>();
-        subjects.add(MockBuilder.mockSubject());
-        Student student = Mapper.convertStudentRequestDtoToStudent(studentRequestDto,subjects);
-
-        when(studentRepository.getStudentByCode(studentRequestDto.getPersonID())).thenReturn(Optional.of(student));
+        when(studentRepository.getStudentByCode(studentRequestDto.getPersonCode())).thenReturn(Optional.of(MockBuilder.mockStudent()));
 
         // Act & Assert
         BadRequestException exception = assertThrows(BadRequestException.class, () -> studentService.createStudent(studentRequestDto));
@@ -70,4 +55,5 @@ public class StudentServiceTest {
     }
 
 }
+
 */

@@ -1,5 +1,6 @@
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Controller;
 
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.ProfessorRequestDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Service.IProfessorService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,10 +14,9 @@ public class ProfessorController {
         this.professorService = professorService;
     }
 
-    @PostMapping("/createProfessor")
+    @PostMapping("/create")
     public ResponseEntity<?> createProfessor(@RequestBody ProfessorRequestDto professorRequestDto){
         return ResponseEntity.ok(professorService.createProfessor(professorRequestDto));
     }
-
 
 }

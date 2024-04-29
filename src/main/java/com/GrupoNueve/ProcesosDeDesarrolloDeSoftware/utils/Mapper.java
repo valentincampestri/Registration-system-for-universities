@@ -1,7 +1,6 @@
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.utils;
 
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.CourseRequestDto;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.InscriptionRequestDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.ProfessorRequestDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.StudentRequestDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.CourseResponseDto;
@@ -10,6 +9,7 @@ import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.SubjectDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.*;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.Collections;
 import java.util.List;
 
 @Configuration
@@ -108,12 +108,25 @@ public class Mapper {
         return new Student(
                 studentRequestDto.getName(),
                 studentRequestDto.getLastName(),
-                studentRequestDto.getPersonID(),
+                studentRequestDto.getPersonCode(),
                 studentRequestDto.getEmail(),
                 studentRequestDto.getPhone(),
                 studentRequestDto.getAddress(),
                 studentRequestDto.getCareer(),
                 subjects
+        );
+    }
+
+    public static StudentRequestDto convertStudentToStudentRequestDto(Student student){
+        return new StudentRequestDto(
+                student.getPersonCode(),
+                student.getName(),
+                student.getLastName(),
+                student.getEmail(),
+                student.getPhone(),
+                student.getAddress(),
+                student.getCareer(),
+                student.getApprovedSubjectList().stream().map(Subject::getSubjectCode).toList()
         );
     }
 }

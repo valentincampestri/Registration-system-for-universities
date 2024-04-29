@@ -22,8 +22,9 @@ public class ProfessorService implements IProfessorService {
 
     ISubjectRepository subjectRepository;
 
-    public ProfessorService(IProfessorRepository professorRepository) {
+    public ProfessorService(IProfessorRepository professorRepository, ISubjectRepository subjectRepository) {
         this.professorRepository = professorRepository;
+        this.subjectRepository = subjectRepository;
     }
 
     public MessageResponseDto createProfessor(ProfessorRequestDto professorRequestDto) {
