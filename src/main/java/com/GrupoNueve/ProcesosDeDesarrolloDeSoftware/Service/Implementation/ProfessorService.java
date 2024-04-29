@@ -40,7 +40,7 @@ public class ProfessorService implements IProfessorService {
         for (String subjectCode : professorRequestDto.getSubjectsCodeList()){
             Optional<Subject> subjectCandidate = subjectRepository.getSubjectByCode(subjectCode);
             if (subjectCandidate.isEmpty()) {
-                throw new BadRequestException("One or more subject don't exists.");
+                throw new BadRequestException("One or more subjects don't exists.");
             }
             subjects.add(subjectCandidate.get());
         }

@@ -2,6 +2,7 @@ package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.utils;
 
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.CourseRequestDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.InscriptionRequestDto;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.ProfessorRequestDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.CourseResponseDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.FeeResponseDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.StudentRequestDto;
@@ -274,6 +275,10 @@ public class MockBuilder {
                         )
                 )
         );
+    }
+
+    public static ProfessorRequestDto mockProfessorRequestDto() {
+        return Mapper.convertProfessorToProfessorRequestDto(mockProfessor());
     }
 }
 

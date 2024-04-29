@@ -1,7 +1,10 @@
-/*
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.service;
 
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.CourseRequestDto;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.ProfessorRequestDto;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.StudentRequestDto;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.MessageResponseDto;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.BadRequestException;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.NotFoundException;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.Implementation.*;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Service.Implementation.CourseService;
@@ -22,6 +25,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @DirtiesContext
@@ -30,21 +34,47 @@ import static org.mockito.Mockito.when;
 public class ProfessorServiceTest {
     @Mock
     ProfessorRepository professorRepository;
+    @Mock
+    SubjectRepository subjectRepository;
     @InjectMocks
     ProfessorService professorService;
 
     @Test
-    @DisplayName("create - Error")
-    public void createFail() {
+    @DisplayName("createStudent - Student already exists.")
+    public void createStudentTestFailStudentAlreadyExists() {
         // Arrange
+        ProfessorRequestDto professorRequestDto = MockBuilder.mockProfessorRequestDto();
+        when(professorRepository.getProfessorByCode(professorRequestDto.getPersonID())).thenReturn(Optional.of(MockBuilder.mockProfessor()));
+
         // Act & Assert
+        BadRequestException exception = assertThrows(BadRequestException.class, () -> professorService.createProfessor(professorRequestDto));
+        Assertions.assertEquals("Professor already exists.", exception.getMessage());
     }
 
     @Test
-    @DisplayName("create - Ok")
-    public void createOk() {
+    @DisplayName("createStudent - One or more subjects don't exists.")
+    public void createStudentTestFailSubjectsDontExists() {
         // Arrange
-        // Act
-        // Assert
+        ProfessorRequestDto professorRequestDto = MockBuilder.mockProfessorRequestDto();
+        when(professorRepository.getProfessorByCode(any())).thenReturn(Optional.empty());
+        when(subjectRepository.getSubjectByCode(any())).thenReturn(Optional.empty());
+
+        // Act & Assert
+        BadRequestException exception = assertThrows(BadRequestException.class, () -> professorService.createProfessor(professorRequestDto));
+        Assertions.assertEquals("One or more subjects don't exists.", exception.getMessage());
     }
-}*/
+
+    @Test
+    @DisplayName("createStudent - Ok.")
+    public void createStudentTestOk() {
+        // Arrange
+        ProfessorRequestDto professorRequestDto = MockBuilder.mockProfessorRequestDto();
+        when(professorRepository.getProfessorByCode(any())).thenReturn(Optional.empty());
+        when(subjectRepository.getSubjectByCode(any())).thenReturn(Optional.of(MockBuilder.mockSubject()));
+
+        // Act
+        MessageResponseDto result = professorService.createProfessor(professorRequestDto);
+        // Assert
+        Assertions.assertEquals("Professor created successfully.", result.getMessage());
+    }
+}

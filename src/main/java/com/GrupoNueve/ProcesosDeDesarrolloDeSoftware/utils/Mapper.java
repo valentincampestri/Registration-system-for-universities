@@ -104,6 +104,18 @@ public class Mapper {
         );
     }
 
+    public static ProfessorRequestDto convertProfessorToProfessorRequestDto(Professor professor){
+        return new ProfessorRequestDto(
+                professor.getPersonCode(),
+                professor.getName(),
+                professor.getLastName(),
+                professor.getEmail(),
+                professor.getPhone(),
+                professor.getAddress(),
+                professor.getSubjects().stream().map(Subject::getSubjectCode).toList()
+        );
+    }
+
     public static Student convertStudentRequestDtoToStudent(StudentRequestDto studentRequestDto, List<Subject> subjects){
         return new Student(
                 studentRequestDto.getName(),
