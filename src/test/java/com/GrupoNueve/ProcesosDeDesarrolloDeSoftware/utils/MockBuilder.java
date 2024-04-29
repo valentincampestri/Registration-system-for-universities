@@ -130,26 +130,6 @@ public class MockBuilder {
         );
     }
 
-/*    public static Student mockStudent() {
-        return new Student(
-                "string",
-                "string",
-                "string",
-                "string",
-                "string",
-                "string",
-                mockCareer(),
-                List.of(
-                        new Subject(
-                                "1",
-                                "Physics",
-                                40,
-                                List.of("0")
-                        )
-                )
-        );
-    }*/
-
     public static StudentRequestDto mockStudentRequestDto() {
         return new StudentRequestDto(
                 "string",
@@ -162,14 +142,6 @@ public class MockBuilder {
                 List.of("11")
         );
     }
-
-   /* public static Inscription mockInscription() {
-        return new Inscription(
-                "4124",
-                mockStudent(),
-                mockCourse()
-        );
-    }*/
 
     public static InscriptionResponseDto mockInscriptoinDto() {
         return new InscriptionResponseDto(
@@ -327,5 +299,33 @@ public class MockBuilder {
     public static FeeResponseDto mockFeeResponseDto() {
         return Mapper.convertFeeToFeeResponseDto(mockFee());
     }
+
+    /* public static Inscription mockInscription() {
+        return new Inscription(
+                "4124",
+                mockStudent(),
+                mockCourse()
+        );
+    }*/
+
+    /*    public static Student mockStudent() {
+        return new Student(
+                "string",
+                "string",
+                "string",
+                "string",
+                "string",
+                "string",
+                mockCareer(),
+                List.of(
+                        new Subject(
+                                "1",
+                                "Physics",
+                                40,
+                                List.of("0")
+                        )
+                )
+        );
+    }*/
 }
 

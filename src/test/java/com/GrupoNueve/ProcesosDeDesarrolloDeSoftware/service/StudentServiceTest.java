@@ -39,7 +39,7 @@ public class StudentServiceTest {
 
     @InjectMocks
     StudentService studentService;
-    
+
 /*
     @Test
     @DisplayName("createStudent - List of approved subjects is null.")
