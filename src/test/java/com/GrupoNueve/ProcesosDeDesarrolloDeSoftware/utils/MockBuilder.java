@@ -257,5 +257,23 @@ public class MockBuilder {
         return Mapper.convertFeeToFeeResponseDto(mockFee());
     }
 
+    public static Professor mockProfessor() {
+        return new Professor(
+                "string",
+                "string",
+                "string",
+                "string",
+                "string",
+                "string",
+                List.of(
+                        new Subject(
+                                "1",
+                                "Physics",
+                                40,
+                                List.of("0")
+                        )
+                )
+        );
+    }
 }
 
