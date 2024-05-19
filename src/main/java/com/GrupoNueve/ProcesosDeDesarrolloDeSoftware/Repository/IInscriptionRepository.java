@@ -15,4 +15,6 @@ public interface IInscriptionRepository {
     List<Inscription> getInscriptionByStudentCode(String studentCode);
 
     List<Inscription> getAllInscriptions();
+
+    List<Inscription> getInscriptionsByCourseCode(String courseCode);
 }

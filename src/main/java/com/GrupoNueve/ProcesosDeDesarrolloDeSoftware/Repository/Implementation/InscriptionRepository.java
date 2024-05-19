@@ -56,6 +56,13 @@ public class InscriptionRepository implements IInscriptionRepository {
         return inscriptionsList;
     }
 
+    @Override
+    public List<Inscription> getInscriptionsByCourseCode(String courseCode) {
+        return inscriptionsList.stream()
+                .filter(inscription -> inscription.getCourses().stream().anyMatch(course -> course.getCourseCode().equals(courseCode)))
+                .toList();
+    }
+
     private void loadInscriptions() throws IOException {
         File file;
         ObjectMapper objectMapper = new ObjectMapper();

@@ -1,7 +1,6 @@
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Service.Implementation;
 
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.InscriptionRequestDto;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.InscriptionResponseDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.MessageResponseDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.*;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.BadRequestException;
@@ -49,6 +48,7 @@ public class InscriptionService implements IInscriptionService {
         }
         Inscription inscription = new Inscription(existentStudent.get(), courseList);
         inscriptionChecks(inscription);
+        inscriptionMaxCapacityCheck(inscription);
         inscriptionRepository.addInscription(inscription);
         utils.addFee(inscription);
         return new MessageResponseDto("You have successfully enrolled in the selected courses. Now you can pay according to your student code.");
@@ -82,7 +82,7 @@ public class InscriptionService implements IInscriptionService {
         List<Course> courses = inscription.getCourses();
         int currentWorkLoad = 0;
         Subject subject;
-        //agueguo lastInscriptionDate al Course Entity.
+        //aguego lastInscriptionDate al Course Entity.
         LocalDate lastInscriptionDate;
         LocalDate today = LocalDate.now();
         if (!courses.isEmpty()) {
@@ -124,7 +124,14 @@ public class InscriptionService implements IInscriptionService {
             if (!okPrerequisites) {
                 throw new BadRequestException("You need to pass one or more subjects as a prerequisite to enroll in one or more subjects that you are trying to enroll in this term.");
             }
+        }
+    }
 
+    private void inscriptionMaxCapacityCheck(Inscription inscription) {
+        for (Course course : inscription.getCourses()) {
+            if (course.getClassroom().getMaxCapacity() <= inscriptionRepository.getInscriptionsByCourseCode(course.getCourseCode()).size()) {
+                throw new BadRequestException("The course " + course.getCourseCode() + " is already full.");
+            }
         }
     }
 }

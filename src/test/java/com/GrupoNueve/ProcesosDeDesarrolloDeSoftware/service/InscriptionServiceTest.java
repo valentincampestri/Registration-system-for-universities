@@ -1,12 +1,11 @@
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.service;
 
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.CourseRequestDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.InscriptionRequestDto;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.BadRequestException;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.NotFoundException;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.IStudentRepository;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.Implementation.*;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Service.Implementation.CourseService;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Service.Implementation.FeeService;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.Implementation.CourseRepository;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.Implementation.InscriptionRepository;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Service.Implementation.InscriptionService;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.utils.MockBuilder;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.utils.Utils;
@@ -84,6 +83,20 @@ public class InscriptionServiceTest {
 //        NotFoundException exception = assertThrows(NotFoundException.class, () -> inscriptionService.createInscription(inscriptionRequestDto, studentCode));
 //        Assertions.assertEquals("You are already enrolled in one or more subjects that you are trying to enroll in this term.", exception.getMessage());
 //    }
+
+    @Test
+    @DisplayName("create - Course is already full")
+    public void createInscriptionFailMaxCapacity() {
+        // Arrange
+        InscriptionRequestDto inscriptionRequestDto = MockBuilder.mockInscriptionRequestMaxCapacityDto();
+        String studentCode = MockBuilder.mockStudent().getPersonCode();
+        String courseCode = "CS500";
+        when(studentRepository.getStudentByCode(studentCode)).thenReturn(Optional.of(MockBuilder.mockStudent()));
+        when(courseRepository.getCourseByCode(courseCode)).thenReturn(Optional.of(MockBuilder.mockCourseMaxCapacity()));
+        // Act & Assert
+        BadRequestException exception = assertThrows(BadRequestException.class, () -> inscriptionService.createInscription(inscriptionRequestDto, studentCode));
+        Assertions.assertEquals("The course " + courseCode + " is already full.", exception.getMessage());
+    }
 
     @Test
     @DisplayName("create - Ok")

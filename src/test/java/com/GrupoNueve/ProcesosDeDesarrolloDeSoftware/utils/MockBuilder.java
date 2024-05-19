@@ -127,6 +127,41 @@ public class MockBuilder {
         );
     }
 
+    public static Course mockCourseMaxCapacity() {
+        List<Subject> subjects = List.of(new Subject("S002", "Computer Science", 60, List.of("S002")));
+        return new Course("CS500",
+                Shift.AFTERNOON,
+                "Presencial",
+                new Professor(
+                        "John",
+                        "Doe",
+                        "P001",
+                        "john.doe@example.com",
+                        "123-456-7890",
+                        "123 Main St",
+                        subjects
+                ),
+                new Subject(
+                        "S002",
+                        "Computer Science",
+                        60,
+                        List.of("S002")
+                ),
+                new Classroom(
+                        0,
+                        "C101"
+                ),
+                new Term(
+                        LocalDate.parse("2024-09-01"),
+                        LocalDate.parse("2024-12-20")
+                ),
+                LocalDate.parse("2024-10-01"),
+                List.of(DayOfWeek.MONDAY, DayOfWeek.WEDNESDAY, DayOfWeek.FRIDAY),
+                "Exam 1: Class 5, Exam 2: Class 10, Make-up/Early final: Class 11, Regular final: Class 13",
+                1000D
+        );
+    }
+
     public static Subject mockSubject() {
         return new Subject(
                 "14",
@@ -222,8 +257,55 @@ public class MockBuilder {
         );
     }
 
+    public static Inscription mockInscriptionMaxCapacity() {
+        List<Subject> subjects = List.of(new Subject("S002", "Computer Science", 60, List.of("S002")));
+        return new Inscription(
+                mockStudent(),
+                List.of(
+                        new Course(
+                                "CS500",
+                                Shift.AFTERNOON,
+                                "Presencial",
+                                new Professor(
+                                        "John",
+                                        "Doe",
+                                        "P001",
+                                        "john.doe@example.com",
+                                        "123-456-7890",
+                                        "123 Main St",
+                                        subjects
+                                ),
+                                new Subject(
+                                        "S002",
+                                        "Computer Science",
+                                        60,
+                                        List.of("S002")
+                                ),
+                                new Classroom(
+                                        0,
+                                        "C101"
+                                ),
+                                new Term(
+                                        LocalDate.parse("2024-09-01"),
+                                        LocalDate.parse("2024-12-20")
+                                ),
+                                LocalDate.parse("2024-10-01"),
+                                List.of(DayOfWeek.MONDAY, DayOfWeek.WEDNESDAY, DayOfWeek.FRIDAY),
+                                "Exam 1: Class 5, Exam 2: Class 10, Make-up/Early final: Class 11, Regular final: Class 13",
+                                1000D
+                        )
+                )
+        );
+    }
+
     public static InscriptionRequestDto mockInscriptionRequestDto() {
         Inscription inscription = mockInscription();
+        return new InscriptionRequestDto(
+                inscription.getCourses().stream().map(Course::getCourseCode).toList());
+    }
+
+    public static InscriptionRequestDto mockInscriptionRequestMaxCapacityDto() {
+        Inscription inscription = mockInscriptionMaxCapacity();
         return new InscriptionRequestDto(
                 inscription.getCourses().stream().map(Course::getCourseCode).toList());
     }
