@@ -14,7 +14,6 @@ import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Service.ICourseService;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.utils.Mapper;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -29,6 +28,36 @@ public class CourseService implements ICourseService {
         this.courseRepository = courseRepository;
         this.professorRepository = professorRepository;
         this.subjectRepository = subjectRepository;
+    }
+
+    @Override
+    public List<CourseResponseDto> getAllCourses() {
+        List<Course> courseList = courseRepository.getAllCourses();
+        if (courseList.isEmpty()) {
+            throw new NotFoundException("There are no courses.");
+        }
+        return courseList.stream().map(Mapper::convertCourseToCourseResponseDto).toList();
+    }
+
+    @Override
+    public MessageResponseDto createCourse(CourseRequestDto courseRequestDto, String professorCode, String subjectCode) {
+        Optional<Professor> existentProfessor = professorRepository.getProfessorByCode(professorCode);
+        if (existentProfessor.isEmpty()) {
+            throw new NotFoundException("Professor does not exist.");
+        }
+        Optional<Subject> existentSubject = subjectRepository.getSubjectByCode(subjectCode);
+        if (existentSubject.isEmpty()) {
+            throw new NotFoundException("Subject does not exist.");
+        }
+        Course course = Mapper.convertCourseRequestDtoToCourse(courseRequestDto, existentProfessor.get(), existentSubject.get());
+        Optional<Course> existentCourse = courseRepository.getCourseByCode(course.getCourseCode());
+        if (existentCourse.isPresent()) {
+            throw new BadRequestException("Course already exists.");
+        } else {
+            courseRepository.addCourse(course);
+        }
+
+        return new MessageResponseDto("Course created successfully.");
     }
 
     @Override
@@ -51,71 +80,6 @@ public class CourseService implements ICourseService {
         return coursesFilteredBySubject.stream()
                 .map(Mapper::convertCourseToCourseResponseDto)
                 .collect(Collectors.toList());
-    }
-
-    @Override
-    public ScheduleDto getScheduleByCourse(String courseCode) {
-        Course course = courseRepository.getCourseByCode(courseCode)
-                .orElseThrow(() -> new NotFoundException("Course not found with ID: " + courseCode));
-
-
-        String schedule = course.getSchedule();
-
-
-        ScheduleDto scheduleDto = new ScheduleDto();
-        scheduleDto.setSchedule(schedule);
-
-        return scheduleDto;
-    }
-
-    @Override
-    public List<CourseResponseDto> getCoursesByProfessor(String professorCode) {
-        List<Course> allCourses = courseRepository.getAllCourses();
-
-        if (allCourses.isEmpty()) {
-            throw new NotFoundException("There are no courses.");
-        }
-        List<Course> coursesFilteredByProfessor = allCourses.stream()
-                .filter(course -> course.getProfessor().getPersonCode().equals(professorCode))
-                .toList();
-
-        return coursesFilteredByProfessor.stream()
-                .map(Mapper::convertCourseToCourseResponseDto)
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public MessageResponseDto getTermReportByProfessor(String professorCode) {
-        List<Course> courses = courseRepository.getCoursesByProfessor(professorCode);
-
-        if (courses.isEmpty()) {
-            throw new BadRequestException("There are no courses assigned for the professor with ID: " + professorCode);
-        }
-
-        ReportPDF report = new ReportPDF();
-        report.generateReport(courses);
-        return new MessageResponseDto("PDF generated.");
-    }
-
-    @Override
-    public MessageResponseDto createCourse(CourseRequestDto courseRequestDto, String professorCode, String subjectCode) {
-        Optional<Professor> existentProfessor = professorRepository.getProfessorByCode(professorCode);
-        if (existentProfessor.isEmpty()) {
-            throw new NotFoundException("Professor does not exist.");
-        }
-        Optional<Subject> existentSubject = subjectRepository.getSubjectByCode(subjectCode);
-        if (existentSubject.isEmpty()) {
-            throw new NotFoundException("Subject does not exist.");
-        }
-        Course course = Mapper.convertCourseRequestDtoToCourse(courseRequestDto, existentProfessor.get(), existentSubject.get());
-        Optional<Course> existentCourse = courseRepository.getCourseByCode(course.getCourseCode());
-        if (existentCourse.isPresent()) {
-            throw new BadRequestException("Course already exists.");
-        } else {
-            courseRepository.addCourse(course);
-        }
-
-        return new MessageResponseDto("Course created successfully.");
     }
 
     @Override
@@ -156,11 +120,45 @@ public class CourseService implements ICourseService {
     }
 
     @Override
-    public List<CourseResponseDto> getAllCourses() {
-        List<Course> courseList = courseRepository.getAllCourses();
-        if (courseList.isEmpty()) {
+    public List<CourseResponseDto> getCoursesByProfessor(String professorCode) {
+        List<Course> allCourses = courseRepository.getAllCourses();
+
+        if (allCourses.isEmpty()) {
             throw new NotFoundException("There are no courses.");
         }
-        return courseList.stream().map(Mapper::convertCourseToCourseResponseDto).toList();
+        List<Course> coursesFilteredByProfessor = allCourses.stream()
+                .filter(course -> course.getProfessor().getPersonCode().equals(professorCode))
+                .toList();
+
+        return coursesFilteredByProfessor.stream()
+                .map(Mapper::convertCourseToCourseResponseDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public ScheduleDto getScheduleByCourse(String courseCode) {
+        Course course = courseRepository.getCourseByCode(courseCode)
+                .orElseThrow(() -> new NotFoundException("Course not found with ID: " + courseCode));
+
+        String schedule = course.getSchedule();
+
+
+        ScheduleDto scheduleDto = new ScheduleDto();
+        scheduleDto.setSchedule(schedule);
+
+        return scheduleDto;
+    }
+
+    @Override
+    public MessageResponseDto getTermReportByProfessor(String professorCode) {
+        List<Course> courses = courseRepository.getCoursesByProfessor(professorCode);
+
+        if (courses.isEmpty()) {
+            throw new BadRequestException("There are no courses assigned for the professor with ID: " + professorCode);
+        }
+
+        ReportPDF report = new ReportPDF();
+        report.generateReport(courses);
+        return new MessageResponseDto("PDF generated.");
     }
 }

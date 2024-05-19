@@ -9,20 +9,19 @@ import java.util.List;
 
 public interface ICourseService {
 
-
-    List<CourseResponseDto> getCoursesBySubject(String subjectCode);
-
-    ScheduleDto getScheduleByCourse(String courseCode);
-
-    List<CourseResponseDto> getCoursesByProfessor(String professorCode);
-
-    MessageResponseDto getTermReportByProfessor(String professorCode);
-
     List<CourseResponseDto> getAllCourses();
 
     MessageResponseDto createCourse(CourseRequestDto courseRequestDto, String personId, String subjectCode);
 
+    List<CourseResponseDto> getCoursesBySubject(String subjectCode);
+
     List<CourseResponseDto> getCoursesByShift(String shift);
 
     List<CourseResponseDto> getCoursesBySubectAndShift(String subjectCode, String shift);
+
+    List<CourseResponseDto> getCoursesByProfessor(String professorCode);
+
+    ScheduleDto getScheduleByCourse(String courseCode);
+
+    MessageResponseDto getTermReportByProfessor(String professorCode);
 }

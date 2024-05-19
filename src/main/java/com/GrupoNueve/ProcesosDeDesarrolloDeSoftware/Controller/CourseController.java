@@ -40,7 +40,7 @@ public class CourseController {
     }
 
     @GetMapping("/subject-shift/{subjectCode}/{shift}")
-    public ResponseEntity<List<CourseResponseDto>> getCoursesBySubectAndShift(@PathVariable String subjectCode, String shift) {
+    public ResponseEntity<List<CourseResponseDto>> getCoursesBySubectAndShift(@PathVariable String subjectCode, @PathVariable String shift) {
         return ResponseEntity.ok(courseService.getCoursesBySubectAndShift(subjectCode, shift));
     }
 

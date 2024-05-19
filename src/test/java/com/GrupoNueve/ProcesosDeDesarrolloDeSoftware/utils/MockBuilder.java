@@ -127,7 +127,7 @@ public class MockBuilder {
         );
     }
 
-    public static Subject mockSubject2() {
+    public static Subject mockSubjectTwo() {
         return new Subject(
                 "1",
                 "Physics",

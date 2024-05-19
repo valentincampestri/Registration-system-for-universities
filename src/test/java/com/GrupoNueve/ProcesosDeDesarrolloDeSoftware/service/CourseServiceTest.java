@@ -156,17 +156,17 @@ public class CourseServiceTest {
     @DisplayName("getCoursesBySubject - Courses found for subject")
     public void getCoursesBySubjectTestCoursesFound() {
         // Arrange
-        String subjectCode = "14";
+        String subjectCode = "1";
         List<Course> courses = new ArrayList<>();
         courses.add(MockBuilder.mockCourse());
         when(courseRepository.getAllCourses()).thenReturn(courses);
-        when(subjectRepository.getSubjectByCode(subjectCode)).thenReturn(Optional.of(MockBuilder.mockSubject()));
+        when(subjectRepository.getSubjectByCode(subjectCode)).thenReturn(Optional.of(MockBuilder.mockSubjectTwo()));
 
         // Act
         List<CourseResponseDto> response = courseService.getCoursesBySubject(subjectCode);
 
         // Assert
-        Assertions.assertNotNull(response);
+        Assertions.assertEquals(List.of(MockBuilder.mockCourseResponseDto()), response);
     }
 
     @Test
@@ -222,7 +222,7 @@ public class CourseServiceTest {
     @DisplayName("getCoursesByProfessor - Courses found for professor")
     public void getCoursesByProfessorTestCoursesFound() {
         // Arrange
-        String professorCode = "123";
+        String professorCode = "string";
         List<Course> courses = new ArrayList<>();
         courses.add(MockBuilder.mockCourse());
         when(courseRepository.getAllCourses()).thenReturn(courses);
@@ -318,7 +318,7 @@ public class CourseServiceTest {
         List<Course> courses = new ArrayList<>();
         courses.add(MockBuilder.mockCourse());
         when(courseRepository.getAllCourses()).thenReturn(courses);
-        when(subjectRepository.getSubjectByCode(subjectCode)).thenReturn(Optional.of(MockBuilder.mockSubject2()));
+        when(subjectRepository.getSubjectByCode(subjectCode)).thenReturn(Optional.of(MockBuilder.mockSubjectTwo()));
 
         // Act
         List<CourseResponseDto> response = courseService.getCoursesBySubectAndShift(subjectCode, shift);

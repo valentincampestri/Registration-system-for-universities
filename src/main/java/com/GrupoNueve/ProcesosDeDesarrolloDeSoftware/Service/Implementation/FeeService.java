@@ -2,7 +2,14 @@ package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Service.Implementation;
 
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.FeeResponseDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.MessageResponseDto;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.*;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Binance;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Fee;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Course;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.IPaymentMethod;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Inscription;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.MercadoPago;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.PagoMisCuentas;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Student;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.BadRequestException;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.InvalidArgsException;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.NotFoundException;
@@ -12,7 +19,9 @@ import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Service.IFeeService;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.utils.Mapper;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -49,20 +58,18 @@ public class FeeService implements IFeeService {
         for (Fee fee : feeList) {
             if (!fee.getIsPaid()) {
                 String normalizedPaymentMethod = paymentMethod.toLowerCase();
-                IPaymentMethod selectedPaymentMethod;
-                switch (normalizedPaymentMethod) {
-                    case "mercadopago":
-                        selectedPaymentMethod = new MercadoPago();
-                        break;
-                    case "pago_mis_cuentas":
-                        selectedPaymentMethod = new PagoMisCuentas();
-                        break;
-                    case "binance":
-                        selectedPaymentMethod = new Binance();
-                        break;
-                    default:
-                        throw new InvalidArgsException("Invalid payment method: " + paymentMethod);
+
+                Map<String, IPaymentMethod> paymentMethods = new HashMap<>();
+                paymentMethods.put("mercadopago", new MercadoPago());
+                paymentMethods.put("pago_mis_cuentas", new PagoMisCuentas());
+                paymentMethods.put("binance", new Binance());
+
+                IPaymentMethod selectedPaymentMethod = paymentMethods.get(normalizedPaymentMethod);
+
+                if (selectedPaymentMethod == null) {
+                    throw new InvalidArgsException("Invalid payment method: " + paymentMethod);
                 }
+
                 if (selectedPaymentMethod.pay(fee.getPrice())){
                     fee.setIsPaid(true);
                     feeRepository.updateFee(fee);
