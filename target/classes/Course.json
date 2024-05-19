@@ -1,8 +1,7 @@
 [
   {
     "courseCode": "CS101",
-    "startTime": "09:00",
-    "endTime": "11:00",
+    "shift": "Morning",
     "modality": "Presencial",
     "professor": {
       "name": "John",
@@ -49,8 +48,7 @@
   },
   {
     "courseCode": "CS102",
-    "startTime": "09:00",
-    "endTime": "11:00",
+    "shift": "Morning",
     "modality": "Presencial",
     "professor": {
       "name": "Luka",
@@ -103,8 +101,7 @@
   },
   {
     "courseCode": "CS103",
-    "startTime": "09:00",
-    "endTime": "11:00",
+    "shift": "Morning",
     "modality": "Presencial",
     "professor": {
       "name": "Luka",

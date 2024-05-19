@@ -27,8 +27,7 @@
     "courses": [
       {
         "courseCode": "CS101",
-        "startTime": "09:00",
-        "endTime": "11:00",
+        "shift": "Morning",
         "modality": "Presencial",
         "professor": {
           "name": "John",

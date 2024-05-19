@@ -7,7 +7,7 @@ import lombok.experimental.FieldDefaults;
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Builder
-public class CreditCard implements IPaymentMethod {
+public class PagoMisCuentas implements IPaymentMethod {
 
     // TODO: Implement methods
     @Override

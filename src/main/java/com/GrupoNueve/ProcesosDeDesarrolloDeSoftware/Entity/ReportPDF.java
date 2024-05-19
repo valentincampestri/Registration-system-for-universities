@@ -6,7 +6,6 @@ import com.itextpdf.text.pdf.PdfWriter;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import javax.swing.text.Document;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.List;
@@ -31,7 +30,7 @@ public class ReportPDF implements IReport {
 
             for (Course course : courses) {
                 document.add(new Paragraph("Course name: " + course.getSubject().getName() + "\n"));
-                document.add(new Paragraph("Timetable: " + course.getStartTime() + " - " + course.getEndTime() + "\n"));
+                document.add(new Paragraph("Shift: " + course.getShift() + "\n"));
                 document.add(new Paragraph("Assigned classroom: " + course.getClassroom().getClassroomCode() + "\n"));
                 document.add(new Paragraph("\n---\n\n")); // Línea de separación
             }

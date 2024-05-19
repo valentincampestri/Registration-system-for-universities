@@ -9,7 +9,6 @@ import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.SubjectDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.*;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.Collections;
 import java.util.List;
 
 @Configuration
@@ -17,8 +16,7 @@ public class Mapper {
     public static CourseResponseDto convertCourseToCourseResponseDto(Course course) {
         return new CourseResponseDto(
                 course.getCourseCode(),
-                course.getStartTime(),
-                course.getEndTime(),
+                course.getShift(),
                 course.getModality(),
                 course.getProfessor(),
                 course.getSubject(),
@@ -34,8 +32,7 @@ public class Mapper {
     public static Course convertCourseResponseDtoToCourse(CourseResponseDto courseResponseDto) {
         return new Course(
                 courseResponseDto.getCourseCode(),
-                courseResponseDto.getStartTime(),
-                courseResponseDto.getEndTime(),
+                courseResponseDto.getShift(),
                 courseResponseDto.getModality(),
                 courseResponseDto.getProfessor(),
                 courseResponseDto.getSubject(),
@@ -51,8 +48,7 @@ public class Mapper {
     public static Course convertCourseRequestDtoToCourse(CourseRequestDto courseRequestDto, Professor professor, Subject subject) {
         return new Course(
                 courseRequestDto.getCourseCode(),
-                courseRequestDto.getStartTime(),
-                courseRequestDto.getEndTime(),
+                courseRequestDto.getShift(),
                 courseRequestDto.getModality(),
                 professor,
                 subject,

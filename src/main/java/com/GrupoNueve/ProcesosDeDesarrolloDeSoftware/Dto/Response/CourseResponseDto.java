@@ -1,11 +1,6 @@
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response;
 
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Classroom;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Professor;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Subject;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Term;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import io.swagger.v3.oas.annotations.media.Schema;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,7 +9,6 @@ import lombok.experimental.FieldDefaults;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.List;
 
 @Data
@@ -23,12 +17,7 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CourseResponseDto {
     String courseCode;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
-    @Schema(type = "string", format = "HH:mm", example = "09:00")
-    LocalTime startTime;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
-    @Schema(type = "string", format = "HH:mm", example = "10:00")
-    LocalTime endTime;
+    Shift shift;
     String modality;
     Professor professor;
     Subject subject;

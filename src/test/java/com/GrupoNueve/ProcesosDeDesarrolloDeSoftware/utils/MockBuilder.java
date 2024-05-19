@@ -6,22 +6,18 @@ import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.ProfessorReques
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.CourseResponseDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.FeeResponseDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.StudentRequestDto;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.InscriptionResponseDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.SubjectDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.*;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.Collections;
 import java.util.List;
 
 public class MockBuilder {
     public static CourseRequestDto mockCourseRequestDto() {
         return new CourseRequestDto(
                 "0",
-                LocalTime.parse("09:00"),
-                LocalTime.parse("10:00"),
+                Shift.MORNING,
                 "virtual",
                 new Classroom(
                         50,
@@ -41,8 +37,7 @@ public class MockBuilder {
     public static CourseResponseDto mockCourseResponseDto() {
         return new CourseResponseDto(
                 "0",
-                LocalTime.parse("09:00"),
-                LocalTime.parse("10:00"),
+                Shift.MORNING,
                 "virtual",
                 new Professor(
                         "string",
@@ -84,8 +79,7 @@ public class MockBuilder {
     public static Course mockCourse() {
         return new Course(
                 "0",
-                LocalTime.parse("09:00"),
-                LocalTime.parse("10:00"),
+                Shift.MORNING,
                 "virtual",
                 new Professor(
                         "string",
@@ -176,8 +170,7 @@ public class MockBuilder {
                 List.of(
                         new Course(
                                 "CS101",
-                                LocalTime.parse("09:00"),
-                                LocalTime.parse("11:00"),
+                                Shift.MORNING,
                                 "Presencial",
                                 new Professor(
                                         "John",
@@ -186,14 +179,7 @@ public class MockBuilder {
                                         "john.doe@example.com",
                                         "123-456-7890",
                                         "123 Main St",
-                                        List.of(
-                                                new Subject(
-                                                        "S002",
-                                                        "Computer Science",
-                                                        60,
-                                                        List.of("S002")
-                                                )
-                                        )
+                                        subjects
                                 ),
                                 new Subject(
                                         "S002",

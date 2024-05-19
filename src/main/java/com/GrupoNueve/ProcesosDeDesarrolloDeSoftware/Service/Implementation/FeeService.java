@@ -54,11 +54,11 @@ public class FeeService implements IFeeService {
                     case "mercadopago":
                         selectedPaymentMethod = new MercadoPago();
                         break;
-                    case "paypal":
-                        selectedPaymentMethod = new PayPal();
+                    case "pago_mis_cuentas":
+                        selectedPaymentMethod = new PagoMisCuentas();
                         break;
-                    case "credit_card":
-                        selectedPaymentMethod = new CreditCard();
+                    case "binance":
+                        selectedPaymentMethod = new Binance();
                         break;
                     default:
                         throw new InvalidArgsException("Invalid payment method: " + paymentMethod);

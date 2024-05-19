@@ -1,15 +1,12 @@
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.service;
 
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.CourseRequestDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.FeeResponseDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.MessageResponseDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Fee;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Inscription;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.BadRequestException;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.InvalidArgsException;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.NotFoundException;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.Implementation.*;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Service.Implementation.CourseService;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Service.Implementation.FeeService;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.utils.Mapper;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.utils.MockBuilder;
@@ -78,11 +75,11 @@ public class FeeServiceTest {
     }
 
     @Test
-    @DisplayName("payFee - Credit_Card - Ok")
-    public void payFeeCreditCardOk() {
+    @DisplayName("payFee - Binance - Ok")
+    public void payFeeBinanceOk() {
         // Arrange
         String studentCode = "ST001";
-        String paymentMethod = "credit_card";
+        String paymentMethod = "Binance";
         when(feeRepository.getFeeByStudentCode(studentCode)).thenReturn(List.of(MockBuilder.mockFee()));
         // Act
         MessageResponseDto result = feeService.pay(studentCode, paymentMethod);
@@ -91,11 +88,11 @@ public class FeeServiceTest {
     }
 
     @Test
-    @DisplayName("payFee - paypal - Ok")
-    public void payFeePayPalOk() {
+    @DisplayName("payFee - Pago Mis Cuentas - Ok")
+    public void payFeePagoMisCuentasOk() {
         // Arrange
         String studentCode = "ST001";
-        String paymentMethod = "paypal";
+        String paymentMethod = "pago_mis_cuentas";
         when(feeRepository.getFeeByStudentCode(studentCode)).thenReturn(List.of(MockBuilder.mockFee()));
         // Act
         MessageResponseDto result = feeService.pay(studentCode, paymentMethod);

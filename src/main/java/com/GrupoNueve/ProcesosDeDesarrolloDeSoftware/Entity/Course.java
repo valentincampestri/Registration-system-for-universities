@@ -5,7 +5,6 @@ import lombok.experimental.FieldDefaults;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.List;
 
 @AllArgsConstructor
@@ -15,8 +14,7 @@ import java.util.List;
 @Builder
 public class Course {
     String courseCode;
-    LocalTime startTime;
-    LocalTime endTime;
+    Shift shift;
     String modality;
     Professor professor;
     Subject subject;

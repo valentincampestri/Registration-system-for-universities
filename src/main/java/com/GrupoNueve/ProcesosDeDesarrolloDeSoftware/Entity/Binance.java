@@ -7,7 +7,7 @@ import lombok.experimental.FieldDefaults;
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Builder
-public class PayPal implements IPaymentMethod {
+public class Binance implements IPaymentMethod {
 
     // TODO: Implement methods
     @Override
