@@ -28,19 +28,32 @@ public class CourseController {
     public ResponseEntity<?> createCourse(@RequestBody CourseRequestDto courseRequestDto, @PathVariable String professorCode, @PathVariable String subjectCode) {
         return ResponseEntity.ok(courseService.createCourse(courseRequestDto, professorCode, subjectCode));
     }
+
     @GetMapping("/subject/{subjectCode}")
     public ResponseEntity<List<CourseResponseDto>> getCoursesBySubject(@PathVariable String subjectCode) {
         return ResponseEntity.ok(courseService.getCoursesBySubject(subjectCode));
+    }
+
+    @GetMapping("/shift/{shift}")
+    public ResponseEntity<List<CourseResponseDto>> getCoursesByShift(@PathVariable String shift) {
+        return ResponseEntity.ok(courseService.getCoursesByShift(shift));
+    }
+
+    @GetMapping("/subject-shift/{subjectCode}/{shift}")
+    public ResponseEntity<List<CourseResponseDto>> getCoursesBySubectAndShift(@PathVariable String subjectCode, String shift) {
+        return ResponseEntity.ok(courseService.getCoursesBySubectAndShift(subjectCode, shift));
     }
 
     @GetMapping("/professor/{professorCode}")
     public ResponseEntity<List<CourseResponseDto>> getCoursesByProfessor(@PathVariable String professorCode) {
         return ResponseEntity.ok(courseService.getCoursesByProfessor(professorCode));
     }
+
     @GetMapping("/{courseCode}/schedule")
     public ScheduleDto getScheduleByCourse(@PathVariable String courseCode) {
         return courseService.getScheduleByCourse(courseCode);
     }
+
     @PostMapping("/generate-report")
     public MessageResponseDto getTermReportByProfessor(@RequestParam("professorCode") String professorCode) {
         return courseService.getTermReportByProfessor(professorCode);

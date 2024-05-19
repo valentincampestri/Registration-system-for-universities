@@ -4,10 +4,7 @@ import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.CourseRequestDt
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.CourseResponseDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.MessageResponseDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.ScheduleDto;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Course;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Professor;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.ReportPDF;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Subject;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.*;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.BadRequestException;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.NotFoundException;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.ICourseRepository;
@@ -17,6 +14,7 @@ import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Service.ICourseService;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.utils.Mapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -33,13 +31,16 @@ public class CourseService implements ICourseService {
         this.subjectRepository = subjectRepository;
     }
 
-
     @Override
     public List<CourseResponseDto> getCoursesBySubject(String subjectCode) {
-
         List<Course> allCourses = courseRepository.getAllCourses();
         if (allCourses.isEmpty()) {
             throw new NotFoundException("There are no courses.");
+        }
+
+        Optional<Subject> existentSubject = subjectRepository.getSubjectByCode(subjectCode);
+        if (existentSubject.isEmpty()) {
+            throw new NotFoundException("Subject does not exist.");
         }
 
         List<Course> coursesFilteredBySubject = allCourses.stream()
@@ -54,7 +55,6 @@ public class CourseService implements ICourseService {
 
     @Override
     public ScheduleDto getScheduleByCourse(String courseCode) {
-
         Course course = courseRepository.getCourseByCode(courseCode)
                 .orElseThrow(() -> new NotFoundException("Course not found with ID: " + courseCode));
 
@@ -70,7 +70,6 @@ public class CourseService implements ICourseService {
 
     @Override
     public List<CourseResponseDto> getCoursesByProfessor(String professorCode) {
-
         List<Course> allCourses = courseRepository.getAllCourses();
 
         if (allCourses.isEmpty()) {
@@ -88,7 +87,6 @@ public class CourseService implements ICourseService {
     @Override
     public MessageResponseDto getTermReportByProfessor(String professorCode) {
         List<Course> courses = courseRepository.getCoursesByProfessor(professorCode);
-
 
         if (courses.isEmpty()) {
             throw new BadRequestException("There are no courses assigned for the professor with ID: " + professorCode);
@@ -116,7 +114,45 @@ public class CourseService implements ICourseService {
         } else {
             courseRepository.addCourse(course);
         }
+
         return new MessageResponseDto("Course created successfully.");
+    }
+
+    @Override
+    public List<CourseResponseDto> getCoursesByShift(String shift) {
+        if (!shift.equalsIgnoreCase("MORNING") && !shift.equalsIgnoreCase("AFTERNOON") && !shift.equalsIgnoreCase("NIGHT")){
+            throw new BadRequestException("Invalid shift.");
+        }
+
+        List<Course> allCourses = courseRepository.getAllCourses();
+        if (allCourses.isEmpty()) {
+            throw new NotFoundException("There are no courses.");
+        }
+
+        Shift shiftEnum = Shift.valueOf(shift.toUpperCase());
+
+        List<Course> coursesFilteredByShift = allCourses.stream()
+                .filter(course -> course.getShift().equals(shiftEnum))
+                .toList();
+
+        return coursesFilteredByShift.stream()
+                .map(Mapper::convertCourseToCourseResponseDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<CourseResponseDto> getCoursesBySubectAndShift(String subjectCode, String shift) {
+        List<CourseResponseDto> coursesBySubject = getCoursesBySubject(subjectCode);
+        List<CourseResponseDto> coursesByShift = getCoursesByShift(shift);
+        List<CourseResponseDto> common = coursesBySubject.stream()
+                .filter(coursesByShift::contains)
+                .toList();
+
+        if (common.isEmpty()) {
+            throw new NotFoundException("There are no courses with the specified subject and shift.");
+        }
+
+        return common;
     }
 
     @Override

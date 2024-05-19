@@ -127,6 +127,15 @@ public class MockBuilder {
         );
     }
 
+    public static Subject mockSubject2() {
+        return new Subject(
+                "1",
+                "Physics",
+                40,
+                List.of("0")
+        );
+    }
+
     public static SubjectDto mockSubjectDto() {
         return new SubjectDto(
                 "14",

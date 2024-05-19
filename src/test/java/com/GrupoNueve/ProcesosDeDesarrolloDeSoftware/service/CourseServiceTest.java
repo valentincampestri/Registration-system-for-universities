@@ -128,6 +128,20 @@ public class CourseServiceTest {
     }
 
     @Test
+    @DisplayName("getCoursesBySubject - Subject does not exist")
+    public void getCoursesBySubjectTestNotFoundException() {
+        // Arrange
+        String subjectCode = "03493490384902390284";
+        List<Course> courseList = List.of(MockBuilder.mockCourse());
+        when(courseRepository.getAllCourses()).thenReturn(courseList);
+        when(subjectRepository.getSubjectByCode(subjectCode)).thenReturn(Optional.empty());
+
+        // Act & Assert
+        NotFoundException exception = assertThrows(NotFoundException.class, () -> courseService.getCoursesBySubject(subjectCode));
+        Assertions.assertEquals("Subject does not exist.", exception.getMessage());
+    }
+
+    @Test
     @DisplayName("getCoursesBySubject - No courses found for subject")
     public void getCoursesBySubjectTestNoCourses() {
         // Arrange
@@ -142,16 +156,55 @@ public class CourseServiceTest {
     @DisplayName("getCoursesBySubject - Courses found for subject")
     public void getCoursesBySubjectTestCoursesFound() {
         // Arrange
-        String subjectCode = "123";
+        String subjectCode = "14";
         List<Course> courses = new ArrayList<>();
         courses.add(MockBuilder.mockCourse());
         when(courseRepository.getAllCourses()).thenReturn(courses);
+        when(subjectRepository.getSubjectByCode(subjectCode)).thenReturn(Optional.of(MockBuilder.mockSubject()));
 
         // Act
         List<CourseResponseDto> response = courseService.getCoursesBySubject(subjectCode);
 
         // Assert
         Assertions.assertNotNull(response);
+    }
+
+    @Test
+    @DisplayName("getCoursesByShift - Shift does not exist")
+    public void getCoursesByShiftTestNotFoundException() {
+        // Arrange
+        String shift = "03493490384902390284";
+
+        // Act & Assert
+        BadRequestException exception = assertThrows(BadRequestException.class, () -> courseService.getCoursesByShift(shift));
+        Assertions.assertEquals("Invalid shift.", exception.getMessage());
+    }
+
+    @Test
+    @DisplayName("getCoursesByShift - No courses found for shift")
+    public void getCoursesByShiftTestNoCourses() {
+        // Arrange
+        String shift = "night";
+        when(courseRepository.getAllCourses()).thenReturn(new ArrayList<>());
+
+        // Act & Assert
+        Assertions.assertThrows(NotFoundException.class, () -> courseService.getCoursesByShift(shift));
+    }
+
+    @Test
+    @DisplayName("getCoursesByShift - Courses found for shift")
+    public void getCoursesByShiftTestCoursesFound() {
+        // Arrange
+        String shift = "morning";
+        List<Course> courses = new ArrayList<>();
+        courses.add(MockBuilder.mockCourse());
+        when(courseRepository.getAllCourses()).thenReturn(courses);
+
+        // Act
+        List<CourseResponseDto> response = courseService.getCoursesByShift(shift);
+
+        // Assert
+        Assertions.assertEquals(List.of(MockBuilder.mockCourseResponseDto()),response);
     }
 
     @Test
@@ -238,4 +291,39 @@ public class CourseServiceTest {
         Assertions.assertEquals("PDF generated.", response.getMessage());
     }
 
+    @Test
+    @DisplayName("getCoursesBySubjectAndShift - Courses not found for specified subject and shift")
+    public void getCoursesBySubectAndShiftTestNotFound() {
+        // Arrange
+        String subjectCode = "14";
+        String shift = "morning";
+
+        List<Course> courses = new ArrayList<>();
+        courses.add(MockBuilder.mockCourse());
+        when(courseRepository.getAllCourses()).thenReturn(courses);
+        when(subjectRepository.getSubjectByCode(subjectCode)).thenReturn(Optional.of(MockBuilder.mockSubject()));
+
+        // Act && Assert
+        NotFoundException exception = assertThrows(NotFoundException.class, () -> courseService.getCoursesBySubectAndShift(subjectCode, shift));
+        Assertions.assertEquals("There are no courses with the specified subject and shift.", exception.getMessage());
+    }
+
+    @Test
+    @DisplayName("getCoursesBySubjectAndShift - Ok")
+    public void getCoursesBySubectAndShiftOk() {
+        // Arrange
+        String subjectCode = "1";
+        String shift = "morning";
+
+        List<Course> courses = new ArrayList<>();
+        courses.add(MockBuilder.mockCourse());
+        when(courseRepository.getAllCourses()).thenReturn(courses);
+        when(subjectRepository.getSubjectByCode(subjectCode)).thenReturn(Optional.of(MockBuilder.mockSubject2()));
+
+        // Act
+        List<CourseResponseDto> response = courseService.getCoursesBySubectAndShift(subjectCode, shift);
+
+        // Assert
+        Assertions.assertEquals(List.of(MockBuilder.mockCourseResponseDto()), response);
+    }
 }

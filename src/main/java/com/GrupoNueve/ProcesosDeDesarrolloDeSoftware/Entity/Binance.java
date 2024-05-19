@@ -9,7 +9,6 @@ import lombok.experimental.FieldDefaults;
 @Builder
 public class Binance implements IPaymentMethod {
 
-    // TODO: Implement methods
     @Override
     public boolean pay(Double amount) {
         return true;

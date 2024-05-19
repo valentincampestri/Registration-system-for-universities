@@ -21,4 +21,8 @@ public interface ICourseService {
     List<CourseResponseDto> getAllCourses();
 
     MessageResponseDto createCourse(CourseRequestDto courseRequestDto, String personId, String subjectCode);
+
+    List<CourseResponseDto> getCoursesByShift(String shift);
+
+    List<CourseResponseDto> getCoursesBySubectAndShift(String subjectCode, String shift);
 }
