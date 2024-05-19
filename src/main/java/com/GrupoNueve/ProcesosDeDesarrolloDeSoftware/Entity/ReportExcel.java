@@ -1,5 +1,6 @@
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity;
 
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.IInscriptionRepository;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -18,6 +19,7 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Builder
 public class ReportExcel implements IReport {
+    private IInscriptionRepository inscriptionRepository;
 
     @Override
     public void generateReport(List<Course> courses) {
@@ -31,6 +33,8 @@ public class ReportExcel implements IReport {
         headerRow.createCell(2).setCellValue("Subject");
         headerRow.createCell(3).setCellValue("Shift");
         headerRow.createCell(4).setCellValue("Assigned Classroom");
+        headerRow.createCell(5).setCellValue("Term code");
+        headerRow.createCell(6).setCellValue("Student count");
 
         // Fill data
         for (int i = 0; i < courses.size(); i++) {
@@ -41,6 +45,8 @@ public class ReportExcel implements IReport {
             row.createCell(2).setCellValue(course.getSubject().getName());
             row.createCell(3).setCellValue(course.getShift().toString());
             row.createCell(4).setCellValue(course.getClassroom().getClassroomCode());
+            row.createCell(5).setCellValue(course.getTerm().getTermCode());
+            row.createCell(6).setCellValue(inscriptionRepository.getInscriptionsByCourseCode(course.getCourseCode()).size());
         }
 
         // Auto size columns

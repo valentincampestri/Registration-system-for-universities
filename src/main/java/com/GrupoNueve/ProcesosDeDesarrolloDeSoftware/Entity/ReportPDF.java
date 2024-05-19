@@ -1,5 +1,6 @@
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity;
 
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.IInscriptionRepository;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -18,6 +19,7 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Builder
 public class ReportPDF implements IReport {
+    private IInscriptionRepository inscriptionRepository;
 
     @Override
     public void generateReport(List<Course> courses) {
@@ -34,6 +36,8 @@ public class ReportPDF implements IReport {
                 document.add(new Paragraph("Subject: " + course.getSubject().getName() + "\n"));
                 document.add(new Paragraph("Shift: " + course.getShift() + "\n"));
                 document.add(new Paragraph("Assigned classroom: " + course.getClassroom().getClassroomCode() + "\n"));
+                document.add(new Paragraph("Term code: " + course.getTerm().getTermCode() + "\n"));
+                document.add(new Paragraph("Student count: " + inscriptionRepository.getInscriptionsByCourseCode(course.getCourseCode()).size()));
                 document.add(new Paragraph("\n---\n\n"));
             }
 

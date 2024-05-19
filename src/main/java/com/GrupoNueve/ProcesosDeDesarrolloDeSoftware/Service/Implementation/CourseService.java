@@ -8,6 +8,7 @@ import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.*;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.BadRequestException;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.NotFoundException;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.ICourseRepository;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.IInscriptionRepository;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.IProfessorRepository;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.ISubjectRepository;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Service.ICourseService;
@@ -23,11 +24,13 @@ public class CourseService implements ICourseService {
     ICourseRepository courseRepository;
     IProfessorRepository professorRepository;
     ISubjectRepository subjectRepository;
+    IInscriptionRepository inscriptionRepository;
 
-    public CourseService(ICourseRepository courseRepository, IProfessorRepository professorRepository, ISubjectRepository subjectRepository) {
+    public CourseService(ICourseRepository courseRepository, IProfessorRepository professorRepository, ISubjectRepository subjectRepository, IInscriptionRepository inscriptionRepository) {
         this.courseRepository = courseRepository;
         this.professorRepository = professorRepository;
         this.subjectRepository = subjectRepository;
+        this.inscriptionRepository = inscriptionRepository;
     }
 
     @Override
@@ -150,25 +153,29 @@ public class CourseService implements ICourseService {
     }
 
     @Override
-    public MessageResponseDto getTermReportByProfessor(String professorCode, String reportFormat) {
+    public MessageResponseDto getTermReportByProfessor(String professorCode, String reportFormat, String termCode) {
         Optional<Professor> existentProfessor = professorRepository.getProfessorByCode(professorCode);
         if (existentProfessor.isEmpty()) {
             throw new NotFoundException("Professor does not exist.");
         }
 
         List<Course> courses = courseRepository.getCoursesByProfessor(professorCode);
+        courses = courses.stream()
+                .filter(course -> course.getTerm().getTermCode().equals(termCode))
+                .toList();
         if (courses.isEmpty()) {
-            throw new BadRequestException("There are no courses assigned for the professor with ID: " + professorCode);
+            throw new BadRequestException("There are no courses assigned for the professor with ID: " + professorCode + " in the term with ID: " + termCode);
         }
+
 
         IReport report;
         switch (reportFormat.toUpperCase()) {
             case "PDF":
-                report = new ReportPDF();
+                report = new ReportPDF(this.inscriptionRepository);
                 report.generateReport(courses);
                 break;
             case "EXCEL":
-                report = new ReportExcel();
+                report = new ReportExcel(this.inscriptionRepository);
                 report.generateReport(courses);
                 break;
             default:

@@ -33,6 +33,7 @@ public class MockBuilder {
                         "701"
                 ),
                 new Term(
+                        "1T-2024",
                         LocalDate.parse("2025-04-26"),
                         LocalDate.parse("2025-07-26")
                 ),
@@ -75,6 +76,7 @@ public class MockBuilder {
                         "701"
                 ),
                 new Term(
+                        "1T-2024",
                         LocalDate.parse("2025-04-26"),
                         LocalDate.parse("2025-07-26")
                 ),
@@ -117,6 +119,7 @@ public class MockBuilder {
                         "701"
                 ),
                 new Term(
+                        "1T-2024",
                         LocalDate.parse("2025-04-26"),
                         LocalDate.parse("2025-07-26")
                 ),
@@ -152,6 +155,7 @@ public class MockBuilder {
                         "C101"
                 ),
                 new Term(
+                        "2T-2024",
                         LocalDate.parse("2024-09-01"),
                         LocalDate.parse("2024-12-20")
                 ),
@@ -245,6 +249,7 @@ public class MockBuilder {
                                         "C101"
                                 ),
                                 new Term(
+                                        "2T-2024",
                                         LocalDate.parse("2024-09-01"),
                                         LocalDate.parse("2024-12-20")
                                 ),
@@ -286,6 +291,7 @@ public class MockBuilder {
                                         "C101"
                                 ),
                                 new Term(
+                                        "2T-2024",
                                         LocalDate.parse("2024-09-01"),
                                         LocalDate.parse("2024-12-20")
                                 ),

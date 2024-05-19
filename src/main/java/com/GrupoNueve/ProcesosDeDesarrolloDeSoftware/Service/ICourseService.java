@@ -23,5 +23,5 @@ public interface ICourseService {
 
     ScheduleDto getScheduleByCourse(String courseCode);
 
-    MessageResponseDto getTermReportByProfessor(String professorCode, String reportFormat);
+    MessageResponseDto getTermReportByProfessor(String professorCode, String reportFormat, String termCode);
 }

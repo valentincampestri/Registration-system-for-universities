@@ -15,6 +15,7 @@ import java.time.LocalDate;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Builder
 public class Term {
+    String termCode;
     LocalDate start;
     LocalDate end;
 }

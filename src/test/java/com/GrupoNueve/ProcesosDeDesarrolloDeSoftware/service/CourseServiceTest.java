@@ -8,6 +8,7 @@ import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Course;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.BadRequestException;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.NotFoundException;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.Implementation.CourseRepository;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.Implementation.InscriptionRepository;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.Implementation.ProfessorRepository;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.Implementation.SubjectRepository;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Service.Implementation.CourseService;
@@ -41,6 +42,9 @@ public class CourseServiceTest {
     ProfessorRepository professorRepository;
     @Mock
     SubjectRepository subjectRepository;
+    @Mock
+    InscriptionRepository inscriptionRepository;
+
     @InjectMocks
     CourseService courseService;
 
@@ -271,25 +275,27 @@ public class CourseServiceTest {
         // Arrange
         String professorCode = "QWERTYUIK";
         String reportFormat = "PDF";
+        String termCode = "1T-2024";
         when(professorRepository.getProfessorByCode(professorCode)).thenReturn(Optional.empty());
 
         // Act && Assert
-        NotFoundException exception = assertThrows(NotFoundException.class, () -> courseService.getTermReportByProfessor(professorCode, reportFormat));
+        NotFoundException exception = assertThrows(NotFoundException.class, () -> courseService.getTermReportByProfessor(professorCode, reportFormat, termCode));
         Assertions.assertEquals("Professor does not exist.", exception.getMessage());
     }
 
     @Test
-    @DisplayName("getTermReportByProfessor - No courses found for professor")
+    @DisplayName("getTermReportByProfessor - No courses found for professor in this term")
     public void getTermReportByProfessorTestNoCourses() {
         // Arrange
         String professorCode = "string";
+        String termCode = "1T-2024";
         when(professorRepository.getProfessorByCode(professorCode)).thenReturn(Optional.of(MockBuilder.mockProfessor()));
         String reportFormat = "PDF";
         when(courseRepository.getCoursesByProfessor(professorCode)).thenReturn(Collections.emptyList());
 
         // Act && Assert
-        BadRequestException exception = assertThrows(BadRequestException.class, () -> courseService.getTermReportByProfessor(professorCode, reportFormat));
-        Assertions.assertEquals("There are no courses assigned for the professor with ID: "+professorCode, exception.getMessage());
+        BadRequestException exception = assertThrows(BadRequestException.class, () -> courseService.getTermReportByProfessor(professorCode, reportFormat, termCode));
+        Assertions.assertEquals("There are no courses assigned for the professor with ID: " + professorCode + " in the term with ID: " + termCode, exception.getMessage());
     }
 
     @Test
@@ -299,11 +305,12 @@ public class CourseServiceTest {
         String professorCode = "string";
         when(professorRepository.getProfessorByCode(professorCode)).thenReturn(Optional.of(MockBuilder.mockProfessor()));
         String reportFormat = "mp4";
+        String termCode = "1T-2024";
         List<Course> courses = List.of(MockBuilder.mockCourse());
         when(courseRepository.getCoursesByProfessor(professorCode)).thenReturn(courses);
 
         // Act && Assert
-        BadRequestException exception = assertThrows(BadRequestException.class, () -> courseService.getTermReportByProfessor(professorCode, reportFormat));
+        BadRequestException exception = assertThrows(BadRequestException.class, () -> courseService.getTermReportByProfessor(professorCode, reportFormat, termCode));
         Assertions.assertEquals("Invalid report format.", exception.getMessage());
     }
 
@@ -314,11 +321,12 @@ public class CourseServiceTest {
         String professorCode = "string";
         when(professorRepository.getProfessorByCode(professorCode)).thenReturn(Optional.of(MockBuilder.mockProfessor()));
         String reportFormat = "Excel";
+        String termCode = "1T-2024";
         List<Course> courses = List.of(MockBuilder.mockCourse());
         when(courseRepository.getCoursesByProfessor(professorCode)).thenReturn(courses);
 
         // Act
-        MessageResponseDto response = courseService.getTermReportByProfessor(professorCode, reportFormat);
+        MessageResponseDto response = courseService.getTermReportByProfessor(professorCode, reportFormat, termCode);
 
         // Assert
         Assertions.assertEquals("Term Report generated.", response.getMessage());
