@@ -4,7 +4,7 @@ import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.MessageRespons
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.CourseRequestDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.CourseResponseDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.ScheduleDto;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.*;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Course;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.BadRequestException;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.NotFoundException;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.Implementation.CourseRepository;
@@ -195,7 +195,7 @@ public class CourseServiceTest {
     @DisplayName("getCoursesByShift - Courses found for shift")
     public void getCoursesByShiftTestCoursesFound() {
         // Arrange
-        String shift = "morning";
+        String shift = "MORNING";
         List<Course> courses = new ArrayList<>();
         courses.add(MockBuilder.mockCourse());
         when(courseRepository.getAllCourses()).thenReturn(courses);
@@ -296,7 +296,7 @@ public class CourseServiceTest {
     public void getCoursesBySubectAndShiftTestNotFound() {
         // Arrange
         String subjectCode = "14";
-        String shift = "morning";
+        String shift = "MORNING";
 
         List<Course> courses = new ArrayList<>();
         courses.add(MockBuilder.mockCourse());
@@ -313,7 +313,7 @@ public class CourseServiceTest {
     public void getCoursesBySubectAndShiftOk() {
         // Arrange
         String subjectCode = "1";
-        String shift = "morning";
+        String shift = "MORNING";
 
         List<Course> courses = new ArrayList<>();
         courses.add(MockBuilder.mockCourse());

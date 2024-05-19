@@ -6,7 +6,8 @@ import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Fee;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.BadRequestException;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.InvalidArgsException;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.NotFoundException;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.Implementation.*;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.Implementation.FeeRepository;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.Implementation.StudentRepository;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Service.Implementation.FeeService;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.utils.Mapper;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.utils.MockBuilder;
@@ -79,7 +80,7 @@ public class FeeServiceTest {
     public void payFeeBinanceOk() {
         // Arrange
         String studentCode = "ST001";
-        String paymentMethod = "Binance";
+        String paymentMethod = "BINANCE";
         when(feeRepository.getFeeByStudentCode(studentCode)).thenReturn(List.of(MockBuilder.mockFee()));
         // Act
         MessageResponseDto result = feeService.pay(studentCode, paymentMethod);

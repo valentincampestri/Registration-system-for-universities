@@ -1,7 +1,7 @@
 [
   {
     "courseCode": "CS101",
-    "shift": "Morning",
+    "shift": "MORNING",
     "modality": "Presencial",
     "professor": {
       "name": "John",
@@ -48,7 +48,7 @@
   },
   {
     "courseCode": "CS102",
-    "shift": "Morning",
+    "shift": "MORNING",
     "modality": "Presencial",
     "professor": {
       "name": "Luka",
@@ -101,7 +101,7 @@
   },
   {
     "courseCode": "CS103",
-    "shift": "Morning",
+    "shift": "MORNING",
     "modality": "Presencial",
     "professor": {
       "name": "Luka",

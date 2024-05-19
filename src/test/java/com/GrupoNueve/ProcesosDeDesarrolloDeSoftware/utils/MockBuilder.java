@@ -7,7 +7,16 @@ import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.CourseResponse
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.FeeResponseDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.StudentRequestDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.SubjectDto;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.*;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Career;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Classroom;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Course;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Fee;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Inscription;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Professor;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Shift;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Student;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Subject;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Term;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;

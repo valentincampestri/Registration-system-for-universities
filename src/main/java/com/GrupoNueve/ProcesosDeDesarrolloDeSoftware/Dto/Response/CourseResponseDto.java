@@ -1,6 +1,10 @@
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response;
 
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.*;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Classroom;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Professor;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Shift;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Subject;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Term;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;

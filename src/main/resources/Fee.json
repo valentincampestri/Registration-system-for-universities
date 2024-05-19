@@ -30,7 +30,7 @@
         "courses": [
           {
             "courseCode": "CS101",
-            "shift": "Morning",
+            "shift": "MORNING",
             "modality": "Presencial",
             "professor": {
               "name": "John",
