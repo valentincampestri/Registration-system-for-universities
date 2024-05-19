@@ -19,8 +19,6 @@ import java.util.List;
 @Builder
 public class ReportPDF implements IReport {
 
-    // TODO: Implement methods
-
     @Override
     public void generateReport(List<Course> courses) {
         com.itextpdf.text.Document document = new com.itextpdf.text.Document();
