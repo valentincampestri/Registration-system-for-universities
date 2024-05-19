@@ -62,7 +62,7 @@ public class InscriptionService implements IInscriptionService {
         HashSet<String> approvedSubjects = new HashSet<>();
         Student student = inscription.getStudent();
         Career career;
-        Integer maxWorkLoad = 0;
+        int maxWorkLoad = 0;
         if (student != null && student.getCareer() != null) {
             //workload
             career = student.getCareer();
@@ -80,7 +80,7 @@ public class InscriptionService implements IInscriptionService {
         //maxWorkLoad retrieved
 
         List<Course> courses = inscription.getCourses();
-        Integer currentWorkLoad = 0;
+        int currentWorkLoad = 0;
         Subject subject;
         //agueguo lastInscriptionDate al Course Entity.
         LocalDate lastInscriptionDate;
