@@ -61,7 +61,7 @@ public class CourseController {
     }
 
     @PostMapping("/generate-report")
-    public MessageResponseDto getTermReportByProfessor(@RequestParam("professorCode") String professorCode) {
-        return courseService.getTermReportByProfessor(professorCode);
+    public MessageResponseDto getTermReportByProfessor(@RequestParam("professorCode") String professorCode, @RequestParam("reportFormat") String reportFormat) {
+        return courseService.getTermReportByProfessor(professorCode, reportFormat);
     }
 }

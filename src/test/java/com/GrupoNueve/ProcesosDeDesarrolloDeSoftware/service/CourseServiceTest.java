@@ -269,11 +269,26 @@ public class CourseServiceTest {
     public void getTermReportByProfessorTestNoCourses() {
         // Arrange
         String professorCode = "123";
+        String reportFormat = "PDF";
         when(courseRepository.getCoursesByProfessor(professorCode)).thenReturn(Collections.emptyList());
 
         // Act && Assert
-        BadRequestException exception = assertThrows(BadRequestException.class, () -> courseService.getTermReportByProfessor(professorCode));
+        BadRequestException exception = assertThrows(BadRequestException.class, () -> courseService.getTermReportByProfessor(professorCode, reportFormat));
         Assertions.assertEquals("There are no courses assigned for the professor with ID: "+professorCode, exception.getMessage());
+    }
+
+    @Test
+    @DisplayName("getTermReportByProfessor - Invalid report format")
+    public void getTermReportByProfessorTestInvalidReportFormat() {
+        // Arrange
+        String professorCode = "123";
+        String reportFormat = "mp4";
+        List<Course> courses = List.of(MockBuilder.mockCourse());
+        when(courseRepository.getCoursesByProfessor(professorCode)).thenReturn(courses);
+
+        // Act && Assert
+        BadRequestException exception = assertThrows(BadRequestException.class, () -> courseService.getTermReportByProfessor(professorCode, reportFormat));
+        Assertions.assertEquals("Invalid report format.", exception.getMessage());
     }
 
     @Test
@@ -281,11 +296,12 @@ public class CourseServiceTest {
     public void getTermReportByProfessorTestOk() {
         // Arrange
         String professorCode = "123";
+        String reportFormat = "Excel";
         List<Course> courses = List.of(MockBuilder.mockCourse());
         when(courseRepository.getCoursesByProfessor(professorCode)).thenReturn(courses);
 
         // Act
-        MessageResponseDto response = courseService.getTermReportByProfessor(professorCode);
+        MessageResponseDto response = courseService.getTermReportByProfessor(professorCode, reportFormat);
 
         // Assert
         Assertions.assertEquals("PDF generated.", response.getMessage());

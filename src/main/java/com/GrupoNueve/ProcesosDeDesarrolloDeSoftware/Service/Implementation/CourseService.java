@@ -150,15 +150,27 @@ public class CourseService implements ICourseService {
     }
 
     @Override
-    public MessageResponseDto getTermReportByProfessor(String professorCode) {
+    public MessageResponseDto getTermReportByProfessor(String professorCode, String reportFormat) {
         List<Course> courses = courseRepository.getCoursesByProfessor(professorCode);
 
         if (courses.isEmpty()) {
             throw new BadRequestException("There are no courses assigned for the professor with ID: " + professorCode);
         }
 
-        ReportPDF report = new ReportPDF();
-        report.generateReport(courses);
+        IReport report;
+        switch (reportFormat.toUpperCase()) {
+            case "PDF":
+                report = new ReportPDF();
+                report.generateReport(courses);
+                break;
+            case "EXCEL":
+                report = new ReportExcel();
+                report.generateReport(courses);
+                break;
+            default:
+                throw new BadRequestException("Invalid report format.");
+        }
+
         return new MessageResponseDto("PDF generated.");
     }
 }
