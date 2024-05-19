@@ -30,10 +30,11 @@ public class ReportPDF implements IReport {
             document.add(new Paragraph("Report of assigned courses for the teacher with ID:" + professorId + "\n\n"));
 
             for (Course course : courses) {
-                document.add(new Paragraph("Course name: " + course.getSubject().getName() + "\n"));
+                document.add(new Paragraph("CourseCode: " + course.getCourseCode() + "\n"));
+                document.add(new Paragraph("Subject: " + course.getSubject().getName() + "\n"));
                 document.add(new Paragraph("Shift: " + course.getShift() + "\n"));
                 document.add(new Paragraph("Assigned classroom: " + course.getClassroom().getClassroomCode() + "\n"));
-                document.add(new Paragraph("\n---\n\n")); // Línea de separación
+                document.add(new Paragraph("\n---\n\n"));
             }
 
             document.close();

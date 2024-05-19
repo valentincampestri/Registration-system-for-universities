@@ -26,21 +26,25 @@ public class ReportExcel implements IReport {
 
         // Create header row
         Row headerRow = sheet.createRow(0);
-        headerRow.createCell(0).setCellValue("Course Name");
-        headerRow.createCell(1).setCellValue("Shift");
-        headerRow.createCell(2).setCellValue("Assigned Classroom");
+        headerRow.createCell(0).setCellValue("Professor Code");
+        headerRow.createCell(1).setCellValue("Course Code");
+        headerRow.createCell(2).setCellValue("Subject");
+        headerRow.createCell(3).setCellValue("Shift");
+        headerRow.createCell(4).setCellValue("Assigned Classroom");
 
         // Fill data
         for (int i = 0; i < courses.size(); i++) {
             Course course = courses.get(i);
             Row row = sheet.createRow(i + 1);
-            row.createCell(0).setCellValue(course.getSubject().getName());
-            row.createCell(1).setCellValue(course.getShift().toString());
-            row.createCell(2).setCellValue(course.getClassroom().getClassroomCode());
+            row.createCell(0).setCellValue(course.getProfessor().getPersonCode());
+            row.createCell(1).setCellValue(course.getCourseCode());
+            row.createCell(2).setCellValue(course.getSubject().getName());
+            row.createCell(3).setCellValue(course.getShift().toString());
+            row.createCell(4).setCellValue(course.getClassroom().getClassroomCode());
         }
 
         // Auto size columns
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 5; i++) {
             sheet.autoSizeColumn(i);
         }
 
