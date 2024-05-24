@@ -7,7 +7,10 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
+import java.time.DayOfWeek;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,10 +19,12 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Professor extends Person {
     List<Subject> subjects;
+    Map<DayOfWeek, Set<Shift>> availability;
 
-    public Professor(String name, String lastName, String personCode, String email, String phone, String address, List<Subject> subjects) {
+    public Professor(String name, String lastName, String personCode, String email, String phone, String address, List<Subject> subjects, Map<DayOfWeek, Set<Shift>> availability) {
         super(name, lastName, personCode, email, phone, address);
         this.subjects = subjects;
+        this.availability = availability;
     }
 
 }

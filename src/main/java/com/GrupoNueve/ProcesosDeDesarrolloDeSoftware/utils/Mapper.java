@@ -6,14 +6,14 @@ import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.StudentRequestD
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.CourseResponseDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.FeeResponseDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.SubjectDto;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Course;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Fee;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Professor;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Student;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Subject;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.*;
 import org.springframework.context.annotation.Configuration;
 
+import java.time.DayOfWeek;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Configuration
 public class Mapper {
@@ -92,7 +92,7 @@ public class Mapper {
         );
     }
 
-    public static Professor convertProfessorRequestDtoToProfessor(ProfessorRequestDto professorRequestDto, List<Subject> subjects){
+    public static Professor convertProfessorRequestDtoToProfessor(ProfessorRequestDto professorRequestDto, List<Subject> subjects, Map<DayOfWeek, Set<Shift>> availability){
         return new Professor(
                 professorRequestDto.getName(),
                 professorRequestDto.getLastName(),
@@ -100,11 +100,16 @@ public class Mapper {
                 professorRequestDto.getEmail(),
                 professorRequestDto.getPhone(),
                 professorRequestDto.getAddress(),
-                subjects
+                subjects,
+                availability
         );
     }
 
     public static ProfessorRequestDto convertProfessorToProfessorRequestDto(Professor professor){
+        Map<String, Set<String>> availability = professor.getAvailability().entrySet().stream().collect(Collectors.toMap(
+                entry -> entry.getKey().toString(),
+                entry -> entry.getValue().stream().map(Shift::toString).collect(Collectors.toSet())
+        ));
         return new ProfessorRequestDto(
                 professor.getPersonCode(),
                 professor.getName(),
@@ -112,7 +117,9 @@ public class Mapper {
                 professor.getEmail(),
                 professor.getPhone(),
                 professor.getAddress(),
-                professor.getSubjects().stream().map(Subject::getSubjectCode).toList()
+                professor.getSubjects().stream().map(Subject::getSubjectCode).toList(),
+                availability
+
         );
     }
 

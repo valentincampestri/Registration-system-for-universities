@@ -2,7 +2,7 @@ package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.service;
 
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.CourseRequestDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.ProfessorRequestDto;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.StudentRequestDto;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.ProfessorRequestDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.MessageResponseDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.BadRequestException;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.NotFoundException;
@@ -40,8 +40,8 @@ public class ProfessorServiceTest {
     ProfessorService professorService;
 
     @Test
-    @DisplayName("createStudent - Student already exists.")
-    public void createStudentTestFailStudentAlreadyExists() {
+    @DisplayName("createProfessor - Professor already exists.")
+    public void createProfessorTestFailProfessorAlreadyExists() {
         // Arrange
         ProfessorRequestDto professorRequestDto = MockBuilder.mockProfessorRequestDto();
         when(professorRepository.getProfessorByCode(professorRequestDto.getPersonID())).thenReturn(Optional.of(MockBuilder.mockProfessor()));
@@ -52,8 +52,8 @@ public class ProfessorServiceTest {
     }
 
     @Test
-    @DisplayName("createStudent - One or more subjects don't exists.")
-    public void createStudentTestFailSubjectsDontExists() {
+    @DisplayName("createProfessor - One or more subjects don't exists.")
+    public void createProfessorTestFailSubjectsDontExists() {
         // Arrange
         ProfessorRequestDto professorRequestDto = MockBuilder.mockProfessorRequestDto();
         when(professorRepository.getProfessorByCode(any())).thenReturn(Optional.empty());
@@ -65,8 +65,8 @@ public class ProfessorServiceTest {
     }
 
     @Test
-    @DisplayName("createStudent - Ok.")
-    public void createStudentTestOk() {
+    @DisplayName("createProfessor - Ok.")
+    public void createProfessorTestOk() {
         // Arrange
         ProfessorRequestDto professorRequestDto = MockBuilder.mockProfessorRequestDto();
         when(professorRepository.getProfessorByCode(any())).thenReturn(Optional.empty());

@@ -7,6 +7,9 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,4 +22,5 @@ public class ProfessorRequestDto {
     String phone;
     String address;
     List<String> subjectsCodeList;
+    Map<String, Set<String>> availibility;
 }

@@ -3,24 +3,17 @@ package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.utils;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.CourseRequestDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.InscriptionRequestDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.ProfessorRequestDto;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.StudentRequestDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.CourseResponseDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.FeeResponseDto;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.StudentRequestDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.SubjectDto;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Career;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Classroom;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Course;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Fee;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Inscription;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Professor;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Shift;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Student;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Subject;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Term;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.*;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class MockBuilder {
     public static CourseRequestDto mockCourseRequestDto() {
@@ -63,6 +56,11 @@ public class MockBuilder {
                                         40,
                                         List.of("0")
                                 )
+                        ),
+                        Map.of(
+                                DayOfWeek.MONDAY, Set.of(Shift.MORNING, Shift.AFTERNOON),
+                                DayOfWeek.TUESDAY, Set.of(Shift.AFTERNOON),
+                                DayOfWeek.WEDNESDAY, Set.of(Shift.NIGHT)
                         )
                 ),
                 new Subject(
@@ -106,6 +104,11 @@ public class MockBuilder {
                                         40,
                                         List.of("0")
                                 )
+                        ),
+                        Map.of(
+                                DayOfWeek.MONDAY, Set.of(Shift.MORNING, Shift.AFTERNOON),
+                                DayOfWeek.TUESDAY, Set.of(Shift.AFTERNOON),
+                                DayOfWeek.WEDNESDAY, Set.of(Shift.NIGHT)
                         )
                 ),
                 new Subject(
@@ -142,7 +145,12 @@ public class MockBuilder {
                         "john.doe@example.com",
                         "123-456-7890",
                         "123 Main St",
-                        subjects
+                        subjects,
+                        Map.of(
+                                DayOfWeek.MONDAY, Set.of(Shift.MORNING, Shift.AFTERNOON),
+                                DayOfWeek.TUESDAY, Set.of(Shift.AFTERNOON),
+                                DayOfWeek.WEDNESDAY, Set.of(Shift.NIGHT)
+                        )
                 ),
                 new Subject(
                         "S002",
@@ -236,7 +244,12 @@ public class MockBuilder {
                                         "john.doe@example.com",
                                         "123-456-7890",
                                         "123 Main St",
-                                        subjects
+                                        subjects,
+                                        Map.of(
+                                                DayOfWeek.MONDAY, Set.of(Shift.MORNING, Shift.AFTERNOON),
+                                                DayOfWeek.TUESDAY, Set.of(Shift.AFTERNOON),
+                                                DayOfWeek.WEDNESDAY, Set.of(Shift.NIGHT)
+                                        )
                                 ),
                                 new Subject(
                                         "S002",
@@ -278,7 +291,11 @@ public class MockBuilder {
                                         "john.doe@example.com",
                                         "123-456-7890",
                                         "123 Main St",
-                                        subjects
+                                        subjects,
+                                        Map.of(
+                                                DayOfWeek.MONDAY, Set.of(Shift.MORNING, Shift.AFTERNOON),
+                                                DayOfWeek.TUESDAY, Set.of(Shift.AFTERNOON),
+                                                DayOfWeek.WEDNESDAY, Set.of(Shift.NIGHT))
                                 ),
                                 new Subject(
                                         "S002",
@@ -351,6 +368,7 @@ public class MockBuilder {
     }
 
     public static Professor mockProfessor() {
+
         return new Professor(
                 "string",
                 "string",
@@ -365,7 +383,13 @@ public class MockBuilder {
                                 40,
                                 List.of("0")
                         )
-                )
+                ),
+                Map.of(
+                        DayOfWeek.MONDAY, Set.of(Shift.MORNING, Shift.AFTERNOON),
+                        DayOfWeek.TUESDAY, Set.of(Shift.AFTERNOON),
+                        DayOfWeek.WEDNESDAY, Set.of(Shift.NIGHT))
+
+
         );
     }
 
