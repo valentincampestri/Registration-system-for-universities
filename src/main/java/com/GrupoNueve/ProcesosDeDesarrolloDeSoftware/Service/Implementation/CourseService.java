@@ -168,19 +168,8 @@ public class CourseService implements ICourseService {
         }
 
 
-        IReport report;
-        switch (reportFormat.toUpperCase()) {
-            case "PDF":
-                report = new ReportPDF(this.inscriptionRepository);
-                report.generateReport(courses);
-                break;
-            case "EXCEL":
-                report = new ReportExcel(this.inscriptionRepository);
-                report.generateReport(courses);
-                break;
-            default:
-                throw new BadRequestException("Invalid report format.");
-        }
+        IReport report = ReportFactoryMethod.createReport(reportFormat, inscriptionRepository);
+        report.generateReport(courses);
 
         return new MessageResponseDto("Term Report generated.");
     }
