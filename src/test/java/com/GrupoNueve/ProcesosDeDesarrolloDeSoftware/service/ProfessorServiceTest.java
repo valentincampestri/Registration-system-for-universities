@@ -60,8 +60,37 @@ public class ProfessorServiceTest {
         when(subjectRepository.getSubjectByCode(any())).thenReturn(Optional.empty());
 
         // Act & Assert
-        BadRequestException exception = assertThrows(BadRequestException.class, () -> professorService.createProfessor(professorRequestDto));
+        BadRequestException exception = assertThrows(BadRequestException.class,
+                () -> professorService.createProfessor(professorRequestDto));
         Assertions.assertEquals("One or more subjects don't exists.", exception.getMessage());
+    }
+
+    @Test
+    @DisplayName("createProfessor - Invalid day of week.")
+    public void createProfessorTestFailInvalidDayOfWeek() {
+        // Arrange
+        ProfessorRequestDto professorRequestDto = MockBuilder.mockProfessorRequestDtoWithInvalidDay();
+        when(professorRepository.getProfessorByCode(any())).thenReturn(Optional.empty());
+        when(subjectRepository.getSubjectByCode(any())).thenReturn(Optional.of(MockBuilder.mockSubject()));
+
+        // Act & Assert
+        BadRequestException exception = assertThrows(BadRequestException.class,
+                () -> professorService.createProfessor(professorRequestDto));
+        Assertions.assertEquals("Invalid day of week.", exception.getMessage());
+    }
+
+    @Test
+    @DisplayName("createProfessor - Invalid shift.")
+    public void createProfessorTestFailInvalidShift() {
+        // Arrange
+        ProfessorRequestDto professorRequestDto = MockBuilder.mockProfessorRequestDtoWithInvalidShift();
+        when(professorRepository.getProfessorByCode(any())).thenReturn(Optional.empty());
+        when(subjectRepository.getSubjectByCode(any())).thenReturn(Optional.of(MockBuilder.mockSubject()));
+
+        // Act & Assert
+        BadRequestException exception = assertThrows(BadRequestException.class,
+                () -> professorService.createProfessor(professorRequestDto));
+        Assertions.assertEquals("Invalid shift.", exception.getMessage());
     }
 
     @Test

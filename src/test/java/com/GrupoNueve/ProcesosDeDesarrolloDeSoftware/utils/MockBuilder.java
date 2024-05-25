@@ -11,6 +11,7 @@ import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.*;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -388,8 +389,38 @@ public class MockBuilder {
                         DayOfWeek.MONDAY, Set.of(Shift.MORNING, Shift.AFTERNOON),
                         DayOfWeek.TUESDAY, Set.of(Shift.AFTERNOON),
                         DayOfWeek.WEDNESDAY, Set.of(Shift.NIGHT))
+        );
+    }
 
+    public static ProfessorRequestDto mockProfessorRequestDtoWithInvalidDay() {
+        ProfessorRequestDto professorRequestDto = mockProfessorRequestDto();
+        Map<String, Set<String>> availabilityWithInvalidDay = new HashMap<>(professorRequestDto.getAvailibility());
+        availabilityWithInvalidDay.put("INVALID_DAY", Set.of("MORNING"));
+        return new ProfessorRequestDto(
+                professorRequestDto.getName(),
+                professorRequestDto.getLastName(),
+                professorRequestDto.getPersonID(),
+                professorRequestDto.getEmail(),
+                professorRequestDto.getPhone(),
+                professorRequestDto.getAddress(),
+                professorRequestDto.getSubjectsCodeList(),
+                availabilityWithInvalidDay
+        );
+    }
 
+    public static ProfessorRequestDto mockProfessorRequestDtoWithInvalidShift() {
+        ProfessorRequestDto professorRequestDto = mockProfessorRequestDto();
+        Map<String, Set<String>> availabilityWithInvalShift = new HashMap<>(professorRequestDto.getAvailibility());
+        availabilityWithInvalShift.put("MONDAY", Set.of("INVALID_SHIFT"));
+        return new ProfessorRequestDto(
+                professorRequestDto.getName(),
+                professorRequestDto.getLastName(),
+                professorRequestDto.getPersonID(),
+                professorRequestDto.getEmail(),
+                professorRequestDto.getPhone(),
+                professorRequestDto.getAddress(),
+                professorRequestDto.getSubjectsCodeList(),
+                availabilityWithInvalShift
         );
     }
 
