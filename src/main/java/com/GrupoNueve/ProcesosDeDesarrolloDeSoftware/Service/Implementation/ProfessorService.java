@@ -72,6 +72,20 @@ public class ProfessorService implements IProfessorService {
         return new MessageResponseDto("Professor created successfully.");
     }
 
+    @Override
+    public MessageResponseDto calculateMonthlyWorkload(String professorCode) {
+        Optional<Professor> existentProfessor = professorRepository.getProfessorByCode(professorCode);
+        if (existentProfessor.isEmpty()) {
+            throw new BadRequestException("Professor does not exist.");
+        }
+        Professor professor = existentProfessor.get();
+        Integer totalHours = 0;
+        for (Subject subject : professor.getSubjects()) {
+            totalHours += (subject.getWorkload() / 4); // se divide por 4 porque queremos la carga horaria mensual
+        }
+        return new MessageResponseDto("Total hours: " + totalHours);
+    }
+
 }
 
 //

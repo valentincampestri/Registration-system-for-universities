@@ -5,4 +5,5 @@ import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.MessageRespons
 
 public interface IProfessorService {
     MessageResponseDto createProfessor(ProfessorRequestDto professorRequestDto);
+    MessageResponseDto calculateMonthlyWorkload(String professorCode);
 }

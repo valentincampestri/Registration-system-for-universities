@@ -106,4 +106,28 @@ public class ProfessorServiceTest {
         // Assert
         Assertions.assertEquals("Professor created successfully.", result.getMessage());
     }
+
+    @Test
+    @DisplayName("calculateMonthlyWorkload - Professor does not exist.")
+    public void calculateMonthlyWorkloadTestFailProfessorDoesNotExist() {
+        // Arrange
+        when(professorRepository.getProfessorByCode(any())).thenReturn(Optional.empty());
+
+        // Act & Assert
+        BadRequestException exception = assertThrows(BadRequestException.class,
+                () -> professorService.calculateMonthlyWorkload("123"));
+        Assertions.assertEquals("Professor does not exist.", exception.getMessage());
+    }
+
+    @Test
+    @DisplayName("calculateMonthlyWorkload - Ok.")
+    public void calculateMonthlyWorkloadTestOk() {
+        // Arrange
+        when(professorRepository.getProfessorByCode(any())).thenReturn(Optional.of(MockBuilder.mockProfessor()));
+
+        // Act
+        MessageResponseDto result = professorService.calculateMonthlyWorkload("123");
+        // Assert
+        Assertions.assertEquals("Total hours: 10", result.getMessage());
+    }
 }
