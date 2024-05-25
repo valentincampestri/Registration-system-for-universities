@@ -60,7 +60,7 @@ public class ProfessorService implements IProfessorService {
                         !shift.equalsIgnoreCase("NIGHT")){
                     throw new BadRequestException("Invalid shift.");
                 }
-                shifts.add(Shift.valueOf(shift));
+                shifts.add(Shift.valueOf(shift.toUpperCase()));
             }
             availability.put(day, shifts);
         }

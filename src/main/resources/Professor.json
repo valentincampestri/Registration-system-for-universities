@@ -15,7 +15,20 @@
           "S002"
         ]
       }
-    ]
+    ],
+    "availability": {
+      "MONDAY": [
+        "MORNING",
+        "AFTERNOON"
+      ],
+      "TUESDAY": [
+        "AFTERNOON",
+        "NIGHT"
+      ],
+      "WEDNESDAY": [
+        "AFTERNOON"
+      ]
+    }
   },
   {
     "name": "Cristiano",
@@ -50,6 +63,19 @@
           "S002"
         ]
       }
-    ]
+    ],
+    "availability": {
+      "MONDAY": [
+        "MORNING",
+        "AFTERNOON"
+      ],
+      "WEDNESDAY": [
+        "MORNING",
+        "NIGHT"
+      ],
+      "FRIDAY": [
+        "NIGHT"
+      ]
+    }
   }
 ]
