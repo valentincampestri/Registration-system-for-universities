@@ -38,6 +38,48 @@ public class MockBuilder {
         );
     }
 
+    public static CourseRequestDto mockCourseRequest2Dto() {
+        return new CourseRequestDto(
+                "1",
+                Shift.AFTERNOON,
+                "virtual",
+                new Classroom(
+                        50,
+                        "701"
+                ),
+                new Term(
+                        "1T-2024",
+                        LocalDate.parse("2025-04-26"),
+                        LocalDate.parse("2025-07-26")
+                ),
+                LocalDate.parse("2025-05-26"),
+                List.of("TUESDAY"),
+                "Schedule",
+                1000D
+        );
+    }
+
+    public static CourseRequestDto mockCourseRequestFailMaxCapacityDto() {
+        return new CourseRequestDto(
+                "0",
+                Shift.MORNING,
+                "virtual",
+                new Classroom(
+                        0,
+                        "701"
+                ),
+                new Term(
+                        "1T-2024",
+                        LocalDate.parse("2025-04-26"),
+                        LocalDate.parse("2025-07-26")
+                ),
+                LocalDate.parse("2025-05-26"),
+                List.of("MONDAY"),
+                "Schedule",
+                1000D
+        );
+    }
+
     public static CourseRequestDto mockCourseRequestFailDayOfWeekDto() {
         return new CourseRequestDto(
                 "0",
@@ -404,6 +446,30 @@ public class MockBuilder {
                                 "Physics",
                                 40,
                                 List.of("0")
+                        )
+                ),
+                Map.of(
+                        DayOfWeek.MONDAY, Set.of(Shift.MORNING, Shift.AFTERNOON),
+                        DayOfWeek.TUESDAY, Set.of(Shift.AFTERNOON),
+                        DayOfWeek.WEDNESDAY, Set.of(Shift.NIGHT))
+        );
+    }
+
+    public static Professor mockProfessorTwo() {
+
+        return new Professor(
+                "string2",
+                "string2",
+                "string2",
+                "string2",
+                "string2",
+                "string2",
+                List.of(
+                        new Subject(
+                                "14",
+                                "string",
+                                11,
+                                List.of("11")
                         )
                 ),
                 Map.of(

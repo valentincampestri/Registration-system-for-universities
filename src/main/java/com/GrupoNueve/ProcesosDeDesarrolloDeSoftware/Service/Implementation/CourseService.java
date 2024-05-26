@@ -19,6 +19,7 @@ import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 @Service
@@ -45,7 +46,7 @@ public class CourseService implements ICourseService {
     }
 
     @Override
-    public MessageResponseDto createCourse(CourseRequestDto courseRequestDto, String professorCode, String subjectCode) {
+    public MessageResponseDto createCourse(CourseRequestDto courseRequestDto, String subjectCode) {
         List<DayOfWeek> daysList = new ArrayList<>();
         for (String day : courseRequestDto.getDaysList()) {
             if (!day.equalsIgnoreCase("MONDAY") && !day.equalsIgnoreCase("TUESDAY") &&
@@ -57,16 +58,45 @@ public class CourseService implements ICourseService {
             daysList.add(DayOfWeek.valueOf(day.toUpperCase()));
         }
 
-        Optional<Professor> existentProfessor = professorRepository.getProfessorByCode(professorCode);
-        if (existentProfessor.isEmpty()) {
-            throw new NotFoundException("Professor does not exist.");
+        if (courseRequestDto.getClassroom().getMaxCapacity()<=10 || courseRequestDto.getClassroom().getMaxCapacity()>=150){
+            throw new BadRequestException("Invalid classroom capacity, it must be from 10 to 150.");
         }
+
         Optional<Subject> existentSubject = subjectRepository.getSubjectByCode(subjectCode);
         if (existentSubject.isEmpty()) {
             throw new NotFoundException("Subject does not exist.");
         }
-        Course course = Mapper.convertCourseRequestDtoToCourse(courseRequestDto, existentProfessor.get(), existentSubject.get(), daysList);
-        Optional<Course> existentCourse = courseRepository.getCourseByCode(course.getCourseCode());
+
+        List<Professor> allProfessors = professorRepository.getAllProfessors();
+        List<Professor> assignedProfessor = new ArrayList<>();
+        List<Course> allCourses = courseRepository.getAllCourses();
+        for (Professor professor : allProfessors) {
+            if (professor.getSubjects().contains(existentSubject.get())) {
+                boolean isAvailable = true;
+                for (DayOfWeek day : daysList) {
+                    if (!professor.getAvailability().containsKey(day) ||
+                            !professor.getAvailability().get(day).contains(courseRequestDto.getShift()) ||
+                            allCourses.stream().anyMatch(course -> course.getProfessor().equals(professor) &&
+                                    course.getDaysList().contains(day) &&
+                                    course.getShift() == courseRequestDto.getShift())) {
+                        isAvailable = false;
+                        break;
+                    }
+                }
+                if (isAvailable) {
+                    assignedProfessor.add(professor);
+                }
+            }
+        }
+
+        if (assignedProfessor.isEmpty()) {
+            throw new NotFoundException("There are no professors available for the specified subject and shift.");
+        }
+
+        Course course = Mapper.convertCourseRequestDtoToCourse(courseRequestDto, assignedProfessor.get(new Random().nextInt(assignedProfessor.size())), existentSubject.get(), daysList);
+        Optional<Course> existentCourse = allCourses.stream()
+                .filter(c -> c.getCourseCode().equals(course.getCourseCode()))
+                .findAny();
         if (existentCourse.isPresent()) {
             throw new BadRequestException("Course already exists.");
         } else {

@@ -55,25 +55,23 @@ public class CourseServiceTest {
     public void createCourseTestFailDayOfWeek() {
         // Arrange
         CourseRequestDto courseRequestDto = MockBuilder.mockCourseRequestFailDayOfWeekDto();
-        String professorCode = "1";
         String subjectCode = "1";
 
         // Act & Assert
-        BadRequestException exception = assertThrows(BadRequestException.class, () -> courseService.createCourse(courseRequestDto, professorCode, subjectCode));
+        BadRequestException exception = assertThrows(BadRequestException.class, () -> courseService.createCourse(courseRequestDto, subjectCode));
         Assertions.assertEquals("Invalid day of week.", exception.getMessage());
     }
 
     @Test
-    @DisplayName("createCourse - Professor does not exist")
-    public void createCourseTestFailProfessor() {
+    @DisplayName("createCourse - Invalid classroom capacity")
+    public void createCourseTestFailMaxCapacity() {
         // Arrange
-        CourseRequestDto courseRequestDto = MockBuilder.mockCourseRequestDto();
-        String professorCode = "1";
+        CourseRequestDto courseRequestDto = MockBuilder.mockCourseRequestFailMaxCapacityDto();
         String subjectCode = "1";
-        when(professorRepository.getProfessorByCode(professorCode)).thenReturn(Optional.empty());
+
         // Act & Assert
-        NotFoundException exception = assertThrows(NotFoundException.class, () -> courseService.createCourse(courseRequestDto, professorCode, subjectCode));
-        Assertions.assertEquals("Professor does not exist.", exception.getMessage());
+        BadRequestException exception = assertThrows(BadRequestException.class, () -> courseService.createCourse(courseRequestDto, subjectCode));
+        Assertions.assertEquals("Invalid classroom capacity, it must be from 10 to 150.", exception.getMessage());
     }
 
     @Test
@@ -81,13 +79,26 @@ public class CourseServiceTest {
     public void createCourseTestFailSubject() {
         // Arrange
         CourseRequestDto courseRequestDto = MockBuilder.mockCourseRequestDto();
-        String professorCode = "1";
         String subjectCode = "1";
-        when(professorRepository.getProfessorByCode(professorCode)).thenReturn(Optional.of(MockBuilder.mockProfessor()));
         when(subjectRepository.getSubjectByCode(subjectCode)).thenReturn(Optional.empty());
         // Act & Assert
-        NotFoundException exception = assertThrows(NotFoundException.class, () -> courseService.createCourse(courseRequestDto, professorCode, subjectCode));
+        NotFoundException exception = assertThrows(NotFoundException.class, () -> courseService.createCourse(courseRequestDto, subjectCode));
         Assertions.assertEquals("Subject does not exist.", exception.getMessage());
+    }
+
+    @Test
+    @DisplayName("createCourse - no professors available")
+    public void createCourseTestFailProfessor() {
+        // Arrange
+        CourseRequestDto courseRequestDto = MockBuilder.mockCourseRequestDto();
+        String subjectCode = "2";
+        when(subjectRepository.getSubjectByCode(subjectCode)).thenReturn(Optional.of(MockBuilder.mockSubject()));
+        Course course = Mapper.convertCourseRequestDtoToCourse(courseRequestDto, MockBuilder.mockProfessor(), MockBuilder.mockSubject(), courseRequestDto.getDaysList().stream().map(DayOfWeek::valueOf).toList());
+        when(courseRepository.getAllCourses()).thenReturn(List.of(course));
+        when(professorRepository.getAllProfessors()).thenReturn(List.of(MockBuilder.mockProfessor()));
+        // Act & Assert
+        NotFoundException exception = assertThrows(NotFoundException.class, () -> courseService.createCourse(courseRequestDto, subjectCode));
+        Assertions.assertEquals("There are no professors available for the specified subject and shift.", exception.getMessage());
     }
 
     @Test
@@ -95,14 +106,13 @@ public class CourseServiceTest {
     public void createCourseTestFailCourse() {
         // Arrange
         CourseRequestDto courseRequestDto = MockBuilder.mockCourseRequestDto();
-        String professorCode = "1";
         String subjectCode = "1";
-        when(professorRepository.getProfessorByCode(professorCode)).thenReturn(Optional.of(MockBuilder.mockProfessor()));
-        when(subjectRepository.getSubjectByCode(subjectCode)).thenReturn(Optional.of(MockBuilder.mockSubject()));
-        Course course = Mapper.convertCourseRequestDtoToCourse(courseRequestDto, MockBuilder.mockProfessor(), MockBuilder.mockSubject(), courseRequestDto.getDaysList().stream().map(DayOfWeek::valueOf).toList());
-        when(courseRepository.getCourseByCode(course.getCourseCode())).thenReturn(Optional.of(course));
+        when(subjectRepository.getSubjectByCode(subjectCode)).thenReturn(Optional.of(MockBuilder.mockSubjectTwo()));
+        Course course = Mapper.convertCourseRequestDtoToCourse(MockBuilder.mockCourseRequestDto(), MockBuilder.mockProfessorTwo(), MockBuilder.mockSubject(), courseRequestDto.getDaysList().stream().map(DayOfWeek::valueOf).toList());
+        when(courseRepository.getAllCourses()).thenReturn(List.of(course));
+        when(professorRepository.getAllProfessors()).thenReturn(List.of(MockBuilder.mockProfessor()));
         // Act & Assert
-        BadRequestException exception = assertThrows(BadRequestException.class, () -> courseService.createCourse(courseRequestDto,"1","1"));
+        BadRequestException exception = assertThrows(BadRequestException.class, () -> courseService.createCourse(courseRequestDto,"1"));
         Assertions.assertEquals("Course already exists.", exception.getMessage());
     }
 
@@ -111,14 +121,13 @@ public class CourseServiceTest {
     public void createCourseTestOk() {
         // Arrange
         CourseRequestDto courseRequestDto = MockBuilder.mockCourseRequestDto();
-        String professorCode = "1";
         String subjectCode = "1";
-        when(professorRepository.getProfessorByCode(professorCode)).thenReturn(Optional.of(MockBuilder.mockProfessor()));
-        when(subjectRepository.getSubjectByCode(subjectCode)).thenReturn(Optional.of(MockBuilder.mockSubject()));
-        Course course = Mapper.convertCourseRequestDtoToCourse(courseRequestDto, MockBuilder.mockProfessor(), MockBuilder.mockSubject(), courseRequestDto.getDaysList().stream().map(DayOfWeek::valueOf).toList());
-        when(courseRepository.getCourseByCode(course.getCourseCode())).thenReturn(Optional.empty());
+        when(subjectRepository.getSubjectByCode(subjectCode)).thenReturn(Optional.of(MockBuilder.mockSubjectTwo()));
+        Course course = Mapper.convertCourseRequestDtoToCourse(MockBuilder.mockCourseRequest2Dto(), MockBuilder.mockProfessorTwo(), MockBuilder.mockSubject(), courseRequestDto.getDaysList().stream().map(DayOfWeek::valueOf).toList());
+        when(courseRepository.getAllCourses()).thenReturn(List.of(course));
+        when(professorRepository.getAllProfessors()).thenReturn(List.of(MockBuilder.mockProfessor()));
         // Act
-        MessageResponseDto result = courseService.createCourse(courseRequestDto,"1","1");
+        MessageResponseDto result = courseService.createCourse(courseRequestDto,"1");
         // Assert
         Assertions.assertEquals("Course created successfully.", result.getMessage());
     }

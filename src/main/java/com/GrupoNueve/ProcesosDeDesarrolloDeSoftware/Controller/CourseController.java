@@ -30,9 +30,9 @@ public class CourseController {
         return ResponseEntity.ok(courseService.getAllCourses());
     }
 
-    @PostMapping("/create/{professorCode}/{subjectCode}")
-    public ResponseEntity<?> createCourse(@RequestBody CourseRequestDto courseRequestDto, @PathVariable String professorCode, @PathVariable String subjectCode) {
-        return ResponseEntity.ok(courseService.createCourse(courseRequestDto, professorCode, subjectCode));
+    @PostMapping("/create/{subjectCode}")
+    public ResponseEntity<?> createCourse(@RequestBody CourseRequestDto courseRequestDto, @PathVariable String subjectCode) {
+        return ResponseEntity.ok(courseService.createCourse(courseRequestDto, subjectCode));
     }
 
     @GetMapping("/subject/{subjectCode}")
