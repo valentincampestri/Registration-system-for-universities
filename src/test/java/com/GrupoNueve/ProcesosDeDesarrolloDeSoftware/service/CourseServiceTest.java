@@ -1,17 +1,17 @@
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.service;
 
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.MessageResponseDto;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.CourseRequestDto;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.CourseResponseDto;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.ScheduleDto;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Course;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.BadRequestException;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.NotFoundException;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.Implementation.CourseRepository;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.Implementation.InscriptionRepository;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.Implementation.ProfessorRepository;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.Implementation.SubjectRepository;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Service.Implementation.CourseService;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.response.MessageResponseDto;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.request.CourseRequestDto;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.response.CourseResponseDto;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.ScheduleDto;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.entity.Course;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.exception.BadRequestException;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.exception.NotFoundException;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.repository.implementation.CourseRepository;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.repository.implementation.InscriptionRepository;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.repository.implementation.ProfessorRepository;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.repository.implementation.SubjectRepository;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.service.implementation.CourseService;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.utils.Mapper;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.utils.MockBuilder;
 import org.junit.jupiter.api.Assertions;
@@ -30,7 +30,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import static com.fasterxml.jackson.core.JsonPointer.valueOf;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 

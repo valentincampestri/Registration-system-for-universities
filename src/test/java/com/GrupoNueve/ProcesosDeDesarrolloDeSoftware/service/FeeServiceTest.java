@@ -1,14 +1,14 @@
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.service;
 
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.FeeResponseDto;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.MessageResponseDto;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Fee;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.BadRequestException;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.InvalidArgsException;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.NotFoundException;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.Implementation.FeeRepository;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.Implementation.StudentRepository;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Service.Implementation.FeeService;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.response.FeeResponseDto;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.response.MessageResponseDto;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.entity.Fee;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.exception.BadRequestException;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.exception.InvalidArgsException;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.exception.NotFoundException;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.repository.implementation.FeeRepository;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.repository.implementation.StudentRepository;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.service.implementation.FeeService;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.utils.Mapper;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.utils.MockBuilder;
 import org.junit.jupiter.api.Assertions;

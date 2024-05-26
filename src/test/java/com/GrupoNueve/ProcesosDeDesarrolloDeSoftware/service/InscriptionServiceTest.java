@@ -1,12 +1,12 @@
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.service;
 
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.InscriptionRequestDto;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.BadRequestException;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.NotFoundException;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.IStudentRepository;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.Implementation.CourseRepository;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.Implementation.InscriptionRepository;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Service.Implementation.InscriptionService;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.request.InscriptionRequestDto;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.exception.BadRequestException;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.exception.NotFoundException;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.repository.IStudentRepository;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.repository.implementation.CourseRepository;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.repository.implementation.InscriptionRepository;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.service.implementation.InscriptionService;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.utils.MockBuilder;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.utils.Utils;
 import org.junit.jupiter.api.Assertions;
@@ -19,7 +19,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 
-import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -106,7 +105,7 @@ public class InscriptionServiceTest {
         String studentCode = "0";
         String courseCode = "CS101";
         when(studentRepository.getStudentByCode(studentCode)).thenReturn(Optional.of(MockBuilder.mockStudent()));
-        when(courseRepository.getCourseByCode(courseCode)).thenReturn(Optional.of(MockBuilder.mockCourse()));
+        when(courseRepository.getCourseByCode(courseCode)).thenReturn(Optional.of(MockBuilder.mockCourseTwo()));
         // Act
         String response = inscriptionService.createInscription(inscriptionRequestDto, studentCode).getMessage();
         // Assert

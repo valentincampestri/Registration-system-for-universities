@@ -1,13 +1,13 @@
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.utils;
 
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.CourseRequestDto;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.InscriptionRequestDto;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.ProfessorRequestDto;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.StudentRequestDto;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.CourseResponseDto;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.FeeResponseDto;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.SubjectDto;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.*;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.request.CourseRequestDto;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.request.InscriptionRequestDto;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.request.ProfessorRequestDto;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.request.StudentRequestDto;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.response.CourseResponseDto;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.response.FeeResponseDto;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.SubjectDto;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.entity.*;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -197,8 +197,56 @@ public class MockBuilder {
         );
     }
 
+    public static Course mockCourseTwo() {
+        return new Course(
+                "0",
+                Shift.MORNING,
+                "virtual",
+                new Professor(
+                        "string",
+                        "string",
+                        "string",
+                        "string",
+                        "string",
+                        "string",
+                        List.of(
+                                new Subject(
+                                        "1",
+                                        "Physics",
+                                        40,
+                                        List.of()
+                                )
+                        ),
+                        Map.of(
+                                DayOfWeek.MONDAY, Set.of(Shift.MORNING, Shift.AFTERNOON),
+                                DayOfWeek.TUESDAY, Set.of(Shift.AFTERNOON),
+                                DayOfWeek.WEDNESDAY, Set.of(Shift.NIGHT)
+                        )
+                ),
+                new Subject(
+                        "1",
+                        "Physics",
+                        40,
+                        List.of()
+                ),
+                new Classroom(
+                        50,
+                        "701"
+                ),
+                new Term(
+                        "1T-2024",
+                        LocalDate.parse("2025-04-26"),
+                        LocalDate.parse("2025-07-26")
+                ),
+                LocalDate.parse("2025-05-26"),
+                List.of(DayOfWeek.MONDAY),
+                "Schedule",
+                1000D
+        );
+    }
+
     public static Course mockCourseMaxCapacity() {
-        List<Subject> subjects = List.of(new Subject("S002", "Computer Science", 60, List.of("S002")));
+        List<Subject> subjects = List.of(new Subject("S002", "Computer Science", 60, List.of()));
         return new Course("CS500",
                 Shift.AFTERNOON,
                 "Presencial",
@@ -220,7 +268,7 @@ public class MockBuilder {
                         "S002",
                         "Computer Science",
                         60,
-                        List.of("S002")
+                        List.of()
                 ),
                 new Classroom(
                         0,
@@ -340,7 +388,7 @@ public class MockBuilder {
     }
 
     public static Inscription mockInscriptionMaxCapacity() {
-        List<Subject> subjects = List.of(new Subject("S002", "Computer Science", 60, List.of("S002")));
+        List<Subject> subjects = List.of(new Subject("S002", "Computer Science", 60, List.of()));
         return new Inscription(
                 mockStudent(),
                 List.of(
@@ -365,7 +413,7 @@ public class MockBuilder {
                                         "S002",
                                         "Computer Science",
                                         60,
-                                        List.of("S002")
+                                        List.of()
                                 ),
                                 new Classroom(
                                         0,
@@ -406,7 +454,7 @@ public class MockBuilder {
     }
 
     public static Student mockStudent() {
-        List<Subject> subjects = List.of(new Subject("S002", "Computer Science", 60, List.of("S002")));
+        List<Subject> subjects = List.of(new Subject("S001", "Computer Science", 50, List.of()));
         return new Student(
                 "Alice",
                 "Smith",

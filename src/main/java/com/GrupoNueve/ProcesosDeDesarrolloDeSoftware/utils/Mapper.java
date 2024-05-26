@@ -1,12 +1,12 @@
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.utils;
 
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.CourseRequestDto;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.ProfessorRequestDto;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Request.StudentRequestDto;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.CourseResponseDto;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.FeeResponseDto;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.SubjectDto;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.*;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.request.CourseRequestDto;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.request.ProfessorRequestDto;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.request.StudentRequestDto;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.response.CourseResponseDto;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.response.FeeResponseDto;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.SubjectDto;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.entity.*;
 import org.springframework.context.annotation.Configuration;
 
 import java.time.DayOfWeek;

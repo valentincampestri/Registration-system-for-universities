@@ -1,13 +1,13 @@
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.service;
 
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.Response.MessageResponseDto;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Dto.SubjectDto;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Entity.Subject;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.BadRequestException;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.InvalidArgsException;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Exception.NotFoundException;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Repository.Implementation.SubjectRepository;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Service.Implementation.SubjectService;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.response.MessageResponseDto;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.SubjectDto;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.entity.Subject;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.exception.BadRequestException;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.exception.InvalidArgsException;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.exception.NotFoundException;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.repository.implementation.SubjectRepository;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.service.implementation.SubjectService;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.utils.MockBuilder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
