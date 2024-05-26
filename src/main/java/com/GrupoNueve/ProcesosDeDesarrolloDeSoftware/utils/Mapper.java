@@ -49,7 +49,7 @@ public class Mapper {
         );
     }
 
-    public static Course convertCourseRequestDtoToCourse(CourseRequestDto courseRequestDto, Professor professor, Subject subject) {
+    public static Course convertCourseRequestDtoToCourse(CourseRequestDto courseRequestDto, Professor professor, Subject subject, List<DayOfWeek> dayOfWeek) {
         return new Course(
                 courseRequestDto.getCourseCode(),
                 courseRequestDto.getShift(),
@@ -59,7 +59,7 @@ public class Mapper {
                 courseRequestDto.getClassroom(),
                 courseRequestDto.getTerm(),
                 courseRequestDto.getLastInscriptionDate(),
-                courseRequestDto.getDaysList(),
+                dayOfWeek,
                 courseRequestDto.getSchedule(),
                 courseRequestDto.getPrice()
         );

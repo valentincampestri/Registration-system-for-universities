@@ -15,6 +15,8 @@ import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.Service.ICourseService;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.utils.Mapper;
 import org.springframework.stereotype.Service;
 
+import java.time.DayOfWeek;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -44,6 +46,17 @@ public class CourseService implements ICourseService {
 
     @Override
     public MessageResponseDto createCourse(CourseRequestDto courseRequestDto, String professorCode, String subjectCode) {
+        List<DayOfWeek> daysList = new ArrayList<>();
+        for (String day : courseRequestDto.getDaysList()) {
+            if (!day.equalsIgnoreCase("MONDAY") && !day.equalsIgnoreCase("TUESDAY") &&
+                    !day.equalsIgnoreCase("WEDNESDAY") && !day.equalsIgnoreCase("THURSDAY") &&
+                    !day.equalsIgnoreCase("FRIDAY") && !day.equalsIgnoreCase("SATURDAY") &&
+                    !day.equalsIgnoreCase("SUNDAY")) {
+                throw new BadRequestException("Invalid day of week.");
+            }
+            daysList.add(DayOfWeek.valueOf(day.toUpperCase()));
+        }
+
         Optional<Professor> existentProfessor = professorRepository.getProfessorByCode(professorCode);
         if (existentProfessor.isEmpty()) {
             throw new NotFoundException("Professor does not exist.");
@@ -52,7 +65,7 @@ public class CourseService implements ICourseService {
         if (existentSubject.isEmpty()) {
             throw new NotFoundException("Subject does not exist.");
         }
-        Course course = Mapper.convertCourseRequestDtoToCourse(courseRequestDto, existentProfessor.get(), existentSubject.get());
+        Course course = Mapper.convertCourseRequestDtoToCourse(courseRequestDto, existentProfessor.get(), existentSubject.get(), daysList);
         Optional<Course> existentCourse = courseRepository.getCourseByCode(course.getCourseCode());
         if (existentCourse.isPresent()) {
             throw new BadRequestException("Course already exists.");

@@ -24,11 +24,13 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 
+import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import static com.fasterxml.jackson.core.JsonPointer.valueOf;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
@@ -47,6 +49,19 @@ public class CourseServiceTest {
 
     @InjectMocks
     CourseService courseService;
+
+    @Test
+    @DisplayName("createCourse - Invalid day of week")
+    public void createCourseTestFailDayOfWeek() {
+        // Arrange
+        CourseRequestDto courseRequestDto = MockBuilder.mockCourseRequestFailDayOfWeekDto();
+        String professorCode = "1";
+        String subjectCode = "1";
+
+        // Act & Assert
+        BadRequestException exception = assertThrows(BadRequestException.class, () -> courseService.createCourse(courseRequestDto, professorCode, subjectCode));
+        Assertions.assertEquals("Invalid day of week.", exception.getMessage());
+    }
 
     @Test
     @DisplayName("createCourse - Professor does not exist")
@@ -84,7 +99,7 @@ public class CourseServiceTest {
         String subjectCode = "1";
         when(professorRepository.getProfessorByCode(professorCode)).thenReturn(Optional.of(MockBuilder.mockProfessor()));
         when(subjectRepository.getSubjectByCode(subjectCode)).thenReturn(Optional.of(MockBuilder.mockSubject()));
-        Course course = Mapper.convertCourseRequestDtoToCourse(courseRequestDto, MockBuilder.mockProfessor(), MockBuilder.mockSubject());
+        Course course = Mapper.convertCourseRequestDtoToCourse(courseRequestDto, MockBuilder.mockProfessor(), MockBuilder.mockSubject(), courseRequestDto.getDaysList().stream().map(DayOfWeek::valueOf).toList());
         when(courseRepository.getCourseByCode(course.getCourseCode())).thenReturn(Optional.of(course));
         // Act & Assert
         BadRequestException exception = assertThrows(BadRequestException.class, () -> courseService.createCourse(courseRequestDto,"1","1"));
@@ -100,7 +115,7 @@ public class CourseServiceTest {
         String subjectCode = "1";
         when(professorRepository.getProfessorByCode(professorCode)).thenReturn(Optional.of(MockBuilder.mockProfessor()));
         when(subjectRepository.getSubjectByCode(subjectCode)).thenReturn(Optional.of(MockBuilder.mockSubject()));
-        Course course = Mapper.convertCourseRequestDtoToCourse(courseRequestDto, MockBuilder.mockProfessor(), MockBuilder.mockSubject());
+        Course course = Mapper.convertCourseRequestDtoToCourse(courseRequestDto, MockBuilder.mockProfessor(), MockBuilder.mockSubject(), courseRequestDto.getDaysList().stream().map(DayOfWeek::valueOf).toList());
         when(courseRepository.getCourseByCode(course.getCourseCode())).thenReturn(Optional.empty());
         // Act
         MessageResponseDto result = courseService.createCourse(courseRequestDto,"1","1");

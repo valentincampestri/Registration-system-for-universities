@@ -32,7 +32,28 @@ public class MockBuilder {
                         LocalDate.parse("2025-07-26")
                 ),
                 LocalDate.parse("2025-05-26"),
-                List.of(DayOfWeek.MONDAY),
+                List.of("MONDAY"),
+                "Schedule",
+                1000D
+        );
+    }
+
+    public static CourseRequestDto mockCourseRequestFailDayOfWeekDto() {
+        return new CourseRequestDto(
+                "0",
+                Shift.MORNING,
+                "virtual",
+                new Classroom(
+                        50,
+                        "701"
+                ),
+                new Term(
+                        "1T-2024",
+                        LocalDate.parse("2025-04-26"),
+                        LocalDate.parse("2025-07-26")
+                ),
+                LocalDate.parse("2025-05-26"),
+                List.of("Kimba"),
                 "Schedule",
                 1000D
         );

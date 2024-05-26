@@ -25,7 +25,7 @@ public class CourseRequestDto {
     Classroom classroom;
     Term term;
     LocalDate lastInscriptionDate;
-    List<DayOfWeek> daysList;
+    List<String> daysList;
     String schedule;
     Double price;
 }
