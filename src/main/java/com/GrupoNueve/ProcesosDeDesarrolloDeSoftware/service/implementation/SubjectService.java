@@ -1,7 +1,7 @@
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.service.implementation;
 
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.response.MessageResponseDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.SubjectDto;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.response.MessageResponseDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.entity.Subject;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.exception.BadRequestException;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.exception.InvalidArgsException;
@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.Optional;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
-
 @Service
 public class SubjectService implements ISubjectService {
     ISubjectRepository subjectRepository;
@@ -32,8 +31,7 @@ public class SubjectService implements ISubjectService {
         if (subjectList.isEmpty()) {
             throw new NotFoundException("There are no subjects.");
         }
-        List<SubjectDto> response = subjectList.stream().map(Mapper::convertSubjectToSubjectDto).toList();
-        return response;
+        return subjectList.stream().map(Mapper::convertSubjectToSubjectDto).toList();
     }
 
     @Override
@@ -43,7 +41,7 @@ public class SubjectService implements ISubjectService {
         if (existentSubject.isPresent()) {
             throw new BadRequestException("Subject already exists.");
         }
-        if (subject.getWorkload()<=0){
+        if (subject.getWorkload() <= 0) {
             throw new InvalidArgsException("Workload must be greater than 0.");
         }
         for (String prerequisite : subject.getPrerequisitesCodeList()) {

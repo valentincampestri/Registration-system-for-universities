@@ -12,6 +12,22 @@ import java.util.List;
 import java.util.Set;
 
 public class AlreadyApprovedSubjectCheckStrategy implements IInscriptionCheckStrategy {
+    private static Set<String> getApprovedSubjects(Inscription inscription) {
+        Set<String> approvedSubjects = new HashSet<>();
+        Student student = inscription.getStudent();
+        if (student != null && student.getCareer() != null) {
+            //prerequisites
+            if (!student.getApprovedSubjectList().isEmpty()) {
+                for (Subject subject : student.getApprovedSubjectList()) {
+                    if (subject.getSubjectCode() != null) {
+                        approvedSubjects.add(subject.getSubjectCode());
+                    }
+                }
+            }
+        }
+        return approvedSubjects;
+    }
+
     @Override
     public void check(Inscription inscription) {
         boolean okPrerequisites;
@@ -27,22 +43,6 @@ public class AlreadyApprovedSubjectCheckStrategy implements IInscriptionCheckStr
                 }
             }
         }
-    }
-
-    private static Set<String> getApprovedSubjects(Inscription inscription) {
-        Set<String> approvedSubjects = new HashSet<>();
-        Student student = inscription.getStudent();
-        if (student != null && student.getCareer() != null) {
-            //prerequisites
-            if (!student.getApprovedSubjectList().isEmpty()) {
-                for (Subject subject : student.getApprovedSubjectList()) {
-                    if (subject.getSubjectCode() != null) {
-                        approvedSubjects.add(subject.getSubjectCode());
-                    }
-                }
-            }
-        }
-        return approvedSubjects;
     }
 }
 

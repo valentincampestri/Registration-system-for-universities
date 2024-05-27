@@ -60,7 +60,7 @@ public class InscriptionRepository implements IInscriptionRepository {
                 .toList();
     }
 
-    private void loadInscriptions() throws IOException {
+    private void loadInscriptions() {
         File file;
         ObjectMapper objectMapper = new ObjectMapper();
         List<Inscription> mappedInscriptions;
@@ -71,7 +71,7 @@ public class InscriptionRepository implements IInscriptionRepository {
             objectMapper.registerModule(new JavaTimeModule());
             objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
             objectMapper.setDateFormat(new SimpleDateFormat("dd-MM-yyyy"));
-            mappedInscriptions = objectMapper.readValue(file, new TypeReference<List<Inscription>>() {
+            mappedInscriptions = objectMapper.readValue(file, new TypeReference<>() {
             });
             inscriptionsList = mappedInscriptions;
         } catch (IOException e) {

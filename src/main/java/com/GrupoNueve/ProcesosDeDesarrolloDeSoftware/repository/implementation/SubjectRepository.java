@@ -20,11 +20,11 @@ import java.util.Optional;
 @Repository
 public class SubjectRepository implements ISubjectRepository {
 
+    private List<Subject> subjectsList = new ArrayList<>();
+
     public SubjectRepository() throws IOException {
         loadSubjects();
     }
-
-    private List<Subject> subjectsList = new ArrayList<>();
 
     @Override
     public void addSubject(Subject subject) {
@@ -54,7 +54,7 @@ public class SubjectRepository implements ISubjectRepository {
         return subjectsList;
     }
 
-    private void loadSubjects() throws IOException {
+    private void loadSubjects() {
         File file;
         ObjectMapper objectMapper = new ObjectMapper();
         List<Subject> mappedSubjects;
@@ -65,7 +65,7 @@ public class SubjectRepository implements ISubjectRepository {
             objectMapper.registerModule(new JavaTimeModule());
             objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
             objectMapper.setDateFormat(new SimpleDateFormat("dd-MM-yyyy"));
-            mappedSubjects = objectMapper.readValue(file, new TypeReference<List<Subject>>() {
+            mappedSubjects = objectMapper.readValue(file, new TypeReference<>() {
             });
             subjectsList = mappedSubjects;
         } catch (IOException e) {

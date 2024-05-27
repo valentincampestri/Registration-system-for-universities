@@ -30,12 +30,12 @@ public class StudentService implements IStudentService {
     public MessageResponseDto createStudent(StudentRequestDto studentRequestDto) {
         Optional<Student> existentStudent = studentRepository.getStudentByCode(studentRequestDto.getPersonCode());
 
-        if (existentStudent.isPresent()){
+        if (existentStudent.isPresent()) {
             throw new BadRequestException("Student already exists.");
         }
 
         List<Subject> subjects = new ArrayList<>();
-        for (String subjectCode : studentRequestDto.getApprovedSubjectsCodeList()){
+        for (String subjectCode : studentRequestDto.getApprovedSubjectsCodeList()) {
             Optional<Subject> subjectCandidate = subjectRepository.getSubjectByCode(subjectCode);
             if (subjectCandidate.isEmpty()) {
                 throw new BadRequestException("One or more subjects don't exists.");

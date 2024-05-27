@@ -13,7 +13,13 @@ import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.utils.Mapper;
 import org.springframework.stereotype.Service;
 
 import java.time.DayOfWeek;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class ProfessorService implements IProfessorService {
@@ -31,12 +37,12 @@ public class ProfessorService implements IProfessorService {
         Optional<Professor> existentProfessor = professorRepository.
                 getProfessorByCode(professorRequestDto.getPersonID());
 
-        if (existentProfessor.isPresent()){
+        if (existentProfessor.isPresent()) {
             throw new BadRequestException("Professor already exists.");
         }
 
         List<Subject> subjects = new ArrayList<>();
-        for (String subjectCode : professorRequestDto.getSubjectsCodeList()){
+        for (String subjectCode : professorRequestDto.getSubjectsCodeList()) {
             Optional<Subject> subjectCandidate = subjectRepository.getSubjectByCode(subjectCode);
             if (subjectCandidate.isEmpty()) {
                 throw new BadRequestException("One or more subjects don't exists.");
@@ -49,14 +55,14 @@ public class ProfessorService implements IProfessorService {
             if (!entry.getKey().equalsIgnoreCase("MONDAY") && !entry.getKey().equalsIgnoreCase("TUESDAY") &&
                     !entry.getKey().equalsIgnoreCase("WEDNESDAY") && !entry.getKey().equalsIgnoreCase("THURSDAY") &&
                     !entry.getKey().equalsIgnoreCase("FRIDAY") && !entry.getKey().equalsIgnoreCase("SATURDAY") &&
-                    !entry.getKey().equalsIgnoreCase("SUNDAY")){
+                    !entry.getKey().equalsIgnoreCase("SUNDAY")) {
                 throw new BadRequestException("Invalid day of week.");
             }
             DayOfWeek day = DayOfWeek.valueOf(entry.getKey());
             Set<Shift> shifts = new HashSet<>();
             for (String shift : entry.getValue()) {
                 if (!shift.equalsIgnoreCase("MORNING") && !shift.equalsIgnoreCase("AFTERNOON") &&
-                        !shift.equalsIgnoreCase("NIGHT")){
+                        !shift.equalsIgnoreCase("NIGHT")) {
                     throw new BadRequestException("Invalid shift.");
                 }
                 shifts.add(Shift.valueOf(shift.toUpperCase()));
@@ -80,11 +86,9 @@ public class ProfessorService implements IProfessorService {
         Professor professor = existentProfessor.get();
         Integer totalHours = 0;
         for (Subject subject : professor.getSubjects()) {
-            totalHours += (subject.getWorkload() / 4); // se divide por 4 porque queremos la carga horaria mensual
+            totalHours += (subject.getWorkload() / 4);
         }
         return new MessageResponseDto("Total hours: " + totalHours);
     }
 
 }
-
-//

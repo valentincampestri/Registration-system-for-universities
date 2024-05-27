@@ -54,7 +54,7 @@ public class StudentRepository implements IStudentRepository {
         return studentsList;
     }
 
-    private void loadStudents() throws IOException {
+    private void loadStudents() {
         File file;
         ObjectMapper objectMapper = new ObjectMapper();
         List<Student> mappedStudents;
@@ -65,7 +65,7 @@ public class StudentRepository implements IStudentRepository {
             objectMapper.registerModule(new JavaTimeModule());
             objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
             objectMapper.setDateFormat(new SimpleDateFormat("dd-MM-yyyy"));
-            mappedStudents = objectMapper.readValue(file, new TypeReference<List<Student>>() {
+            mappedStudents = objectMapper.readValue(file, new TypeReference<>() {
             });
             studentsList = mappedStudents;
         } catch (IOException e) {

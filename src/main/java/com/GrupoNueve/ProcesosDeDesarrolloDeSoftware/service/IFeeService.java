@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface IFeeService {
     void addFee(Inscription inscription);
+
     MessageResponseDto pay(String studentCode, String paymentMethod);
+
     List<FeeResponseDto> getFeesByStudent(String studentCode);
 }

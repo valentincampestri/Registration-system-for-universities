@@ -1,8 +1,11 @@
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.service.implementation.strategies;
 
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.entity.*;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.entity.Career;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.entity.Course;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.entity.Inscription;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.entity.Student;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.entity.Subject;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.exception.BadRequestException;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.repository.IInscriptionRepository;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.service.IInscriptionCheckStrategy;
 
 import java.util.List;

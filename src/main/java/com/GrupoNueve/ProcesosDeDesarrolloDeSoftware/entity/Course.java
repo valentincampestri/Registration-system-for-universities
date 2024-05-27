@@ -1,5 +1,6 @@
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.entity;
 
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

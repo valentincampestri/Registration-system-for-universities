@@ -53,7 +53,7 @@ public class ProfessorRepository implements IProfessorRepository {
         return professorsList;
     }
 
-    private void loadProfessors() throws IOException {
+    private void loadProfessors() {
         File file;
         ObjectMapper objectMapper = new ObjectMapper();
         List<Professor> mappedProfessors;
@@ -64,7 +64,7 @@ public class ProfessorRepository implements IProfessorRepository {
             objectMapper.registerModule(new JavaTimeModule());
             objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
             objectMapper.setDateFormat(new SimpleDateFormat("dd-MM-yyyy"));
-            mappedProfessors = objectMapper.readValue(file, new TypeReference<List<Professor>>() {
+            mappedProfessors = objectMapper.readValue(file, new TypeReference<>() {
             });
             professorsList = mappedProfessors;
         } catch (IOException e) {

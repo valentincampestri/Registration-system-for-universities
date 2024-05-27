@@ -11,7 +11,7 @@ import java.util.List;
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Inscription {
-    static String currentCode="1";
+    static String currentCode = "1";
     String inscriptionCode;
     Student student;
     List<Course> courses;

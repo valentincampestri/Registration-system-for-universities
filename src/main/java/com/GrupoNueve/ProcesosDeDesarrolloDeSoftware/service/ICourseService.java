@@ -1,9 +1,9 @@
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.service;
 
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.ScheduleDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.request.CourseRequestDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.response.CourseResponseDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.response.MessageResponseDto;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.ScheduleDto;
 
 import java.util.List;
 

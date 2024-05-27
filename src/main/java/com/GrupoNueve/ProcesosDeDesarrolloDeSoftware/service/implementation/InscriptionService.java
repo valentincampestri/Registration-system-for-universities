@@ -11,7 +11,12 @@ import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.repository.IInscriptionRepo
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.repository.IStudentRepository;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.service.IInscriptionCheckStrategy;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.service.IInscriptionService;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.service.implementation.strategies.*;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.service.implementation.strategies.AlreadyApprovedSubjectCheckStrategy;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.service.implementation.strategies.AlreadyEnrolledCheckStrategy;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.service.implementation.strategies.InscriptionDateCheckStrategy;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.service.implementation.strategies.MaxCapacityCheckStrategy;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.service.implementation.strategies.PrerequisitesCheckStrategy;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.service.implementation.strategies.WorkloadCheckStrategy;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.utils.Utils;
 import org.springframework.stereotype.Service;
 
@@ -48,7 +53,6 @@ public class InscriptionService implements IInscriptionService {
             courseList.add(existentCourse.get());
         }
         Inscription inscription = new Inscription(existentStudent.get(), courseList);
-//        inscriptionChecks(inscription);
         List<IInscriptionCheckStrategy> checkStrategies = List.of(
                 new WorkloadCheckStrategy(),
                 new PrerequisitesCheckStrategy(),

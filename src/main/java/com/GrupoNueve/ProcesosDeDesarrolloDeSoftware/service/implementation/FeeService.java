@@ -2,7 +2,12 @@ package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.service.implementation;
 
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.response.FeeResponseDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.response.MessageResponseDto;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.entity.*;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.entity.Course;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.entity.Fee;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.entity.IPaymentMethod;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.entity.Inscription;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.entity.PaymentMethodFactory;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.entity.Student;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.exception.BadRequestException;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.exception.NotFoundException;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.repository.IFeeRepository;
@@ -49,7 +54,7 @@ public class FeeService implements IFeeService {
             if (!fee.getIsPaid()) {
                 IPaymentMethod selectedPaymentMethod = PaymentMethodFactory.createPaymentMethod(paymentMethod);
 
-                if (selectedPaymentMethod.pay(fee.getPrice())){
+                if (selectedPaymentMethod.pay(fee.getPrice())) {
                     fee.setIsPaid(true);
                     feeRepository.updateFee(fee);
                     return new MessageResponseDto("The fee has been paid successfully.");

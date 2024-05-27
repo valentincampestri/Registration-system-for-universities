@@ -1,12 +1,17 @@
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.utils;
 
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.SubjectDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.request.CourseRequestDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.request.ProfessorRequestDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.request.StudentRequestDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.response.CourseResponseDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.response.FeeResponseDto;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.SubjectDto;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.entity.*;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.entity.Course;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.entity.Fee;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.entity.Professor;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.entity.Shift;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.entity.Student;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.entity.Subject;
 import org.springframework.context.annotation.Configuration;
 
 import java.time.DayOfWeek;
@@ -92,7 +97,7 @@ public class Mapper {
         );
     }
 
-    public static Professor convertProfessorRequestDtoToProfessor(ProfessorRequestDto professorRequestDto, List<Subject> subjects, Map<DayOfWeek, Set<Shift>> availability){
+    public static Professor convertProfessorRequestDtoToProfessor(ProfessorRequestDto professorRequestDto, List<Subject> subjects, Map<DayOfWeek, Set<Shift>> availability) {
         return new Professor(
                 professorRequestDto.getName(),
                 professorRequestDto.getLastName(),
@@ -105,7 +110,7 @@ public class Mapper {
         );
     }
 
-    public static ProfessorRequestDto convertProfessorToProfessorRequestDto(Professor professor){
+    public static ProfessorRequestDto convertProfessorToProfessorRequestDto(Professor professor) {
         Map<String, Set<String>> availability = professor.getAvailability().entrySet().stream().collect(Collectors.toMap(
                 entry -> entry.getKey().toString(),
                 entry -> entry.getValue().stream().map(Shift::toString).collect(Collectors.toSet())
@@ -123,7 +128,7 @@ public class Mapper {
         );
     }
 
-    public static Student convertStudentRequestDtoToStudent(StudentRequestDto studentRequestDto, List<Subject> subjects){
+    public static Student convertStudentRequestDtoToStudent(StudentRequestDto studentRequestDto, List<Subject> subjects) {
         return new Student(
                 studentRequestDto.getName(),
                 studentRequestDto.getLastName(),
@@ -136,7 +141,7 @@ public class Mapper {
         );
     }
 
-    public static StudentRequestDto convertStudentToStudentRequestDto(Student student){
+    public static StudentRequestDto convertStudentToStudentRequestDto(Student student) {
         return new StudentRequestDto(
                 student.getPersonCode(),
                 student.getName(),

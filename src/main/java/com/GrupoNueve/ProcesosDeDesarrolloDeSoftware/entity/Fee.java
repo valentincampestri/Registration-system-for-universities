@@ -4,6 +4,7 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
+
 import java.util.List;
 
 @NoArgsConstructor
@@ -11,7 +12,7 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 
 public class Fee {
-    static String currentCode="1";
+    static String currentCode = "1";
     String feeCode;
     List<Inscription> inscriptions;
     Double price;

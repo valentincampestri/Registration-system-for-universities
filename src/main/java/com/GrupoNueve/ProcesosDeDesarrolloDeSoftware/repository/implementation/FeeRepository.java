@@ -19,11 +19,11 @@ import java.util.List;
 @Repository
 public class FeeRepository implements IFeeRepository {
 
+    private List<Fee> feesList = new ArrayList<>();
+
     public FeeRepository() throws IOException {
         loadFees();
     }
-
-    private List<Fee> feesList = new ArrayList<>();
 
     @Override
     public void addFee(Fee fee) {
@@ -32,7 +32,7 @@ public class FeeRepository implements IFeeRepository {
 
     @Override
     public void deleteFee(String feeCode) {
-        feesList.removeIf(fee -> feeCode.equals(feeCode));
+        feesList.removeIf(fee -> fee.getFeeCode().equals(feeCode));
     }
 
     @Override
@@ -54,7 +54,7 @@ public class FeeRepository implements IFeeRepository {
         return feesList;
     }
 
-    private void loadFees() throws IOException {
+    private void loadFees() {
         File file;
         ObjectMapper objectMapper = new ObjectMapper();
         List<Fee> mappedFees;
@@ -65,7 +65,7 @@ public class FeeRepository implements IFeeRepository {
             objectMapper.registerModule(new JavaTimeModule());
             objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
             objectMapper.setDateFormat(new SimpleDateFormat("dd-MM-yyyy"));
-            mappedFees = objectMapper.readValue(file, new TypeReference<List<Fee>>() {
+            mappedFees = objectMapper.readValue(file, new TypeReference<>() {
             });
             feesList = mappedFees;
         } catch (IOException e) {

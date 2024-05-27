@@ -1,10 +1,15 @@
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.controller;
 
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.ScheduleDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.request.InscriptionRequestDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.response.CourseResponseDto;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.ScheduleDto;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -20,6 +25,7 @@ public class SystemFacade {
         this.feeController = feeController;
         this.inscriptionController = inscriptionController;
     }
+
     @GetMapping("/course/subject/{subjectCode}")
     public ResponseEntity<List<CourseResponseDto>> getCoursesBySubject(@PathVariable String subjectCode) {
         return courseController.getCoursesBySubject(subjectCode);
@@ -51,7 +57,7 @@ public class SystemFacade {
     }
 
     @PostMapping("/fee/pay/{studentCode}")
-    public ResponseEntity<?> pay (@PathVariable String studentCode, @RequestParam String paymentMethod) {
+    public ResponseEntity<?> pay(@PathVariable String studentCode, @RequestParam String paymentMethod) {
         return feeController.pay(studentCode, paymentMethod);
     }
 

@@ -1,10 +1,15 @@
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.service.implementation;
 
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.ScheduleDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.request.CourseRequestDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.response.CourseResponseDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.response.MessageResponseDto;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.ScheduleDto;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.entity.*;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.entity.Course;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.entity.IReport;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.entity.Professor;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.entity.ReportFactoryMethod;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.entity.Shift;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.entity.Subject;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.exception.BadRequestException;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.exception.NotFoundException;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.repository.ICourseRepository;
@@ -58,7 +63,7 @@ public class CourseService implements ICourseService {
             daysList.add(DayOfWeek.valueOf(day.toUpperCase()));
         }
 
-        if (courseRequestDto.getClassroom().getMaxCapacity()<=10 || courseRequestDto.getClassroom().getMaxCapacity()>=150){
+        if (courseRequestDto.getClassroom().getMaxCapacity() <= 10 || courseRequestDto.getClassroom().getMaxCapacity() >= 150) {
             throw new BadRequestException("Invalid classroom capacity, it must be from 10 to 150.");
         }
 
@@ -130,7 +135,7 @@ public class CourseService implements ICourseService {
 
     @Override
     public List<CourseResponseDto> getCoursesByShift(String shift) {
-        if (!shift.equalsIgnoreCase("MORNING") && !shift.equalsIgnoreCase("AFTERNOON") && !shift.equalsIgnoreCase("NIGHT")){
+        if (!shift.equalsIgnoreCase("MORNING") && !shift.equalsIgnoreCase("AFTERNOON") && !shift.equalsIgnoreCase("NIGHT")) {
             throw new BadRequestException("Invalid shift.");
         }
 

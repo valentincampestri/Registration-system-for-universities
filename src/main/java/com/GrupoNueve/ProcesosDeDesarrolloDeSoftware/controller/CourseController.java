@@ -1,9 +1,9 @@
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.controller;
 
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.ScheduleDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.request.CourseRequestDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.response.CourseResponseDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.response.MessageResponseDto;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.ScheduleDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.service.ICourseService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -5,7 +5,6 @@ import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.request.InscriptionRequ
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.request.ProfessorRequestDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.request.StudentRequestDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.response.CourseResponseDto;
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.response.FeeResponseDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.dto.SubjectDto;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.entity.*;
 
@@ -475,9 +474,6 @@ public class MockBuilder {
         return Mapper.convertStudentToStudentRequestDto(mockStudent());
     }
 
-    public static FeeResponseDto mockFeeResponseDto() {
-        return Mapper.convertFeeToFeeResponseDto(mockFee());
-    }
 
     public static Professor mockProfessor() {
 

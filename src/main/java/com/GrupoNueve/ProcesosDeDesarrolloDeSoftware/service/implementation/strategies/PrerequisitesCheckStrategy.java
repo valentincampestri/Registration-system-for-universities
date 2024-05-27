@@ -1,6 +1,9 @@
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.service.implementation.strategies;
 
-import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.entity.*;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.entity.Course;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.entity.Inscription;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.entity.Student;
+import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.entity.Subject;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.exception.BadRequestException;
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.service.IInscriptionCheckStrategy;
 
@@ -9,6 +12,22 @@ import java.util.List;
 import java.util.Set;
 
 public class PrerequisitesCheckStrategy implements IInscriptionCheckStrategy {
+
+    private static Set<String> getApprovedSubjects(Inscription inscription) {
+        Set<String> approvedSubjects = new HashSet<>();
+        Student student = inscription.getStudent();
+        if (student != null && student.getCareer() != null) {
+            //prerequisites
+            if (!student.getApprovedSubjectList().isEmpty()) {
+                for (Subject subject : student.getApprovedSubjectList()) {
+                    if (subject.getSubjectCode() != null) {
+                        approvedSubjects.add(subject.getSubjectCode());
+                    }
+                }
+            }
+        }
+        return approvedSubjects;
+    }
 
     @Override
     public void check(Inscription inscription) {
@@ -31,21 +50,5 @@ public class PrerequisitesCheckStrategy implements IInscriptionCheckStrategy {
             }
         }
 
-    }
-
-    private static Set<String> getApprovedSubjects(Inscription inscription) {
-        Set<String> approvedSubjects = new HashSet<>();
-        Student student = inscription.getStudent();
-        if (student != null && student.getCareer() != null) {
-            //prerequisites
-            if (!student.getApprovedSubjectList().isEmpty()) {
-                for (Subject subject : student.getApprovedSubjectList()) {
-                    if (subject.getSubjectCode() != null) {
-                        approvedSubjects.add(subject.getSubjectCode());
-                    }
-                }
-            }
-        }
-        return approvedSubjects;
     }
 }

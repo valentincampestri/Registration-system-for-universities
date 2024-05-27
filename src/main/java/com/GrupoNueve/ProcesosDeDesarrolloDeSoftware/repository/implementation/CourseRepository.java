@@ -49,6 +49,7 @@ public class CourseRepository implements ICourseRepository {
                 .filter(course -> course.getCourseCode().equals(courseCode))
                 .findFirst();
     }
+
     @Override
     public List<Course> getCoursesByProfessor(String professorCode) {
         return coursesList.stream()
@@ -61,7 +62,7 @@ public class CourseRepository implements ICourseRepository {
         return coursesList;
     }
 
-    private void loadCourses() throws IOException {
+    private void loadCourses() {
         File file;
         ObjectMapper objectMapper = new ObjectMapper();
         List<Course> mappedCourses;
@@ -72,7 +73,7 @@ public class CourseRepository implements ICourseRepository {
             objectMapper.registerModule(new JavaTimeModule());
             objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
             objectMapper.setDateFormat(new SimpleDateFormat("dd-MM-yyyy"));
-            mappedCourses = objectMapper.readValue(file, new TypeReference<List<Course>>() {
+            mappedCourses = objectMapper.readValue(file, new TypeReference<>() {
             });
             coursesList = mappedCourses;
         } catch (IOException e) {

@@ -1,17 +1,19 @@
 package com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.entity;
 
 import com.GrupoNueve.ProcesosDeDesarrolloDeSoftware.repository.IInscriptionRepository;
-import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.List;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.List;
 
 
 @AllArgsConstructor
@@ -26,7 +28,6 @@ public class ReportExcel implements IReport {
         Workbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet("Courses Report");
 
-        // Create header row
         Row headerRow = sheet.createRow(0);
         headerRow.createCell(0).setCellValue("Professor Code");
         headerRow.createCell(1).setCellValue("Course Code");
@@ -36,7 +37,6 @@ public class ReportExcel implements IReport {
         headerRow.createCell(5).setCellValue("Term code");
         headerRow.createCell(6).setCellValue("Student count");
 
-        // Fill data
         for (int i = 0; i < courses.size(); i++) {
             Course course = courses.get(i);
             Row row = sheet.createRow(i + 1);
@@ -49,12 +49,10 @@ public class ReportExcel implements IReport {
             row.createCell(6).setCellValue(inscriptionRepository.getInscriptionsByCourseCode(course.getCourseCode()).size());
         }
 
-        // Auto size columns
         for (int i = 0; i < 5; i++) {
             sheet.autoSizeColumn(i);
         }
 
-        // Write to file
         try {
             String professorId = courses.get(0).getProfessor().getPersonCode();
             FileOutputStream fileOut = new FileOutputStream("Report - " + professorId + ".xlsx");
